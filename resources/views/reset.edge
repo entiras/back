@@ -1,0 +1,20 @@
+@layout('layout.app')
+@section('content')
+  <h2>
+    Reset
+  </h2>
+  @include('layout.notification')
+  <form action="/api/reset" method="POST">
+    {{ csrfField() }}
+    <input type="hidden" value="{{ token }}" name="token">
+    <div class="form-group">
+      <input type="password" name="password"
+        class="form-control {{ hasErrorFor('password') ? 'is-invalid' : '' }}"
+        placeholder="Password">
+        {{ elIf('<span class="invalid-feedback">$self</span>', getErrorFor('password'), hasErrorFor('password')) }}
+    </div>
+    <button class="btn btn-primary" type="submit">
+        Reset
+    </button>
+  </form>
+@endsection

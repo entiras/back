@@ -1,0 +1,19 @@
+@layout('layout.app')
+@section('content')
+  <h2>
+    Resend
+  </h2>
+  @include('layout.notification')
+  <form action="/api/resend" method="POST">
+    {{ csrfField() }}
+    <div class="form-group">
+      <input type="text" name="email" value="{{ old('email') }}"
+        class="form-control {{ hasErrorFor('email') ? 'is-invalid' : '' }}"
+        placeholder="Email">
+        {{ elIf('<span class="invalid-feedback">$self</span>', getErrorFor('email'), hasErrorFor('email')) }}
+    </div>
+    <button class="btn btn-primary" type="submit">
+        Resend
+    </button>
+  </form>
+@endsection
