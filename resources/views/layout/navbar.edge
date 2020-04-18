@@ -8,27 +8,18 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
       @loggedIn
       <li class="nav-item">
-        <form action="/api/logout" method="POST">
-          {{ csrfField() }}
-          <button class="btn btn-light" type="submit">
-            Logout
-          </button>
-        </form>
+        <a class="nav-link" href="/dash">
+          {{ auth.user.username }}
+        </a>
       </li>
-      <li class="nav-item">
-        {{ auth.user.username }}
-      </li>
+      <form class="form-inline my-2 my-lg-0" action="/api/logout" method="POST">
+        {{ csrfField() }}
+        <button class="btn btn-link my-2 my-sm-0" type="submit">
+          Logout
+        </button>
+      </form>
       @else
       <li class="nav-item">
         <a class="nav-link" href="/signup">
