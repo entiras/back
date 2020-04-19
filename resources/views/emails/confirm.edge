@@ -1,3 +1,15 @@
 <p>
-  Please <a href="{{ appUrl }}/api/confirm/{{ token }}">confirm</a> your account.
+  Hola {{ username }},
+</p>
+<p>
+  Por favor confirma tu direcci&oactue;n de correo electr&oactue;nico para
+  activar tu cuenta de EnTiras.
+  Solamente tienes que usar el siguiente enlace:
+</p>
+<a href="{{ appUrl }}/api/confirm/{{ token }}">
+  {{ appUrl }}/api/confirm/{{ token }}
+</a>
+<p>
+  Si no fuiste t&uacute; quien se registr&oacute; por favor ignora
+  este mensaje.
 </p>

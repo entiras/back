@@ -1,3 +1,12 @@
 <p>
-  Please <a href="{{ appUrl }}/reset/{{ token }}">reset</a> your password.
+  Hola {{ username }},
+</p>
+<p>
+  Puedes cambiar tu contrase&ntilde;a usando el siguiente enlace:
+</p>
+<a href="{{ appUrl }}/reset/{{ token }}">
+  {{ appUrl }}/reset/{{ token }}
+</a>
+<p>
+  Si no necesitas cambiar tu contrase&ntilde;a, por favor ignora este mensaje.
 </p>

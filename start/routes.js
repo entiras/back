@@ -20,11 +20,11 @@ Route.group(() => {
   Route.get('/resend', 'PageController.resend')
   Route.get('/forgot', 'PageController.forgot')
   Route.get('/reset/:token', 'PageController.reset')
-  Route.get('/', 'PageController.home')
   Route.get('/signup', 'PageController.signup')
   Route.get('/login', 'PageController.login')
 }).middleware(['authenticated'])
 Route.get('/dash', 'PageController.dash').middleware(['auth']).as('dash')
+Route.get('/', 'PageController.home')
 
 Route.group(() => {
   Route.post('signup', 'AuthController.signup')

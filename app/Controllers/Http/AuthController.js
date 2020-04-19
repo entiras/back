@@ -93,6 +93,7 @@ class AuthController {
       token: token
     })
     await Mail.send('emails.reset', {
+      username: user.username,
       token: token,
       appUrl: Env.get('APP_URL')
     }, (message) => {
@@ -185,6 +186,7 @@ class AuthController {
       expiresIn: 60 * 60 * 24 * 3
     })
     await Mail.send('emails.confirm', {
+      username: user.username,
       token: token,
       appUrl: Env.get('APP_URL')
     }, (message) => {
@@ -267,6 +269,7 @@ class AuthController {
       expiresIn: 60 * 60 * 24 * 3
     })
     await Mail.send('emails.confirm', {
+      username: user.username,
       token: token,
       appUrl: Env.get('APP_URL')
     }, (message) => {
