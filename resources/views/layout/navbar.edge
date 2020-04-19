@@ -14,6 +14,14 @@
           {{ auth.user.username }}
         </a>
       </li>
+      <li class="nav-item">
+        <form class="form-inline" action="/api/logout" method="POST">
+          {{ csrfField() }}
+          <button class="btn btn-link nav-link" type="submit">
+            Logout
+          </button>
+        </form>
+      </li>
       @else
       <li class="nav-item">
         <a class="nav-link" href="/signup">
@@ -27,13 +35,5 @@
       </li>
       @endloggedIn
     </ul>
-    @loggedIn
-    <form class="form-inline" action="/api/logout" method="POST">
-      {{ csrfField() }}
-      <button class="btn btn-link nav-link" type="submit">
-        Logout
-      </button>
-    </form>
-    @endloggedIn
   </div>
 </nav>
