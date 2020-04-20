@@ -8,30 +8,34 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      @loggedIn
-      <form class="form-inline ml-auto mr-2" action="/dash" method="GET">
-        <button class="btn btn-outline-light btn-sm-block" type="submit">
-          {{ auth.user.username }}
-        </button>
-      </form>
-      <form class="form-inline" action="/api/logout" method="POST">
-        {{ csrfField() }}
-        <button class="btn btn-outline-light btn-sm-block" type="submit">
-          Salir
-        </button>
-      </form>
-      @else
-      <form class="form-inline ml-auto mr-2" action="/signup" method="GET">
-        <button class="btn btn-outline-light btn-sm-block" type="submit">
-          Registro
-        </button>
-      </form>
-      <form class="form-inline" action="/login" method="GET">
-        <button class="btn btn-outline-light btn-sm-block" type="submit">
-          Entrar
-        </button>
-      </form>
-      @endloggedIn
+      <ul class="navbar-nav ml-auto">
+        @loggedIn
+        <li class="nav-item active">
+          <a class="nav-link" href="/dash">
+            {{ auth.user.username }}
+          </a>
+        </li>
+        <li class="nav-item">
+          <button type="submit" class="btn btn-link nav-link" form="logout">
+            Salir
+          </button>
+        </li>
+        <form class="d-none" action="/api/logout" method="POST" id="logout">
+          {{ csrfField() }}
+        </form>
+        @else
+        <li class="nav-item active">
+          <a class="nav-link" href="/signup">
+            Registro
+          </a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/login">
+            Entrar
+          </a>
+        </li>
+        @endloggedIn
+      </ul>
     </div>
   </div>
 </nav>
