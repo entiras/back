@@ -10,27 +10,33 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         @loggedIn
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" href="/dash">
             {{ auth.user.username }}
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/dash"
+          <a class="nav-link" href="#"
             onclick="document.getElementById('logout').submit()">
             Salir
           </a>
+        </li>
+        <li class="nav-item">
+          <button type="button" class="btn btn-link nav-link"
+          form="logout">
+            Salir
+          </button>
         </li>
         <form class="d-none" action="/api/logout" method="POST" id="logout">
           {{ csrfField() }}
         </form>
         @else
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" href="/signup">
             Registro
           </a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" href="/login">
             Entrar
           </a>
