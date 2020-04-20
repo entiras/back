@@ -1,12 +1,12 @@
 @layout('layout.app')
 @section('content')
 <div class="container">
-  <div class="row row-cols-2-sm">
-    <div class="col">
+  <div class="row">
+    <div class="col-sm">
       <div class="card">
         <div class="card-body bg-dark border border-light">
           <h5 class="card-title">Registro</h5>
-          <hr class="my-2">
+          <hr class="my-2 border border-light">
           @include('layout.notification')
           <form action="/api/signup" method="POST">
             {{ csrfField() }}
@@ -41,7 +41,7 @@
         </div>
       </div>
     </div>
-    <div class="col">
+    <div class="col-sm">
       <div class="card">
         <div class="card-body bg-dark border border-light">
           Mensaje
