@@ -261,7 +261,7 @@ class AuthController {
       session.flash({
         notification: {
           type: 'danger',
-          message: 'Nombre de usuario y/o direcci&oacute;n de correo ocupados'
+          message: 'Nombre de usuario y/o direcci\u00f3n de correo ocupados'
         }
       })
       return response.redirect('back')
@@ -281,15 +281,15 @@ class AuthController {
       appUrl: Env.get('APP_URL')
     }, (message) => {
       message.to(user.email).from(Env.get('FROM_EMAIL'))
-      .subject('Confim Email')
+      .subject('Por favor confirma tu direcci\u00f3n de correo electr\u00f3nico')
     })
     session.flash({
       notification: {
         type: 'success',
-        message: 'Esperando confirmaci&oacute;n por correo'
+        message: 'Esperando confirmaci\u00f3n por correo'
       }
     })
-    return response.redirect('/back')
+    return response.redirect('back')
   }
 }
 
