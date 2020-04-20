@@ -247,14 +247,21 @@ class AuthController {
     })
     if (validation.fails()) {
       session.withErrors(validation.messages()).flashExcept('password')
+      session.flash({
+        notification: {
+          type: 'danger',
+          message: 'Corrija los campos indicados'
+        }
+      })
       return response.redirect('back')
     }
-    const clone = await User.findBy('email', request.input('email'));
+    const clone = await User.findBy('email', request.input('email'))
+      || await User.findBy('username', request.input('username'))
     if (clone){
       session.flash({
         notification: {
           type: 'danger',
-          message: 'Used email'
+          message: 'Nombre de usuario y/o direcci&oacute;n de correo ocupados'
         }
       })
       return response.redirect('back')
@@ -279,10 +286,10 @@ class AuthController {
     session.flash({
       notification: {
         type: 'success',
-        message: 'Waiting email confirmation'
+        message: 'Esperando confirmaci&oacute;n por correo'
       }
     })
-    return response.redirect('/login')
+    return response.redirect('/back')
   }
 }
 
