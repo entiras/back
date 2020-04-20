@@ -16,9 +16,10 @@
           </a>
         </li>
         <li class="nav-item">
-          <button type="submit" class="btn btn-link nav-link" form="logout">
+          <a class="nav-link" href="/dash"
+            onclick="document.getElementById('logout').submit()">
             Salir
-          </button>
+          </a>
         </li>
         <form class="d-none" action="/api/logout" method="POST" id="logout">
           {{ csrfField() }}
