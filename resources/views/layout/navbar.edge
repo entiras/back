@@ -9,24 +9,24 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       @loggedIn
-      <form class="form-inline ml-auto" action="/dash" method="GET">
+      <form class="form-inline ml-auto mr-2" action="/dash" method="GET">
         <button class="btn btn-outline-light" type="submit">
           {{ auth.user.username }}
         </button>
       </form>
-      <form class="form-inline ml-2" action="/api/logout" method="POST">
+      <form class="form-inline" action="/api/logout" method="POST">
         {{ csrfField() }}
         <button class="btn btn-outline-light" type="submit">
           Salir
         </button>
       </form>
       @else
-      <form class="form-inline ml-auto" action="/signup" method="GET">
+      <form class="form-inline ml-auto mr-2" action="/signup" method="GET">
         <button class="btn btn-outline-light" type="submit">
           Registro
         </button>
       </form>
-      <form class="form-inline ml-2" action="/login" method="GET">
+      <form class="form-inline" action="/login" method="GET">
         <button class="btn btn-outline-light" type="submit">
           Entrar
         </button>
