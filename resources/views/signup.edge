@@ -3,9 +3,9 @@
 <div class="row">
   <div class="col-sm mb-4">
     <div class="card">
-      <div class="card-body bg-dark border border-light">
+      <div class="card-body border border-dark">
         <h5 class="card-title">Registro</h5>
-        <hr class="my-2 border border-light">
+        <hr class="my-2 border border-dark">
         @include('layout.notification')
         <form action="/api/signup" method="POST">
           {{ csrfField() }}
@@ -44,7 +44,7 @@
     <div class="card">
       <div class="card-body bg-dark border border-light">
         Al registrase a EnTiras se enviar&aacute; un mensaje por correo para
-        confirmar la cuenta. Por favor, revise en su bandeja de spam si es
+        confirmar la cuenta. Por favor, revise su bandeja de spam si es
         necesario.
       </div>
     </div>
