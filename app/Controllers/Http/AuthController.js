@@ -127,7 +127,7 @@ class AuthController {
       session.flash({
         notification: {
           type: 'danger',
-          message: 'Incorrect credentials'
+          message: 'Credenciales incorrectas'
         }
       })
       return response.redirect('back')
@@ -136,7 +136,7 @@ class AuthController {
       session.flash({
         notification: {
           type: 'danger',
-          message: 'Not verified'
+          message: 'Correo no verificado'
         }
       })
       return response.redirect('back')
@@ -146,7 +146,7 @@ class AuthController {
       session.flash({
         notification: {
           type: 'danger',
-          message: 'Incorrect credentials'
+          message: 'Credenciales incorrectas'
         }
       })
       return response.redirect('back')
