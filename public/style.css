@@ -4,3 +4,10 @@
 .bg-entiras-secondary {
   background-color: #fd772d
 }
+.btn-outline-secondary {
+  color: #fd772d;
+  border-color: #fd772d;
+}
+.btn-outline-secondary:hover {
+  background-color: #fd772d;
+}
