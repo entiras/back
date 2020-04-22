@@ -10,4 +10,8 @@
 }
 .btn-outline-secondary:hover {
   background-color: #fd772d;
+  border-color: #fd772d;
+}
+.btn-outline-secondary:focus {
+  box-shadow: 0 1px 1px rgba(253, 119, 45, 0.075) inset, 0 0 8px rgba(253, 119, 45, 0.6);
 }
