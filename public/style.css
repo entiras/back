@@ -18,3 +18,6 @@
 .entiras-brand {
    height: 2em;
 }
+.jumbotron {
+  background-image: url('/banca.jpg');
+}
