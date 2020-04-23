@@ -5,7 +5,7 @@
   background-color: #fd772d;
 }
 .bg-entiras-dark {
-  background-color: rgba(0, 0, 0, 0.5)
+  background-color: rgba(0, 0, 0, 0.7)
 }
 .btn-outline-secondary {
   color: #fd772d;
@@ -22,7 +22,7 @@
    height: 2em;
 }
 .jumbotron {
-  background-image: url('/banca.jpg');
+  background-image: url('https://res.cloudinary.com/entiras/image/upload/v1587609028/banca_wlfcjw.jpg');
   background-position: center;
   background-size: 100%;
 }
