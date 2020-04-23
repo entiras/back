@@ -4,9 +4,6 @@ class PageController {
   home({view}) {
     return view.render('home');
   }
-  signup({view}) {
-    return view.render('signup');
-  }
   login({view}) {
     return view.render('login');
   }
