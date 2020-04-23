@@ -1,8 +1,11 @@
 .bg-entiras-primary {
-  background-color: #074c97
+  background-color: #074c97;
 }
 .bg-entiras-secondary {
-  background-color: #fd772d
+  background-color: #fd772d;
+}
+.bg-entiras-dark {
+  background-color: rgba(0, 0, 0, 0.5)
 }
 .btn-outline-secondary {
   color: #fd772d;
