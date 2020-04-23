@@ -20,4 +20,6 @@
 }
 .jumbotron {
   background-image: url('/banca.jpg');
+  background-position: center;
+  background-size: 100%;
 }
