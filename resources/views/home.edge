@@ -1,5 +1,10 @@
 @layout('layout.app')
 @section('content')
+@loggedIn
+<p>
+  Crea una nueva tira :D
+</p>
+@else
 <div class="jumbotron">
   <div class="row">
     <div class="col-sm">
@@ -39,12 +44,13 @@
                 Registrarse
             </button>
           </form>
-          <a href="/login" class="mt-2 ml-auto card-link">
-            Tengo cuenta
-          </a>
         </div>
       </div>
     </div>
   </div>
 </div>
+@endloggedIn
+<p>
+  Contenido destacado...
+</p>
 @endsection
