@@ -7,8 +7,6 @@
     <div class="col-sm">
       <div class="card bg-entiras-dark text-light">
         <div class="card-body">
-          <h5 class="card-title">Registro</h5>
-          <hr class="my-2">
           @include('layout.notification')
           <form action="/api/signup" method="POST">
             {{ csrfField() }}
