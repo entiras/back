@@ -15,12 +15,16 @@
         @loggedIn
         <li class="nav-item">
           <a class="nav-link" href="/dash">
+            <img draggable="false" class="emoji" alt="&#x2699;"
+            src="https://twemoji.maxcdn.com/v/12.1.5/72x72/2699.png">
             {{ auth.user.username }}
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#"
             onclick="document.getElementById('logout').submit()">
+            <img draggable="false" class="emoji" alt="&#x1F512;"
+            src="https://twemoji.maxcdn.com/v/12.1.5/72x72/1f512.png">
             Salir
           </a>
         </li>
@@ -30,7 +34,7 @@
         @else
         <li class="nav-item">
           <a class="nav-link" href="/login">
-            <img draggable="false" class="emoji" alt="🔒"
+            <img draggable="false" class="emoji" alt="&#x1F512;"
             src="https://twemoji.maxcdn.com/v/12.1.5/72x72/1f512.png">
             Entrar
           </a>
