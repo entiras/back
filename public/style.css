@@ -27,13 +27,15 @@
 .jumbotron {
   background-color: black;
   background-position: center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 .bg-entiras-focus-1 {
-  background-size: auto 180%;
   background-image: url('https://res.cloudinary.com/entiras/image/upload/v1587609028/banca_wlfcjw.jpg');
 }
 .bg-entiras-focus-2 {
-  background-size: auto 210%;
   background-image: url('https://res.cloudinary.com/entiras/image/upload/v1587763727/carton_glsjt5.jpg');
 }
 img.emoji {
