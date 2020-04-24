@@ -23,9 +23,14 @@
 }
 .jumbotron {
   background-color: black;
-  background-image: url('https://res.cloudinary.com/entiras/image/upload/v1587712683/carton_s9zuu5.jpg');
   background-position: center;
   background-size: auto 180%
+}
+.bg-entiras-focus-1 {
+  background-image: url('https://res.cloudinary.com/entiras/image/upload/v1587609028/banca_wlfcjw.jpg');
+}
+.bg-entiras-focus-2 {
+  background-image: url('https://res.cloudinary.com/entiras/image/upload/v1587712683/carton_s9zuu5.jpg');
 }
 img.emoji {
     cursor: pointer;
