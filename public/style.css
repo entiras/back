@@ -7,6 +7,9 @@
 .bg-entiras-dark {
   background-color: rgba(0, 0, 0, 0.7)
 }
+.card-link, .card-link:hover {
+  color: #fd772d;
+}
 .btn-outline-secondary {
   color: #fd772d;
   border-color: #fd772d;

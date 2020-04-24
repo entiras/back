@@ -1,27 +1,44 @@
 @layout('layout.app')
 @section('content')
-  <h2>
-    Login
-  </h2>
-  @include('layout.notification')
-  <form action="/api/login" method="POST">
-    {{ csrfField() }}
-    <div class="form-group">
-      <input type="text" name="username" value="{{ old('username') }}"
-        class="form-control {{ hasErrorFor('username') ? 'is-invalid' : '' }}"
-        placeholder="Username">
-        {{ elIf('<span class="invalid-feedback">$self</span>', getErrorFor('username'), hasErrorFor('username')) }}
+<div class="jumbotron bg-entiras-focus-2">
+  <div class="row">
+    <div class="col-md">
     </div>
-    <div class="form-group">
-      <input type="password" name="password"
-        class="form-control {{ hasErrorFor('password') ? 'is-invalid' : '' }}"
-        placeholder="Password">
-        {{ elIf('<span class="invalid-feedback">$self</span>', getErrorFor('password'), hasErrorFor('password')) }}
+    <div class="col-md">
+      <div class="card bg-entiras-dark text-light">
+        <div class="card-body">
+          @include('layout.notification')
+          <form action="/api/login" method="POST">
+            {{ csrfField() }}
+            <div class="form-group">
+              <label>
+                <img draggable="false" class="emoji" alt="&#x1F3F7;&#xFE0F;"
+                src="https://twemoji.maxcdn.com/v/12.1.5/72x72/1f3f7.png">
+                Nombre de Usuario
+              </label>
+              <input type="text" name="username" value="{{ old('username') }}"
+                class="form-control {{ hasErrorFor('username') ? 'is-invalid' : '' }}"
+                placeholder="usuario">
+            </div>
+            <div class="form-group">
+              <label>
+                <img draggable="false" class="emoji" alt="&#x1F511;"
+                src="https://twemoji.maxcdn.com/v/12.1.5/72x72/1f511.png">
+                Contrase&ntilde;a
+              </label>
+              <input type="password" name="password"
+                class="form-control {{ hasErrorFor('password') ? 'is-invalid' : '' }}"
+                placeholder="4 caracteres m&iacute;nimo">
+            </div>
+            <button class="btn btn-outline-secondary btn-block" type="submit">
+                Entrar
+            </button>
+          </form>
+        </div>
+        <a class="card-link" href="/forgot">Olvid&eacute; mi contrase&ntilde;a</a>
+        <a class="card-link" href="/resend">Mi correo de confirmaci&oacute;n no lleg&oacute;</a>
+      </div>
     </div>
-    <button class="btn btn-primary" type="submit">
-        Login
-    </button>
-  </form>
-  <a href="/resend">Resend confirmation Email</a><br>
-  <a href="/forgot">Forgot Password</a>
+  </div>
+</div>
 @endsection
