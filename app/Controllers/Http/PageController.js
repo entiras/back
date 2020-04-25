@@ -21,6 +21,11 @@ class PageController {
       token: params.token
     });
   }
+  obscure({view, params}) {
+    return view.render('obscure',{
+      all: params.all
+    });
+  }
 }
 
 module.exports = PageController
