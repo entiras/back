@@ -167,14 +167,20 @@ class AuthController {
     })
     if (validation.fails()) {
       session.withErrors(validation.messages()).flashExcept('password')
+      session.flash({
+        notification: {
+          type: 'danger',
+          message: 'Corrija los campos indicados'
+        }
+      })
       return response.redirect('back')
     }
-    const user = await User.findBy('email', request.input('email'));
+    const user = await User.findBy('email', request.input('email'))
     if (!user){
       session.flash({
         notification: {
           type: 'success',
-          message: 'Email sent'
+          message: 'Esperando confirmaci\u00f3n por correo'
         }
       })
       return response.redirect('back')
@@ -183,7 +189,7 @@ class AuthController {
       session.flash({
         notification: {
           type: 'danger',
-          message: 'Already verified'
+          message: 'Correo verificado'
         }
       })
       return response.redirect('back')
@@ -197,12 +203,12 @@ class AuthController {
       appUrl: Env.get('APP_URL')
     }, (message) => {
       message.to(user.email).from(Env.get('FROM_EMAIL'))
-      .subject('Confim Email')
+      .subject('Por favor confirma tu direcci\u00f3n de correo electr\u00f3nico')
     })
     session.flash({
       notification: {
         type: 'success',
-        message: 'Email sent'
+        message: 'Esperando confirmaci\u00f3n por correo'
       }
     })
     return response.redirect('back')
