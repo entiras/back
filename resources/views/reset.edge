@@ -1,20 +1,31 @@
 @layout('layout.app')
 @section('content')
-  <h2>
-    Reset
-  </h2>
-  @include('layout.notification')
-  <form action="/api/reset" method="POST">
-    {{ csrfField() }}
-    <input type="hidden" value="{{ token }}" name="token">
-    <div class="form-group">
-      <input type="password" name="password"
-        class="form-control {{ hasErrorFor('password') ? 'is-invalid' : '' }}"
-        placeholder="Password">
-        {{ elIf('<span class="invalid-feedback">$self</span>', getErrorFor('password'), hasErrorFor('password')) }}
+<div class="jumbotron bg-entiras-focus-1">
+  <div class="row">
+    <div class="col-md">
     </div>
-    <button class="btn btn-primary" type="submit">
-        Reset
-    </button>
-  </form>
+    <div class="col-md">
+      <div class="card bg-entiras-dark text-light">
+        <div class="card-body">
+          @include('layout.notification')
+          <form action="/api/reset" method="POST">
+            {{ csrfField() }}
+            <input type="hidden" value="{{ token }}" name="token">
+            <div class="form-group">
+              <label>
+                Contrase&ntilde;a
+              </label>
+              <input type="password" name="password"
+                class="form-control {{ hasErrorFor('password') ? 'is-invalid' : '' }}"
+                placeholder="4 caracteres m&iacute;nimo">
+            </div>
+            <button class="btn btn-outline-secondary btn-block" type="submit">
+                Cambiar
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection

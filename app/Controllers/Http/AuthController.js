@@ -17,6 +17,12 @@ class AuthController {
     })
     if (validation.fails()) {
       session.withErrors(validation.messages()).flashExcept('password')
+      session.flash({
+        notification: {
+          type: 'danger',
+          message: 'Corrija los campos indicados'
+        }
+      })
       return response.redirect('back')
     }
     var payload
@@ -26,7 +32,7 @@ class AuthController {
       session.flash({
         notification: {
           type: 'danger',
-          message: 'Invalid or expired link'
+          message: 'El enlace es inv\u00e1lido o ha caducado'
         }
       })
       return response.redirect('back')
@@ -36,7 +42,7 @@ class AuthController {
       session.flash({
         notification: {
           type: 'danger',
-          message: 'User not found'
+          message: 'El usuario no existe'
         }
       })
       return response.redirect('back')
@@ -49,7 +55,7 @@ class AuthController {
       session.flash({
         notification: {
           type: 'danger',
-          message: 'No reset request'
+          message: 'No se ha solicitado cambiar la contrase\u00f1a'
         }
       })
       return response.redirect('back')
@@ -60,7 +66,7 @@ class AuthController {
     session.flash({
       notification: {
         type: 'success',
-        message: 'Password changed'
+        message: 'Contrase\u00f1a actualizada'
       }
     })
     return response.redirect('back')
@@ -104,7 +110,7 @@ class AuthController {
       appUrl: Env.get('APP_URL')
     }, (message) => {
       message.to(user.email).from(Env.get('FROM_EMAIL'))
-      .subject('Cambia tu contrase\u00f1a')
+      .subject('Puedes cambiar tu contrase\u00f1a')
     })
     session.flash({
       notification: {
