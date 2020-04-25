@@ -120,9 +120,15 @@ class AuthController {
     })
     if (validation.fails()) {
       session.withErrors(validation.messages()).flashExcept('password')
+      session.flash({
+        notification: {
+          type: 'danger',
+          message: 'Corrija los campos indicados'
+        }
+      })
       return response.redirect('back')
     }
-    const user = await User.findBy('username', request.input('username'));
+    const user = await User.findBy('username', request.input('username'))
     if (!user){
       session.flash({
         notification: {
