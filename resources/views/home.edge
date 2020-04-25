@@ -13,10 +13,10 @@
     </div>
     <div class="col-md">
       <div class="card bg-entiras-dark text-light">
-        <h3 class="text-center">
-          Registro
-        </h3>
         <div class="card-body">
+          <h3 class="text-center">
+            Registro
+          </h3>
           @include('layout.notification')
           <form action="/api/signup" method="POST">
             {{ csrfField() }}
