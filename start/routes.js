@@ -24,7 +24,7 @@ Route.group(() => {
 }).middleware(['authenticated'])
 Route.get('/dash', 'PageController.dash').middleware(['auth']).as('dash')
 Route.get('/', 'PageController.home')
-Route.get('/:all', 'PageController.obscure')
+Route.get('*', 'PageController.obscure')
 
 Route.group(() => {
   Route.post('signup', 'AuthController.signup')
