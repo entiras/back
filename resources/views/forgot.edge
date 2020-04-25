@@ -1,20 +1,30 @@
 @layout('layout.app')
 @section('content')
-  <h2>
-    Olvid&eacute; mi contrase&ntilde;a
-  </h2>
-  @include('layout.notification')
-  <form action="/api/forgot" method="POST">
-    {{ csrfField() }}
-    <div class="form-group">
-      <label>Direcci&oacute;n de correo</label>
-      <input type="text" name="email" value="{{ old('email') }}"
-        class="form-control {{ hasErrorFor('email') ? 'is-invalid' : '' }}"
-        placeholder="ejemplo@ejemplo.com">
-        {{ elIf('<span class="invalid-feedback">$self</span>', getErrorFor('email'), hasErrorFor('email')) }}
+<div class="jumbotron bg-entiras-focus-1">
+  <div class="row">
+    <div class="col-md">
     </div>
-    <button class="btn btn-primary" type="submit">
-      Pedir cambio
-    </button>
-  </form>
+    <div class="col-md">
+      <div class="card bg-entiras-dark text-light">
+        <div class="card-body">
+          @include('layout.notification')
+          <form action="/api/forgot" method="POST">
+            {{ csrfField() }}
+            <div class="form-group">
+              <label>
+                Direcci&oacute;n de Correo
+              </label>
+              <input type="text" name="email" value="{{ old('email') }}"
+                class="form-control {{ hasErrorFor('email') ? 'is-invalid' : '' }}"
+                placeholder="ejemplo@ejemplo.com">
+            </div>
+            <button class="btn btn-outline-secondary btn-block" type="submit">
+                Confirmar
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection

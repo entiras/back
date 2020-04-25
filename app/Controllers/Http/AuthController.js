@@ -72,14 +72,20 @@ class AuthController {
     })
     if (validation.fails()) {
       session.withErrors(validation.messages()).flashExcept('password')
+      session.flash({
+        notification: {
+          type: 'danger',
+          message: 'Corrija los campos indicados'
+        }
+      })
       return response.redirect('back')
     }
-    const user = await User.findBy('email', request.input('email'));
+    const user = await User.findBy('email', request.input('email'))
     if (!user){
       session.flash({
         notification: {
           type: 'success',
-          message: 'Email sent'
+          message: 'Correo enviado'
         }
       })
       return response.redirect('back')
@@ -103,7 +109,7 @@ class AuthController {
     session.flash({
       notification: {
         type: 'success',
-        message: 'Email sent'
+        message: 'Correo enviado'
       }
     })
     return response.redirect('back')
