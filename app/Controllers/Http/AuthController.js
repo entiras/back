@@ -104,7 +104,7 @@ class AuthController {
       appUrl: Env.get('APP_URL')
     }, (message) => {
       message.to(user.email).from(Env.get('FROM_EMAIL'))
-      .subject('Reset Password')
+      .subject('Cambia tu contrase\u00f1a')
     })
     session.flash({
       notification: {
