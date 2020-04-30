@@ -16,7 +16,7 @@ module.exports = {
   | Function - Receives the current origin and should return one of the above values.
   |
   */
-  origin: 'entira.tk,entiras.herokuapp.com',
+  origin: ['entira.tk', 'entiras.herokuapp.com'],
 
   /*
   |--------------------------------------------------------------------------
