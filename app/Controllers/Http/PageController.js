@@ -1,16 +1,9 @@
 'use strict'
 
-const { Octokit } = require("@octokit/rest");
-const octokit = new Octokit();
-
 class PageController {
-  async home({ response }) {
-    //return view.render('home');
+  home({ response }) {
     return response.json({
-      data: await octokit.repos.listForOrg({
-        org: "entiras",
-        type: "public"
-      })
+      message: 'API working'
     });
   }
   login({ view }) {
