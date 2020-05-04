@@ -4,18 +4,14 @@ const { Octokit } = require("@octokit/rest");
 const octokit = new Octokit();
 
 class PageController {
-  home({ response }) {
+  async home({ response }) {
     //return view.render('home');
-    octokit.repos
-      .listForOrg({
+    return response.json({
+      data: await octokit.repos.listForOrg({
         org: "octokit",
         type: "public"
       })
-      .then(({ data }) => {
-        return response.json({
-          data: data
-        });
-      });
+    });
   }
   login({ view }) {
     return view.render('login');
