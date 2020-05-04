@@ -1,11 +1,21 @@
 'use strict'
 
+const { Octokit } = require("@octokit/rest");
+const octokit = new Octokit();
+
 class PageController {
-  home({ view, response }) {
+  home({ response }) {
     //return view.render('home');
-    return response.json({
-      mensaje: 'Hola'
-    });
+    octokit.repos
+      .listForOrg({
+        org: "octokit",
+        type: "public"
+      })
+      .then(({ data }) => {
+        return response.json({
+          data: data
+        });
+      });
   }
   login({ view }) {
     return view.render('login');
