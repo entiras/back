@@ -8,7 +8,7 @@ class PageController {
     //return view.render('home');
     return response.json({
       data: await octokit.repos.listForOrg({
-        org: "octokit",
+        org: "entiras",
         type: "public"
       })
     });
