@@ -1,28 +1,31 @@
 'use strict'
 
 class PageController {
-  home({view}) {
-    return view.render('home');
+  home({ view, response }) {
+    //return view.render('home');
+    return response.json({
+      mensaje: 'Hola'
+    });
   }
-  login({view}) {
+  login({ view }) {
     return view.render('login');
   }
-  resend({view}) {
+  resend({ view }) {
     return view.render('resend');
   }
-  dash({view}) {
+  dash({ view }) {
     return view.render('dash');
   }
-  forgot({view}) {
+  forgot({ view }) {
     return view.render('forgot');
   }
-  reset({view, params}) {
-    return view.render('reset',{
+  reset({ view, params }) {
+    return view.render('reset', {
       token: params.token
     });
   }
-  obscure({view, params}) {
-    return view.render('obscure',{
+  obscure({ view, params }) {
+    return view.render('obscure', {
       all: params.all
     });
   }
