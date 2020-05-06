@@ -13,7 +13,7 @@ class PageController {
   }
   csrf({ response, view }) {
     return response.json({
-      token: view.render('token')
+      token: view.render('token').replace('\n', '')
     });
   }
   /*login({ view }) {
