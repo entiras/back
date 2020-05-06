@@ -3,10 +3,20 @@
 class PageController {
   home({ response }) {
     return response.json({
-      message: 'API working'
+      status: '✔️'
     });
   }
-  login({ view }) {
+  obscure({ response }) {
+    return response.json({
+      route: '❌'
+    });
+  }
+  csrf({ response, view }) {
+    return response.json({
+      token: view.render('token')
+    });
+  }
+  /*login({ view }) {
     return view.render('login');
   }
   resend({ view }) {
@@ -22,12 +32,7 @@ class PageController {
     return view.render('reset', {
       token: params.token
     });
-  }
-  obscure({ view, params }) {
-    return view.render('obscure', {
-      all: params.all
-    });
-  }
+  }*/
 }
 
 module.exports = PageController

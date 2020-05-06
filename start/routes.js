@@ -14,9 +14,13 @@
 */
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
-const Route = use('Route')
+const Route = use('Route');
 
-Route.group(() => {
+Route.get('/csrf', 'PageController.csrf');
+Route.get('/', 'PageController.home');
+Route.route('*', 'PageController.obscure');
+
+/*Route.group(() => {
   Route.get('/resend', 'PageController.resend')
   Route.get('/forgot', 'PageController.forgot')
   Route.get('/reset/:token', 'PageController.reset')
@@ -34,4 +38,4 @@ Route.group(() => {
   Route.post('forgot', 'AuthController.forgot')
   Route.post('reset', 'AuthController.reset')
   Route.get('confirm/:token', 'AuthController.confirm')
-}).prefix('/api/')
+}).prefix('/api/')*/
