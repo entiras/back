@@ -9,7 +9,57 @@ const Hash = use('Hash')
 const jwt = require('jsonwebtoken')
 
 class AuthController {
-  async reset({response, request, session}) {
+  async signup({ session, request, response }) {
+    const validation = await validate(
+      request.all(), {
+      email: 'required|email',
+      username: 'required',
+      password: 'required|min:4'
+    })
+    if (validation.fails()) {
+      return response.json({
+        notification: {
+          type: 'danger',
+          message: 'validation',
+          validation: validation
+        }
+      });
+    }
+    const clone = await User.findBy('email', request.input('email'))
+      || await User.findBy('username', request.input('username'))
+    if (clone) {
+      return response.json({
+        notification: {
+          type: 'danger',
+          message: 'clone'
+        }
+      });
+    }
+    const user = await User.create({
+      email: request.input('email'),
+      username: request.input('username'),
+      password: request.input('password'),
+      verified: false
+    })
+    const token = jwt.sign({ email: user.email }, Env.get('SECRET'), {
+      expiresIn: 60 * 60 * 24 * 3
+    })
+    await Mail.send('emails.confirm', {
+      username: user.username,
+      token: token,
+      appUrl: Env.get('APP_URL')
+    }, (message) => {
+      message.to(user.email).from(Env.get('FROM_EMAIL'))
+        .subject('Por favor confirma tu dirección de correo electrónico')
+    })
+    return response.json({
+      notification: {
+        type: 'success',
+        message: 'sent'
+      }
+    });
+  }
+  /*async reset({response, request, session}) {
     const validation = await validate(
       request.all(), {
         token: 'required',
@@ -261,60 +311,7 @@ class AuthController {
       }
     })
     return response.redirect('/login')
-  }
-  async signup({session, request, response}) {
-    const validation = await validate(
-      request.all(), {
-      email: 'required|email',
-      username: 'required',
-      password: 'required|min:4'
-    })
-    if (validation.fails()) {
-      session.withErrors(validation.messages()).flashExcept('password')
-      session.flash({
-        notification: {
-          type: 'danger',
-          message: 'Corrija los campos indicados'
-        }
-      })
-      return response.redirect('back')
-    }
-    const clone = await User.findBy('email', request.input('email'))
-      || await User.findBy('username', request.input('username'))
-    if (clone){
-      session.flash({
-        notification: {
-          type: 'danger',
-          message: 'Nombre de usuario y/o direcci\u00f3n de correo ocupados'
-        }
-      })
-      return response.redirect('back')
-    }
-    const user = await User.create({
-      email: request.input('email'),
-      username: request.input('username'),
-      password: request.input('password'),
-      verified: false
-    })
-    const token = jwt.sign({email: user.email}, Env.get('SECRET'), {
-      expiresIn: 60 * 60 * 24 * 3
-    })
-    await Mail.send('emails.confirm', {
-      username: user.username,
-      token: token,
-      appUrl: Env.get('APP_URL')
-    }, (message) => {
-      message.to(user.email).from(Env.get('FROM_EMAIL'))
-      .subject('Por favor confirma tu direcci\u00f3n de correo electr\u00f3nico')
-    })
-    session.flash({
-      notification: {
-        type: 'success',
-        message: 'Esperando confirmaci\u00f3n por correo'
-      }
-    })
-    return response.redirect('back')
-  }
+  }*/
 }
 
 module.exports = AuthController;
