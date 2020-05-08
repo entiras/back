@@ -30,7 +30,7 @@
     "@adonisjs/validator": "^5.0.6",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.0.2",
-    "octokit": "*"
+    "@octokit/rest": "*"
   },
   "devDependencies": {},
   "autoload": {

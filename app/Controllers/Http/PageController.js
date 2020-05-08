@@ -1,7 +1,7 @@
 'use strict'
 
 const Env = use('Env')
-const { Octokit, App, Action } = require("octokit");
+const { Octokit } = require("@octokit/rest");
 const octokit = new Octokit({
   auth: Env.get('GITHUB_TOKEN', '')
 });
