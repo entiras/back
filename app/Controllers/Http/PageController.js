@@ -8,14 +8,11 @@ const octokit = new Octokit({
 
 class PageController {
   async home({ response }) {
-    var data = await octokit.repos
-      .listForOrg({
-        org: "octokit",
-        type: "private"
-      });
+    await octokit.repos.createForAuthenticatedUser({
+      name: 'Hola'
+    });
     return response.json({
-      status: '✔️',
-      data: data
+      status: '✔️'
     });
   }
   obscure({ response }) {
