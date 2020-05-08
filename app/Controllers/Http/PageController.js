@@ -1,9 +1,21 @@
 'use strict'
 
+const Env = use('Env')
+const { Octokit, App, Action } = require("octokit");
+const octokit = new Octokit({
+  auth: Env.get('GITHUB_TOKEN', '')
+});
+
 class PageController {
-  home({ response }) {
+  async home({ response }) {
+    var data = await octokit.repos
+      .listForOrg({
+        org: "octokit",
+        type: "private"
+      });
     return response.json({
-      status: '✔️'
+      status: '✔️',
+      data: data
     });
   }
   obscure({ response }) {

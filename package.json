@@ -29,7 +29,8 @@
     "@adonisjs/shield": "^1.0.8",
     "@adonisjs/validator": "^5.0.6",
     "jsonwebtoken": "^8.5.1",
-    "pg": "^8.0.2"
+    "pg": "^8.0.2",
+    "octokit": "*"
   },
   "devDependencies": {},
   "autoload": {
