@@ -8,16 +8,27 @@ const octokit = new Octokit({
 
 class PageController {
   async home({ response }) {
-    var d = await octokit.repos.createOrUpdateFile({
+    var cont = await octokit.repos.getContents({
+      owner: 'entiras',
+      repo: 'front',
+      path: 'hola2',
+    });
+    var cont2 = await octokit.repos.getContents({
+      owner: 'entiras',
+      repo: 'front',
+      path: 'hola',
+    });
+    /*var d = await octokit.repos.createOrUpdateFile({
       owner: 'entiras',
       repo: 'front',
       path: 'hola',
       message: 'hola',
-      content: 'SG9sYQ=='
-    });
+      content: 'SG9sYQ==',
+      sha: 'af5a0623e0771a314019824ae5786545e4813652'
+    });*/
     return response.json({
       status: '✔️',
-      data: d
+      data: [cont, cont2]
     });
   }
   obscure({ response }) {
