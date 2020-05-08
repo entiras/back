@@ -8,18 +8,16 @@ const octokit = new Octokit({
 
 class PageController {
   async home({ response }) {
-    await octokit.repos.createForAuthenticatedUser({
-      name: 'Hola'
-    });
-    await octokit.repos.createOrUpdateFile({
+    var d = await octokit.repos.createOrUpdateFile({
       owner: 'entiras',
-      repo: 'fron',
+      repo: 'front',
       path: 'hola',
       message: 'hola',
       content: 'SG9sYQ=='
     });
     return response.json({
-      status: '✔️'
+      status: '✔️',
+      data: d
     });
   }
   obscure({ response }) {
