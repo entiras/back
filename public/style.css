@@ -1,0 +1,92 @@
+.bg-entiras-primary {
+  background-color: #074c97;
+}
+.bg-entiras-secondary {
+  background-color: #fd772d;
+}
+.bg-entiras-dark {
+  background-color: rgba(0, 0, 0, 0.8)
+}
+a, a:hover {
+  color: #fd772d;
+}
+.btn-outline-secondary {
+  color: #fd772d;
+  border-color: #fd772d;
+}
+.btn-outline-secondary:hover {
+  background-color: #fd772d;
+  border-color: #fd772d;
+}
+.btn-outline-secondary:focus {
+  box-shadow: 0 1px 1px rgba(253, 119, 45, 0.075) inset, 0 0 8px rgba(253, 119, 45, 0.6);
+}
+.entiras-brand {
+  height: 2em;
+}
+.jumbotron {
+  background-color: black;
+  background-position: center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.bg-entiras-focus-1 {
+  background-image: url('https://res.cloudinary.com/entiras/image/upload/v1587609028/banca_wlfcjw.jpg');
+}
+.bg-entiras-focus-2 {
+  background-image: url('https://res.cloudinary.com/entiras/image/upload/v1587763727/carton_glsjt5.jpg');
+}
+@font-face {
+  font-family: 'desyrelregular';
+  src: url('https://res.cloudinary.com/entiras/raw/upload/v1588187690/desyrel_iwosvz.woff2') format('woff2'),
+    url('https://res.cloudinary.com/entiras/raw/upload/v1588187690/desyrel_aju6af.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+.h-entiras {
+  font-family: 'desyrelregular' !important;
+  font-weight: bold;
+}
+.big {
+  font-size: 10rem;
+  color: #074c97;
+}
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?mh8zzq');
+  src:  url('fonts/icomoon.eot?mh8zzq#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?mh8zzq') format('truetype'),
+    url('fonts/icomoon.woff?mh8zzq') format('woff'),
+    url('fonts/icomoon.svg?mh8zzq#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-paper-plane:before {
+  content: "\e903";
+}
+.icon-hourglass:before {
+  content: "\e902";
+}
+.icon-bars:before {
+  content: "\e900";
+}
+.icon-lock:before {
+  content: "\e901";
+}

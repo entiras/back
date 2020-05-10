@@ -1,0 +1,4 @@
+/script.js /script.js 200
+/style.css /style.css 200
+/api/* https://entiras.herokuapp.com/:splat 200
+/* /index.html 200
