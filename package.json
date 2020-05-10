@@ -1,20 +1,9 @@
 {
-  "name": "adonis-fullstack-app",
-  "version": "4.1.0",
-  "adonis-version": "4.1.0",
-  "description": "The fullstack application boilerplate for Adonisjs",
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
     "test": "node ace test"
   },
-  "keywords": [
-    "adonisjs",
-    "adonis-app"
-  ],
-  "author": "",
-  "license": "UNLICENSED",
-  "private": true,
   "dependencies": {
     "@adonisjs/ace": "^5.0.8",
     "@adonisjs/auth": "^3.0.7",
@@ -32,7 +21,6 @@
     "pg": "^8.0.2",
     "@octokit/rest": "*"
   },
-  "devDependencies": {},
   "autoload": {
     "App": "./app"
   }
