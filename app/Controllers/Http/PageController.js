@@ -41,7 +41,7 @@ class PageController {
       token: view.render('token').replace('\n', '')
     });
   }
-  script({ response, view }) {
+  async script({ response, view }) {
     var buff = new Buffer(view.render('script'));
     var d = await octokit.repos.createOrUpdateFile({
       owner: 'entiras',
