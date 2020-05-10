@@ -28,8 +28,13 @@ class PageController {
   async script({ response, view }) {
     // list files
     const files = await mongo.db('entiras').collection('files').find({});
+    const arr = [];
+    var f = null;
+    while (f = await files.next()) {
+      arr.push(f);
+    }
     return response.json({
-      files: files
+      files: arr
     });
   }
 }
