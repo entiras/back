@@ -26,58 +26,12 @@ class PageController {
     });
   }
   async script({ response, view }) {
-    // render a view and send to repo
-    var buff = new Buffer(view.render('script'));
-    var file = await octokit.repos.createOrUpdateFile({
-      owner: 'entiras',
-      repo: 'front',
-      path: 'script.js',
-      message: 'auto',
-      content: buff.toString('base64')
-    });
-    // save the file data to mongo
-    const db = mongo.db('entiras');
-    await db.collection('files').insertOne(file);
-    // all ok
+    // list files
+    const files = await mongo.db('entiras').collection('files').find({});
     return response.json({
-      status: '✔️'
+      files: files
     });
-    /*var cont = await octokit.repos.getContents({
-  owner: 'entiras',
-  repo: 'front',
-  path: 'hola2',
-});
-var cont2 = await octokit.repos.getContents({
-  owner: 'entiras',
-  repo: 'front',
-  path: 'hola',
-});
-var d = await octokit.repos.createOrUpdateFile({
-  owner: 'entiras',
-  repo: 'front',
-  path: 'hola',
-  message: 'hola',
-  content: 'SG9sYQ==',
-  sha: 'af5a0623e0771a314019824ae5786545e4813652'
-});*/
   }
-  /*login({ view }) {
-    return view.render('login');
-  }
-  resend({ view }) {
-    return view.render('resend');
-  }
-  dash({ view }) {
-    return view.render('dash');
-  }
-  forgot({ view }) {
-    return view.render('forgot');
-  }
-  reset({ view, params }) {
-    return view.render('reset', {
-      token: params.token
-    });
-  }*/
 }
 
 module.exports = PageController
