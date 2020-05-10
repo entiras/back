@@ -11,27 +11,8 @@ mongo.connect();
 
 class PageController {
   async home({ response }) {
-    /*var cont = await octokit.repos.getContents({
-      owner: 'entiras',
-      repo: 'front',
-      path: 'hola2',
-    });
-    var cont2 = await octokit.repos.getContents({
-      owner: 'entiras',
-      repo: 'front',
-      path: 'hola',
-    });
-    var d = await octokit.repos.createOrUpdateFile({
-      owner: 'entiras',
-      repo: 'front',
-      path: 'hola',
-      message: 'hola',
-      content: 'SG9sYQ==',
-      sha: 'af5a0623e0771a314019824ae5786545e4813652'
-    });*/
     return response.json({
-      status: '✔️',
-      data: [cont, cont2]
+      status: '✔️'
     });
   }
   obscure({ response }) {
@@ -45,17 +26,40 @@ class PageController {
     });
   }
   async script({ response, view }) {
+    // render a view and send to repo
     var buff = new Buffer(view.render('script'));
-    var d = await octokit.repos.createOrUpdateFile({
+    var file = await octokit.repos.createOrUpdateFile({
       owner: 'entiras',
       repo: 'front',
       path: 'script.js',
       message: 'auto',
       content: buff.toString('base64')
     });
+    // save the file data to mongo
+    const db = mongo.db('entiras');
+    await db.collection('files').insertOne(file);
+    // all ok
     return response.json({
       status: '✔️'
     });
+    /*var cont = await octokit.repos.getContents({
+  owner: 'entiras',
+  repo: 'front',
+  path: 'hola2',
+});
+var cont2 = await octokit.repos.getContents({
+  owner: 'entiras',
+  repo: 'front',
+  path: 'hola',
+});
+var d = await octokit.repos.createOrUpdateFile({
+  owner: 'entiras',
+  repo: 'front',
+  path: 'hola',
+  message: 'hola',
+  content: 'SG9sYQ==',
+  sha: 'af5a0623e0771a314019824ae5786545e4813652'
+});*/
   }
   /*login({ view }) {
     return view.render('login');
