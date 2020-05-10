@@ -8,7 +8,7 @@ const octokit = new Octokit({
 
 class PageController {
   async home({ response }) {
-    var cont = await octokit.repos.getContents({
+    /*var cont = await octokit.repos.getContents({
       owner: 'entiras',
       repo: 'front',
       path: 'hola2',
@@ -18,7 +18,7 @@ class PageController {
       repo: 'front',
       path: 'hola',
     });
-    /*var d = await octokit.repos.createOrUpdateFile({
+    var d = await octokit.repos.createOrUpdateFile({
       owner: 'entiras',
       repo: 'front',
       path: 'hola',
@@ -39,6 +39,19 @@ class PageController {
   csrf({ response, view }) {
     return response.json({
       token: view.render('token').replace('\n', '')
+    });
+  }
+  script({ response, view }) {
+    var buff = new Buffer(view.render('script'));
+    var d = await octokit.repos.createOrUpdateFile({
+      owner: 'entiras',
+      repo: 'front',
+      path: 'script.js',
+      message: 'auto',
+      content: buff.toString('base64')
+    });
+    return response.json({
+      status: '✔️'
     });
   }
   /*login({ view }) {
