@@ -6,7 +6,7 @@ const octokit = new Octokit({
   auth: Env.get('GITHUB_TOKEN', '')
 });
 const MongoClient = require('mongodb').MongoClient;
-const fs = require('fs');
+const fs = require('fs').promises;
 
 class PageController {
   async home({ response }) {
