@@ -38,9 +38,9 @@ class PageController {
       await octokit.repos.deleteFile({
         owner: 'entiras',
         repo: 'front',
-        path: file.data.content.path,
+        path: file.sha.data.content.path,
         message: 'auto',
-        sha: file.data.content.sha
+        sha: file.sha.data.content.sha
       });
     }
     col.deleteMany({
