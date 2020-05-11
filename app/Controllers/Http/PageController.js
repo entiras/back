@@ -1,12 +1,12 @@
 'use strict'
 
 const Env = use('Env');
-const Drive = use('Drive');
 const { Octokit } = require("@octokit/rest");
 const octokit = new Octokit({
   auth: Env.get('GITHUB_TOKEN', '')
 });
 const MongoClient = require('mongodb').MongoClient;
+const fs = require('fs');
 
 class PageController {
   async home({ response }) {
@@ -49,7 +49,7 @@ class PageController {
     });
     // create new files
     for (var i = 0; i < 3; i++) {
-      var buff = new Buffer(await Drive.get('resources/views/script.js'));
+      var buff = new Buffer(await fs.readFile('./resources/views/script.js'));
       var data = await octokit.repos.createOrUpdateFile({
         owner: 'entiras',
         repo: 'front',
