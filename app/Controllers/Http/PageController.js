@@ -35,7 +35,7 @@ class PageController {
     var file = null;
     while (file = await iterator.next()) {
       // delete old files
-      octokit.repos.deleteFile({
+      await octokit.repos.deleteFile({
         owner: 'entiras',
         repo: 'front',
         path: file.path,
