@@ -17,7 +17,7 @@
 const Route = use('Route');
 
 Route.get('/csrf', 'PageController.csrf');
-Route.get('/base', 'PageController.script');
+Route.get('/base', 'PageController.base');
 Route.get('/', 'PageController.home');
 Route.post('/signup', 'AuthController.signup');
 Route.route('*', 'PageController.obscure');
