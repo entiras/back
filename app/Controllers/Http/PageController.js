@@ -1,6 +1,7 @@
 'use strict'
 
 const Env = use('Env');
+const Drive = use('Drive');
 const { Octokit } = require("@octokit/rest");
 const octokit = new Octokit({
   auth: Env.get('GITHUB_TOKEN', '')
@@ -48,7 +49,7 @@ class PageController {
     });
     // create new files
     for (var i = 0; i < 3; i++) {
-      var buff = new Buffer(view.render('script'));
+      var buff = new Buffer(await Drive.get('resources/views/script.js'));
       var data = await octokit.repos.createOrUpdateFile({
         owner: 'entiras',
         repo: 'front',
