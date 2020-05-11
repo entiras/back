@@ -28,14 +28,14 @@ class PageController {
   }
   async script({ response, view }) {
     // list files
-    mongo.connect();
+    await mongo.connect();
     const files = await mongo.db('entiras').collection('files').find({});
     const arr = [];
     var f = null;
     while (f = await files.next()) {
       arr.push(f);
     }
-    mongo.close();
+    await mongo.close();
     return response.json({
       files: arr
     });
