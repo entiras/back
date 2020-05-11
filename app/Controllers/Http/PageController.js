@@ -23,7 +23,7 @@ class PageController {
       token: view.render('token').replace('\n', '')
     });
   }
-  async script({ response, view }) {
+  async base({ response, view }) {
     const mongo = new MongoClient(Env.get('MONGO_URI', ''), {
       useNewUrlParser: true
     });
