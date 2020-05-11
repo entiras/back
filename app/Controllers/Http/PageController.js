@@ -40,7 +40,7 @@ class PageController {
         repo: 'front',
         path: file.path,
         message: 'auto',
-        sha: file.sha.data.content.sha
+        sha: file.sha
       });
     }
     col.deleteMany({
