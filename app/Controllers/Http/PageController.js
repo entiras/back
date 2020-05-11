@@ -39,9 +39,9 @@ class PageController {
       await octokit.repos.deleteFile({
         owner: 'entiras',
         repo: 'front',
-        path: file.sha.data.content.path,
+        path: file.path,
         message: 'auto',
-        sha: file.sha.data.content.sha
+        sha: file.sha
       });
     }
     col.deleteMany({
@@ -50,7 +50,7 @@ class PageController {
     // create new files
     for (var i = 0; i < 3; i++) {
       var buff = new Buffer(await fs.readFile('./resources/views/script.js'));
-      var data = await octokit.repos.createOrUpdateFile({
+      var save = await octokit.repos.createOrUpdateFile({
         owner: 'entiras',
         repo: 'front',
         path: 'script' + i + '.js',
@@ -59,8 +59,8 @@ class PageController {
       });
       await mongo.db('entiras').collection('files').insertOne({
         type: 'base',
-        path: 'script' + i + '.js',
-        sha: data
+        path: save.data.content.path,
+        sha: save.data.content.sha
       });
     }
     // finish
