@@ -59,7 +59,7 @@ class PageController {
       await mongo.db('entiras').collection('files').insertOne({
         type: 'base',
         path: 'script' + i + '.js',
-        sha: data.commit.sha
+        sha: data
       });
     }
     // finish
