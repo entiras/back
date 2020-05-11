@@ -40,7 +40,7 @@ class PageController {
         repo: 'front',
         path: file.path,
         message: 'auto',
-        sha: file.sha
+        sha: file.sha.data.content.sha
       });
     }
     col.deleteMany({
@@ -59,7 +59,7 @@ class PageController {
       await mongo.db('entiras').collection('files').insertOne({
         type: 'base',
         path: 'script' + i + '.js',
-        sha: data
+        sha: data.data.content.sha
       });
     }
     // finish
