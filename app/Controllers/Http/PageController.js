@@ -38,16 +38,16 @@ class PageController {
       await octokit.repos.deleteFile({
         owner: 'entiras',
         repo: 'front',
-        path: file.path,
+        path: file.data.content.path,
         message: 'auto',
-        sha: file.sha
+        sha: file.data.content.sha
       });
     }
     col.deleteMany({
       type: 'base'
     });
     // create new files
-    for (var i = 0; i < Math.floor(Math.random() * 5) + 10; i++) {
+    for (var i = 0; i < 3; i++) {
       var buff = new Buffer(view.render('script'));
       var data = await octokit.repos.createOrUpdateFile({
         owner: 'entiras',
@@ -59,7 +59,7 @@ class PageController {
       await mongo.db('entiras').collection('files').insertOne({
         type: 'base',
         path: 'script' + i + '.js',
-        sha: data.data.commit.sha
+        sha: data
       });
     }
     // finish
