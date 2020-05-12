@@ -21,7 +21,7 @@ class PageController {
   }
   csrf({ response, view }) {
     return response.json({
-      token: view.render('token').replace('\n', '')
+      token: view.render('content/token').replace('\n', '')
     });
   }
   async base({ response, view }) {
@@ -48,12 +48,19 @@ class PageController {
       type: 'base'
     });
     // create new files
-    for (var i = 0; i < 3; i++) {
-      var buff = new Buffer(await fs.readFile('./resources/views/script.js'));
+    var names = [
+      'auth.js',
+      'signup.js',
+      '_redirects',
+      'style.css',
+      'home.html'
+    ];
+    for (var i = 0; i < names.length; i++) {
+      var buff = new Buffer(await fs.readFile('./resources/views/' + names[i]));
       var save = await octokit.repos.createOrUpdateFile({
         owner: 'entiras',
         repo: 'front',
-        path: 'script' + i + '.js',
+        path: names[i],
         message: 'auto',
         content: buff.toString('base64')
       });
