@@ -4,12 +4,14 @@ actions.signup = function (data) {
     } else if (typeof data.token === 'string') {
         $('input[name=_csrf]').val(data.token);
         var arr = $('#signup-form').serializeArray();
+        var data = {};
+        for (var i = 0; i < arr.length; i++) {
+            data[arr[i].name] = arr[i].value;
+        }
         $.ajax({
             type: 'POST',
             url: '/api/signup',
-            data: {
-                _csrf: arr[0].value
-            },
+            data: data,
             success: actions.signup,
             error: actions.failed
         });
