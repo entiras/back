@@ -70,6 +70,9 @@ class PageController {
       });
     }
     // render views
+    view.share({
+      date: new Date()
+    })
     var info = [
       ['index.html', 'content/home'],
       ['signup/index.html', 'content/signup'],
