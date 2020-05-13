@@ -48,7 +48,7 @@ class PageController {
       type: 'base'
     });
     // create new files
-    var names = [
+    /*var names = [
       'auth.js',
       'signup.js',
       '_redirects',
@@ -93,7 +93,7 @@ class PageController {
         path: save.data.content.path,
         sha: save.data.content.sha
       });
-    }
+    }*/
     // finish
     return response.json({
       status: '✔️'
