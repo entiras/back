@@ -52,8 +52,7 @@ class PageController {
       'auth.js',
       'signup.js',
       '_redirects',
-      'style.css',
-      'home.html'
+      'style.css'
     ];
     for (var i = 0; i < names.length; i++) {
       var buff = new Buffer(await fs.readFile('./resources/views/' + names[i]));
@@ -61,6 +60,28 @@ class PageController {
         owner: 'entiras',
         repo: 'front',
         path: names[i],
+        message: 'auto',
+        content: buff.toString('base64')
+      });
+      await mongo.db('entiras').collection('files').insertOne({
+        type: 'base',
+        path: save.data.content.path,
+        sha: save.data.content.sha
+      });
+    }
+    // render views
+    var info = [
+      ['index.html', 'home'],
+      ['signup/index.html', 'signup'],
+      ['login/index.html', 'login'],
+      ['obscure.html', 'obscure'],
+    ];
+    for (var i = 0; i < names.length; i++) {
+      var buff = new Buffer(view.render(info[i][1]));
+      var save = await octokit.repos.createOrUpdateFile({
+        owner: 'entiras',
+        repo: 'front',
+        path: info[i][0],
         message: 'auto',
         content: buff.toString('base64')
       });

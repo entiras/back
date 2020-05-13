@@ -1,4 +1,4 @@
-actions.signup = function (data, stat, req) {
+actions.signup = function (data) {
     if (typeof data !== 'object') {
         actions.csrf(actions.signup);
     } else if (typeof data.token === 'string') {

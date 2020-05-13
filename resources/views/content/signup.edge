@@ -1,0 +1,61 @@
+@layout('layout.app')
+@section('headers')
+<title>
+    EnTiras - Registro
+</title>
+@endsection
+@section('content')
+<div class="row d-none animated fadeIn faster guest">
+    <div class="col-lg text-center">
+        <span class="h1 h-entiras">
+            Registro
+        </span>
+    </div>
+    <div class="col-lg"></div>
+</div>
+<div class="row mt-2 d-none animated fadeIn faster guest">
+    <div class="col-lg mb-4">
+        <div class="card">
+            <div class="card-body">
+                <form id="signup-form">
+                    <input type="hidden" name="_csrf">
+                    <div class="form-group">
+                        <label>
+                            Dirección de Correo
+                        </label>
+                        <input type="text" name="email" class="form-control" placeholder="ejemplo@ejemplo.com">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Nombre de Usuario
+                        </label>
+                        <input type="text" name="username" class="form-control" placeholder="usuario">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Contraseña
+                        </label>
+                        <input type="password" name="password" class="form-control" placeholder="4 caracteres mínimo">
+                    </div>
+                </form>
+                <button class="btn btn-outline-secondary btn-block" onclick="actions.signup()">
+                    Registrarse
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg text-center">
+        <p class="icon-paper-plane big"></p>
+        <p>
+            Después del registro se enviará un correo de confirmación para activar la cuenta
+        </p>
+        <p>
+            Si ya tienes una cuenta, intenta
+            <a href="/login">iniciar sesión</a>
+        </p>
+    </div>
+</div>
+@endsection
+@section('scripts')
+<script src="signup.js"></script>
+@endsection

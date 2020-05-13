@@ -55,11 +55,10 @@ a, a:hover {
 }
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?mh8zzq');
-  src:  url('fonts/icomoon.eot?mh8zzq#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?mh8zzq') format('truetype'),
-    url('fonts/icomoon.woff?mh8zzq') format('woff'),
-    url('fonts/icomoon.svg?mh8zzq#icomoon') format('svg');
+  src:  url('https://res.cloudinary.com/entiras/raw/upload/v1589343212/icomoon_hxfe2u.eot?mh8zzq');
+  src:  url('https://res.cloudinary.com/entiras/raw/upload/v1589343212/icomoon_hxfe2u.eot?mh8zzq#iefix') format('embedded-opentype'),
+    url('https://res.cloudinary.com/entiras/raw/upload/v1589343212/icomoon_mp54xs.ttf?mh8zzq') format('truetype'),
+    url('https://res.cloudinary.com/entiras/raw/upload/v1589343212/icomoon_aarv0l.woff?mh8zzq') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: block;
