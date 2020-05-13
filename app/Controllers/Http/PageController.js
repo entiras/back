@@ -71,10 +71,10 @@ class PageController {
     }
     // render views
     var info = [
-      ['index.html', 'home'],
-      ['signup/index.html', 'signup'],
-      ['login/index.html', 'login'],
-      ['obscure.html', 'obscure'],
+      ['index.html', 'content/home'],
+      ['signup/index.html', 'content/signup'],
+      ['login/index.html', 'content/login'],
+      ['obscure.html', 'content/obscure'],
     ];
     for (var i = 0; i < names.length; i++) {
       var buff = new Buffer(view.render(info[i][1]));
