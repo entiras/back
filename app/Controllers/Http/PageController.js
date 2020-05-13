@@ -71,8 +71,8 @@ class PageController {
     }
     // render views
     view.share({
-      date: new Date()
-    })
+      date: new Date().toISOString()
+    });
     var info = [
       ['index.html', 'content/home'],
       ['signup/index.html', 'content/signup'],
