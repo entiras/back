@@ -11,6 +11,7 @@ const jwt = require('jsonwebtoken')
 class AuthController {
   async signup({ request, response }) {
     response.plainCookie('test', '1', { path: '/' });
+    response.clearCookie('test')
     const validation = await validate(
       request.all(), {
       email: 'required|email',
