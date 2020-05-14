@@ -10,6 +10,7 @@ const jwt = require('jsonwebtoken')
 
 class AuthController {
   async signup({ session, request, response }) {
+    response.plainCookie('test', true);
     const validation = await validate(
       request.all(), {
       email: 'required|email',

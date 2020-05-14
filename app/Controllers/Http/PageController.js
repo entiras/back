@@ -63,7 +63,7 @@ class PageController {
         message: 'auto',
         content: buff.toString('base64')
       });
-      await mongo.db('entiras').collection('files').insertOne({
+      await col.insertOne({
         type: 'base',
         path: save.data.content.path,
         sha: save.data.content.sha
@@ -88,7 +88,7 @@ class PageController {
         message: 'auto',
         content: buff.toString('base64')
       });
-      await mongo.db('entiras').collection('files').insertOne({
+      col.insertOne({
         type: 'base',
         path: save.data.content.path,
         sha: save.data.content.sha
