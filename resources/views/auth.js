@@ -18,14 +18,16 @@ loader.wait = function () {
 var login = {};
 login.logged = false;
 login.check = function () {
-    $.ajax({
-        type: 'GET',
-        url: '/api',
-        success: login.checked,
-        error: actions.failed
-    });
+    var cookie = Cookies.get('user');
+    if (cookie === udefined) {
+        login.logged = false;
+    } else {
+        login.logged = true;
+    }
+    login.checked();
 };
 login.checked = function () {
+    loader.hide();
     if (login.logged) {
         content.logged();
     } else {
@@ -35,11 +37,9 @@ login.checked = function () {
 // show content depending on log
 var content = {};
 content.logged = function () {
-    loader.hide();
     $('.logged').removeClass('d-none');
 };
 content.guest = function () {
-    loader.hide();
     $('.guest').removeClass('d-none');
 };
 // actions
@@ -55,6 +55,33 @@ actions.csrf = function (callback) {
         success: callback,
         error: actions.failed
     });
+};
+actions.form = function (id) {
+    var arr = $(id).serializeArray();
+    var data = {};
+    for (var i = 0; i < arr.length; i++) {
+        data[arr[i].name] = arr[i].value;
+    }
+    return data;
+};
+actions.signup = function (data) {
+    $('#signup-btn').prop('disabled', true);
+    if (typeof data !== 'object') {
+        actions.csrf(actions.signup);
+    } else if (typeof data.token === 'string') {
+        $('input[name=_csrf]').val(data.token);
+        var data = actions.form('#signup-form');
+        $.ajax({
+            type: 'POST',
+            url: '/api/signup',
+            data: data,
+            success: actions.signup,
+            error: actions.failed
+        });
+    } else {
+        $('#signup-btn').prop('disabled', false);
+        console.log(data);
+    }
 };
 $(document).ready(function () {
     loader.show();
