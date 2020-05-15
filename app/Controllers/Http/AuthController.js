@@ -8,10 +8,11 @@ const Mail = use('Mail')
 const Hash = use('Hash')
 const jwt = require('jsonwebtoken')
 
+//response.plainCookie('test', '1', { path: '/' });
+//response.clearCookie('test');
+
 class AuthController {
   async signup({ request, response }) {
-    response.plainCookie('test', '1', { path: '/' });
-    response.clearCookie('test')
     const validation = await validate(
       request.all(), {
       email: 'required|email',
@@ -23,7 +24,7 @@ class AuthController {
         notification: {
           type: 'danger',
           message: 'validation',
-          validation: validation.errorMessages[0]
+          validation: validation
         }
       });
     }
