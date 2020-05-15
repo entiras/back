@@ -19,7 +19,7 @@ var login = {};
 login.logged = false;
 login.check = function () {
     var cookie = Cookies.get('user');
-    if (cookie === udefined) {
+    if (cookie === undefined) {
         login.logged = false;
     } else {
         login.logged = true;
@@ -66,6 +66,7 @@ actions.form = function (id) {
 };
 actions.signup = function (data) {
     $('#signup-btn').prop('disabled', true);
+    $('.alert').addClass('d-none');
     if (typeof data !== 'object') {
         actions.csrf(actions.signup);
     } else if (typeof data.token === 'string') {
@@ -80,6 +81,10 @@ actions.signup = function (data) {
         });
     } else {
         $('#signup-btn').prop('disabled', false);
+        if (data.notification.message === 'validation') {
+            var id = '#' + data.notification.validation.field + '-' + data.notification.validation.validation;
+            $(id).removeClass('d-none');
+        }
         console.log(data);
     }
 };
