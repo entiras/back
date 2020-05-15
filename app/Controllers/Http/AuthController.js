@@ -24,7 +24,7 @@ class AuthController {
         notification: {
           type: 'danger',
           message: 'validation',
-          validation: validation
+          validation: validation._errorMessages[0]
         }
       });
     }
