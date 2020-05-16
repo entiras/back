@@ -21,11 +21,9 @@ class AuthController {
     })
     if (validation.fails()) {
       return response.json({
-        notification: {
-          type: 'danger',
-          message: 'validation',
-          validation: validation._errorMessages[0]
-        }
+        type: 'danger',
+        message: 'validation',
+        error: validation._errorMessages[0]
       });
     }
     const clone = await User.findBy('email', request.input('email'))

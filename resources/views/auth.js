@@ -67,6 +67,7 @@ actions.form = function (id) {
 actions.signup = function (data) {
     $('#signup-btn').prop('disabled', true);
     $('.alert').addClass('d-none');
+    $('input').removeClass('is-invalid');
     if (typeof data !== 'object') {
         actions.csrf(actions.signup);
     } else if (typeof data.token === 'string') {
@@ -81,9 +82,11 @@ actions.signup = function (data) {
         });
     } else {
         $('#signup-btn').prop('disabled', false);
-        if (data.notification.message === 'validation') {
-            var id = '#' + data.notification.validation.field + '-' + data.notification.validation.validation;
-            $(id).removeClass('d-none');
+        if (data.message === 'validation') {
+            var field = data.error.field;
+            var val = data.error.validation;
+            $('#' + field + '-' + val).removeClass('d-none');
+            $('input[name=' + field + ']').addClass('is-invalid');
         }
         console.log(data);
     }
