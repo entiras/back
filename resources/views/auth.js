@@ -87,6 +87,16 @@ actions.signup = function (data) {
             var val = data.error.validation;
             $('#' + field + '-' + val).removeClass('d-none');
             $('input[name=' + field + ']').addClass('is-invalid');
+        } else if (data.message === 'url') {
+            $('#username-url').removeClass('d-none');
+            $('input[name=username]').addClass('is-invalid');
+        } else if (data.message === 'clone') {
+            $('#clone').removeClass('d-none');
+            $('input[name=username]').addClass('is-invalid');
+            $('input[name=email]').addClass('is-invalid');
+        }
+        else if (data.message === 'sent') {
+            $('#sent').removeClass('d-none');
         }
         console.log(data);
     }

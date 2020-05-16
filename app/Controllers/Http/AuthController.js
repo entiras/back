@@ -26,6 +26,16 @@ class AuthController {
         error: validation._errorMessages[0]
       });
     }
+    const url = new URL('https://entira.tk:8080/path?query#hash');
+    url.username = request.input('username');
+    url.password = 'pass';
+    if (url.username !== request.input('username')) {
+      // url unsafe
+      return response.json({
+        type: 'danger',
+        message: 'url'
+      });
+    }
     const clone = await User.findBy('email', request.input('email'))
       || await User.findBy('username', request.input('username'))
     if (clone) {
