@@ -94,8 +94,7 @@ actions.signup = function (data) {
             $('#clone').removeClass('d-none');
             $('input[name=username]').addClass('is-invalid');
             $('input[name=email]').addClass('is-invalid');
-        }
-        else if (data.message === 'sent') {
+        } else if (data.message === 'sent') {
             $('#sent').removeClass('d-none');
         }
         console.log(data);

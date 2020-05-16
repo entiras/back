@@ -40,10 +40,8 @@ class AuthController {
       || await User.findBy('username', request.input('username'))
     if (clone) {
       return response.json({
-        notification: {
-          type: 'danger',
-          message: 'clone'
-        }
+        type: 'danger',
+        message: 'clone'
       });
     }
     const user = await User.create({
@@ -64,10 +62,8 @@ class AuthController {
         .subject('Por favor confirma tu dirección de correo electrónico')
     })
     return response.json({
-      notification: {
-        type: 'success',
-        message: 'sent'
-      }
+      type: 'success',
+      message: 'sent'
     });
   }
   /*async reset({response, request, session}) {
