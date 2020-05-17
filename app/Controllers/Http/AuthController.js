@@ -53,7 +53,7 @@ class AuthController {
     const token = jwt.sign({ email: user.email }, Env.get('SECRET'), {
       expiresIn: 60 * 60 * 24 * 3
     })
-    await Mail.send(['emails.confirm', 'emails.confirm.text'], {
+    await Mail.send(['emails.confirm.html', 'emails.confirm.text'], {
       username: user.username,
       token: token,
       appUrl: Env.get('APP_URL')
