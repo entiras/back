@@ -58,11 +58,10 @@ class AuthController {
       token: token,
       appUrl: Env.get('APP_URL')
     }, (message) => {
-      message
-        .to(user.email)
-        .from(Env.get('FROM_EMAIL'))
-        .subject('Por favor confirma tu dirección de correo electrónico')
-        .header('List-Unsubscribe', '<mailto:' + Env.get('FROM_EMAIL') + '?subject=Unsubscribe>')
+      message.to(user.email);
+      message.from(Env.get('FROM_EMAIL'));
+      message.subject('Por favor confirma tu dirección de correo electrónico');
+      message.header('List-Unsubscribe', '<mailto:' + Env.get('FROM_EMAIL') + '?subject=Unsubscribe>');
     });
     return response.json({
       type: 'success',
