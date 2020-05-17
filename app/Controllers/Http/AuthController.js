@@ -12,7 +12,7 @@ const jwt = require('jsonwebtoken')
 //response.clearCookie('test');
 
 class AuthController {
-  async signup({ request, response }) {
+  async signup({ request, response, view }) {
     const url = new URL('https://entira.tk:8080/path?query#hash');
     url.username = request.input('username');
     url.password = 'pass';
@@ -53,14 +53,16 @@ class AuthController {
     const token = jwt.sign({ email: user.email }, Env.get('SECRET'), {
       expiresIn: 60 * 60 * 24 * 3
     });
-    await Mail.send(['emails.confirm.html', 'emails.confirm.text'], {
+    const data = {
       username: user.username,
       token: token,
       appUrl: Env.get('APP_URL')
-    }, (message) => {
+    };
+    await Mail.send(['emails.confirm.html', 'emails.confirm.text'], data, (message) => {
       message.to(user.email);
       message.from(Env.get('FROM_EMAIL'));
-      message.subject('Por favor confirma tu dirección de correo electrónico');
+      message.subject(view.render('emails.confirm.subject'));
+      message.list.unsubscribe = 'mailto:' + Env.get('FROM_EMAIL') + '?subject=help';
     });
     return response.json({
       type: 'success',
