@@ -78,7 +78,7 @@ class PageController {
       ['login/index.html', 'content.login'],
       ['obscure.html', 'content.obscure'],
     ];
-    for (var i = 0; i < names.length; i++) {
+    for (var i = 0; i < info.length; i++) {
       var buff = new Buffer(view.render(info[i][1]));
       var save = await octokit.repos.createOrUpdateFile({
         owner: 'entiras',
