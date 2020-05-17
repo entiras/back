@@ -73,10 +73,10 @@ class PageController {
       date: new Date().toISOString()
     });
     var info = [
-      ['index.html', 'content/home'],
-      ['signup/index.html', 'content/signup'],
-      ['login/index.html', 'content/login'],
-      ['obscure.html', 'content/obscure'],
+      ['index.html', 'content.home'],
+      ['signup/index.html', 'content.signup'],
+      ['login/index.html', 'content.login'],
+      ['obscure.html', 'content.obscure'],
     ];
     for (var i = 0; i < names.length; i++) {
       var buff = new Buffer(view.render(info[i][1]));
