@@ -13,19 +13,6 @@ const jwt = require('jsonwebtoken')
 
 class AuthController {
   async signup({ request, response }) {
-    const validation = await validate(
-      request.all(), {
-      email: 'required|email',
-      username: 'required',
-      password: 'required|min:4'
-    })
-    if (validation.fails()) {
-      return response.json({
-        type: 'danger',
-        message: 'validation',
-        error: validation._errorMessages[0]
-      });
-    }
     const url = new URL('https://entira.tk:8080/path?query#hash');
     url.username = request.input('username');
     url.password = 'pass';
@@ -34,6 +21,19 @@ class AuthController {
       return response.json({
         type: 'danger',
         message: 'url'
+      });
+    }
+    const validation = await validate(
+      request.all(), {
+      email: 'required|email',
+      username: 'required',
+      password: 'required|min:4'
+    });
+    if (validation.fails()) {
+      return response.json({
+        type: 'danger',
+        message: 'validation',
+        error: validation._errorMessages[0]
       });
     }
     const clone = await User.findBy('email', request.input('email'))
@@ -49,18 +49,21 @@ class AuthController {
       username: request.input('username'),
       password: request.input('password'),
       verified: false
-    })
+    });
     const token = jwt.sign({ email: user.email }, Env.get('SECRET'), {
       expiresIn: 60 * 60 * 24 * 3
-    })
+    });
     await Mail.send(['emails.confirm.html', 'emails.confirm.text'], {
       username: user.username,
       token: token,
       appUrl: Env.get('APP_URL')
     }, (message) => {
-      message.to(user.email).from(Env.get('FROM_EMAIL'))
+      message
+        .to(user.email)
+        .from(Env.get('FROM_EMAIL'))
         .subject('Por favor confirma tu dirección de correo electrónico')
-    })
+        .header('List-Unsubscribe', '<mailto:' + Env.get('FROM_EMAIL') + '?subject=Unsubscribe>')
+    });
     return response.json({
       type: 'success',
       message: 'sent'
