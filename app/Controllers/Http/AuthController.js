@@ -61,7 +61,6 @@ class AuthController {
       message.to(user.email);
       message.from(Env.get('FROM_EMAIL'));
       message.subject('Por favor confirma tu dirección de correo electrónico');
-      message.header('List-Unsubscribe', '<mailto:' + Env.get('FROM_EMAIL') + '?subject=Unsubscribe>');
     });
     return response.json({
       type: 'success',
