@@ -58,7 +58,7 @@ class AuthController {
       token: token,
       appUrl: Env.get('APP_URL')
     };
-    await Mail.send(['emails.confirm.html', 'emails.confirm.text'], data, (message) => {
+    await Mail.raw(view.render('emails.confirm.text', data), (message) => {
       message.to(user.email);
       message.from(Env.get('FROM_EMAIL'));
       message.subject(view.render('emails.confirm.subject'));
