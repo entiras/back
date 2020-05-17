@@ -62,7 +62,10 @@ class AuthController {
       message.to(user.email);
       message.from(Env.get('FROM_EMAIL'));
       message.subject(view.render('emails.confirm.subject'));
-      message.list.unsubscribe = 'mailto:' + Env.get('FROM_EMAIL') + '?subject=help';
+      message.defineProperty(() => {
+        this.nodeMailerMessage.list.unsubscribe = 'mailto:' + Env.get('FROM_EMAIL') + '?subject=help';
+      }, 'unsubscribe', {});
+      message.unsubscribe();
     });
     return response.json({
       type: 'success',
