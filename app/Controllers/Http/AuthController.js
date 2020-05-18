@@ -13,16 +13,6 @@ const jwt = require('jsonwebtoken')
 
 class AuthController {
   async signup({ request, response, view }) {
-    const url = new URL('https://entira.tk:8080/path?query#hash');
-    url.username = request.input('username');
-    url.password = 'pass';
-    if (url.username !== request.input('username')) {
-      // url unsafe
-      return response.json({
-        type: 'danger',
-        message: 'url'
-      });
-    }
     const validation = await validate(
       request.all(), {
       email: 'required|email',
@@ -34,6 +24,16 @@ class AuthController {
         type: 'danger',
         message: 'validation',
         error: validation._errorMessages[0]
+      });
+    }
+    const url = new URL('https://domain.top:8080/path?query#hash');
+    url.username = request.input('username');
+    url.password = 'pass';
+    if (url.username !== request.input('username')) {
+      // url unsafe
+      return response.json({
+        type: 'danger',
+        message: 'url'
       });
     }
     const clone = await User.findBy('email', request.input('email'))
