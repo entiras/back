@@ -27,7 +27,6 @@ login.check = function () {
     login.checked();
 };
 login.checked = function () {
-    loader.hide();
     if (login.logged) {
         content.logged();
     } else {
@@ -45,7 +44,6 @@ content.guest = function () {
 // actions
 var actions = {};
 actions.failed = function () {
-    loader.hide();
     $('#network-err').removeClass('d-none');
 };
 actions.csrf = function (callback) {
@@ -103,6 +101,9 @@ actions.confirm = function () {
     $('input[name=token]').val(window.location.search);
 }
 $(document).ready(function () {
-    loader.show();
     login.check();
+});
+$.ajaxSetup({
+    beforeSend: loader.show,
+    complete: loader.hide
 });
