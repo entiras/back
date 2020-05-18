@@ -77,6 +77,7 @@ class PageController {
       ['signup/index.html', 'content.signup'],
       ['login/index.html', 'content.login'],
       ['obscure.html', 'content.obscure'],
+      ['confirm/index.html', 'content.confirm']
     ];
     for (var i = 0; i < info.length; i++) {
       var buff = new Buffer(view.render(info[i][1]));

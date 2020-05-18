@@ -97,9 +97,11 @@ actions.signup = function (data) {
         } else if (data.message === 'sent') {
             $('#sent').removeClass('d-none');
         }
-        console.log(data);
     }
 };
+actions.confirm = function () {
+    $('input[name=token]').val(window.location.search);
+}
 $(document).ready(function () {
     loader.show();
     login.check();

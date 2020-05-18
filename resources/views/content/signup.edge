@@ -5,18 +5,13 @@
 </title>
 @endsection
 @section('content')
-<div class="row d-none animated fadeIn faster guest">
-    <div class="col-lg text-center">
-        <span class="h1 h-entiras">
-            Registro
-        </span>
-    </div>
-    <div class="col-lg"></div>
-</div>
 <div class="row mt-2 d-none animated fadeIn faster guest">
     <div class="col-lg mb-4">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body bg-entiras-primary text-light">
+                <span class="h1 h-entiras">
+                    Registro
+                </span>
                 <div id="email-required" class="alert alert-danger d-none animated fadeIn faster" role="alert">
                     La dirección de correo es requerida.
                 </div>
@@ -62,7 +57,7 @@
                         <input type="password" name="password" class="form-control" placeholder="4 caracteres mínimo">
                     </div>
                 </form>
-                <button id="signup-btn" class="btn btn-outline-primary btn-block" onclick="actions.signup()">
+                <button id="signup-btn" class="btn btn-outline-light btn-block" onclick="actions.signup()">
                     Registrarse
                 </button>
             </div>
