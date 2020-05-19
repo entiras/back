@@ -5,81 +5,65 @@
 </title>
 @endsection
 @section('content')
-<div class="row mt-2 d-none animated fadeIn faster guest">
-    <div class="col-lg mb-4">
-        <div class="card">
-            <div class="card-body bg-entiras-primary text-light">
-                <div class="h1 h-entiras text-center">
-                    Registro :V
-                </div>
-                <hr class="my-4 border-light">
-                <div id="email-required" class="alert alert-danger d-none animated fadeIn faster" role="alert">
-                    La dirección de correo es requerida.
-                </div>
-                <div id="username-required" class="alert alert-danger d-none animated fadeIn faster" role="alert">
-                    El nombre de usuario es requerido.
-                </div>
-                <div id="username-url" class="alert alert-danger d-none animated fadeIn faster" role="alert">
-                    El nombre de usuario no es válido.
-                </div>
-                <div id="password-required" class="alert alert-danger d-none animated fadeIn faster" role="alert">
-                    La contraseña es requerida.
-                </div>
-                <div id="email-email" class="alert alert-danger d-none animated fadeIn faster" role="alert">
-                    La dirección de correo no es válida.
-                </div>
-                <div id="password-min" class="alert alert-danger d-none animated fadeIn faster" role="alert">
-                    La contraseña debe tener 4 caracteres mínimo.
-                </div>
-                <div id="clone" class="alert alert-danger d-none animated fadeIn faster" role="alert">
-                    El nombre de usuario y/o la dirección de correo ya están en uso.
-                </div>
-                <div id="sent" class="alert alert-success d-none animated fadeIn faster" role="alert">
-                    Se envío el correo de confirmación.
-                </div>
-                <form id="signup-form">
-                    <input type="hidden" name="_csrf">
-                    <div class="form-group">
-                        <label>
-                            Dirección de Correo
-                        </label>
-                        <input type="text" name="email" class="form-control" placeholder="ejemplo@ejemplo.com">
-                    </div>
-                    <div class="form-group">
-                        <label>
-                            Nombre de Usuario
-                        </label>
-                        <input type="text" name="username" class="form-control" placeholder="usuario">
-                    </div>
-                    <div class="form-group">
-                        <label>
-                            Contraseña
-                        </label>
-                        <input type="password" name="password" class="form-control" placeholder="4 caracteres mínimo">
-                    </div>
-                </form>
-                <button id="signup-btn" class="btn btn-outline-light btn-block" onclick="actions.signup()">
-                    Registrarse
-                </button>
+<div class="d-none animated fadeIn faster guest">
+    <div class="card">
+        <div class="card-body bg-dark text-light">
+            <div class="h1 h-entiras text-center">
+                Registro :V
             </div>
+            <hr class="my-2 border-light">
+            <div id="email-required" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+                La dirección de correo es requerida.
+            </div>
+            <div id="username-required" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+                El nombre de usuario es requerido.
+            </div>
+            <div id="username-url" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+                El nombre de usuario no es válido.
+            </div>
+            <div id="password-required" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+                La contraseña es requerida.
+            </div>
+            <div id="email-email" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+                La dirección de correo no es válida.
+            </div>
+            <div id="password-min" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+                La contraseña debe tener 4 caracteres mínimo.
+            </div>
+            <div id="clone" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+                El nombre de usuario y/o la dirección de correo ya están en uso.
+            </div>
+            <div id="sent" class="alert alert-success d-none animated fadeIn faster" role="alert">
+                Se envío el correo de confirmación.
+            </div>
+            <form id="signup-form">
+                <input type="hidden" name="_csrf">
+                <div class="form-group">
+                    <label>
+                        Dirección de Correo
+                    </label>
+                    <input type="text" name="email" class="form-control" placeholder="ejemplo@ejemplo.com">
+                </div>
+                <div class="form-group">
+                    <label>
+                        Nombre de Usuario
+                    </label>
+                    <input type="text" name="username" class="form-control" placeholder="usuario">
+                </div>
+                <div class="form-group">
+                    <label>
+                        Contraseña
+                    </label>
+                    <input type="password" name="password" class="form-control" placeholder="4 caracteres mínimo">
+                </div>
+            </form>
+            <button id="signup-btn" class="btn btn-outline-light btn-block" onclick="actions.signup()">
+                Registrarse
+            </button>
         </div>
     </div>
-    <div class="col-lg">
-        <div class="card">
-            <div class="card-body">
-                <div class="h1 h-entiras text-center">
-                    Problemas :I
-                </div>
-                <hr class="my-4">
-                <p>
-                    <a href="/login/">Ya tengo una cuenta</a>
-                </p>
-                <p>
-                    <a href="/resend/">Mi correo de confirmación no llegó</a>
-                </p>
-            </div>
-        </div>
-    </div>
+    <a href="/login/">Ya tengo una cuenta</a> |
+    <a href="/resend/">Mi correo de confirmación no llegó</a> |
 </div>
 @endsection
 @section('scripts')
