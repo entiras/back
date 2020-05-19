@@ -25,6 +25,8 @@ class PageController {
     });
   }
   async base({ response, view }) {
+    var file = request.input('file');
+
     const mongo = new MongoClient(Env.get('MONGO_URI', ''), {
       useNewUrlParser: true
     });
@@ -36,7 +38,7 @@ class PageController {
     var file = null;
     while (file = await iterator.next()) {
       // delete old files
-      await octokit.repos.deleteFile({
+      var del = await octokit.repos.deleteFile({
         owner: 'entiras',
         repo: 'front',
         path: file.path,

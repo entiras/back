@@ -28,7 +28,6 @@ class AuthController {
     }
     const url = new URL('https://domain.top:8080/path?query#hash');
     url.username = request.input('username');
-    url.password = 'pass';
     if (url.username !== request.input('username')) {
       // url unsafe
       return response.json({
