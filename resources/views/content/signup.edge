@@ -11,7 +11,7 @@
             <div class="h1 h-entiras text-center">
                 Registro :V
             </div>
-            <hr class="my-2 border-light">
+            <hr class="my-2">
             <div id="email-required" class="alert alert-danger d-none animated fadeIn faster" role="alert">
                 La dirección de correo es requerida.
             </div>
@@ -57,13 +57,15 @@
                     <input type="password" name="password" class="form-control" placeholder="4 caracteres mínimo">
                 </div>
             </form>
-            <button id="signup-btn" class="btn btn-outline-light btn-block" onclick="actions.signup()">
+            <button id="signup-btn" class="btn btn-outline-dark btn-block" onclick="actions.signup()">
                 Registrarse
             </button>
-            <small class="text-right">
-                <a href="/login/">Ya tengo una cuenta</a> |
-                <a href="/resend/">Mi correo no llegó</a>
-            </small>
+            <div class="text-right">
+                <small>
+                    <a href="/login/">Ya tengo una cuenta</a> |
+                    <a href="/resend/">Mi correo no llegó</a>
+                </small>
+            </div>
         </div>
     </div>
 </div>
