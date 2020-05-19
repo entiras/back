@@ -25,8 +25,6 @@ class PageController {
     });
   }
   async base({ response, view }) {
-    var file = request.input('file');
-
     const mongo = new MongoClient(Env.get('MONGO_URI', ''), {
       useNewUrlParser: true
     });
