@@ -43,10 +43,13 @@ class PageController {
         message: 'auto',
         sha: file.sha
       });
+      if (del) {
+        col.deleteMany({
+          type: 'base',
+          path: file.path
+        });
+      }
     }
-    col.deleteMany({
-      type: 'base'
-    });
     // create new files
     var names = [
       'auth.js',
