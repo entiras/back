@@ -103,7 +103,7 @@ actions.confirm = function () {
 $(document).ready(function () {
     login.check();
     if ($('input[name=confirm]').val()) {
-        signup.confirm()
+        actions.confirm();
     }
 });
 $.ajaxSetup({
