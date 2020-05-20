@@ -16,7 +16,11 @@ a, a:hover {
 }
 .jumbotron {
   background-color: black;
-  height: 100%;
+}
+@media (min-width: 992px) {
+  .jumbotron {
+    height: 100%;
+  }
 }
 .bg-entiras-focus-1 {
   background-image: url('https://i.imgur.com/duUZ0Tp.jpg');
