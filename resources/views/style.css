@@ -5,7 +5,7 @@
   background-color: #fd772d;
 }
 .bg-entiras-dark {
-  background-color: rgba(0, 0, 0, 0.8)
+  background-color: rgba(0, 0, 0, 0.8);
 }
 a, a:hover {
   color: #fd772d;
@@ -21,10 +21,10 @@ a, a:hover {
   background-image: url('https://res.cloudinary.com/entiras/image/upload/v1587609028/banca_wlfcjw.jpg');
 }
 .bg-entiras-focus-2 {
-  background-image: url('https://res.cloudinary.com/entiras/image/upload/v1587763727/carton_glsjt5.jpg');
+  background-image: url('https://res.cloudinary.com/entiras/image/upload/v1589940865/pantalla_ydrfdy.jpg');
 }
 .bg-entiras-focus-3 {
-  background-image: url('https://res.cloudinary.com/entiras/image/upload/v1589929842/IMG_0641_k5qpbr.jpg');
+  background-image: url('https://res.cloudinary.com/entiras/image/upload/v1587763727/carton_glsjt5.jpg');
 }
 @font-face {
   font-family: 'desyrelregular';
