@@ -16,10 +16,6 @@ a, a:hover {
 .jumbotron {
   background-color: black;
   background-position: center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
 }
 .bg-entiras-focus-1 {
   background-image: url('https://res.cloudinary.com/entiras/image/upload/v1587609028/banca_wlfcjw.jpg');
