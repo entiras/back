@@ -6,84 +6,59 @@
 @endsection
 @section('content')
 <div class="row d-none animated fadeIn faster guest">
-    <div class="col-sm-2 jumbotron bg-entiras-focus-3 d-none animated fadeIn faster guest">
-        <div class="card bg-entiras-dark text-light">
-            <div class="card-body">
-                <p class="h1 h-entiras text-center">
-                    Registro :V
-                </p>
-                <p class="text-right">
-                    OK
-                </p>
+    <div class="col-sm-6">
+        <div class="jumbotron bg-entiras-focus-3 d-none animated fadeIn faster guest">
+            <div class="card bg-entiras-dark text-light">
+                <div class="card-body">
+                    <p class="h1 h-entiras text-center">
+                        Registro :V
+                    </p>
+                </div>
             </div>
         </div>
     </div>
-    <div class="card col-sm-10">
-        <div class="card-body">
-            <div class="h1 h-entiras text-center">
-                Registro :V
-            </div>
-            <hr class="my-2">
-            <div id="email-required" class="alert alert-danger d-none animated fadeIn faster" role="alert">
-                La dirección de correo es requerida.
-            </div>
-            <div id="username-required" class="alert alert-danger d-none animated fadeIn faster" role="alert">
-                El nombre de usuario es requerido.
-            </div>
-            <div id="username-url" class="alert alert-danger d-none animated fadeIn faster" role="alert">
-                El nombre de usuario no es válido.
-            </div>
-            <div id="password-required" class="alert alert-danger d-none animated fadeIn faster" role="alert">
-                La contraseña es requerida.
-            </div>
-            <div id="email-email" class="alert alert-danger d-none animated fadeIn faster" role="alert">
-                La dirección de correo no es válida.
-            </div>
-            <div id="password-min" class="alert alert-danger d-none animated fadeIn faster" role="alert">
-                La contraseña debe tener 4 caracteres mínimo.
-            </div>
-            <div id="clone" class="alert alert-danger d-none animated fadeIn faster" role="alert">
-                El nombre de usuario y/o la dirección de correo ya están en uso.
-            </div>
-            <div id="sent" class="alert alert-success d-none animated fadeIn faster" role="alert">
-                Se envío el correo de confirmación.
-            </div>
-            <form id="signup-form">
-                <input type="hidden" name="_csrf">
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">
-                        Dirección de Correo
-                    </label>
-                    <div class="col-sm-10">
-                        <input type="text" name="email" class="form-control" placeholder="ejemplo@ejemplo.com">
-                    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <div id="email-required" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+                    La dirección de correo es requerida.
                 </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">
-                        Nombre de Usuario
-                    </label>
-                    <div class="col-sm-10">
-                        <input type="text" name="username" class="form-control" placeholder="usuario">
-                    </div>
+                <div id="username-required" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+                    El nombre de usuario es requerido.
                 </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">
-                        Contraseña
-                    </label>
-                    <div class="col-sm-10">
-                        <input type="password" name="password" class="form-control" placeholder="4 caracteres mínimo">
-                    </div>
+                <div id="username-url" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+                    El nombre de usuario no es válido.
                 </div>
-            </form>
-            <div class="row">
-                <div class="col-sm-6">
-                    <button id="signup-btn" class="btn btn-outline-dark btn-block" onclick="actions.signup()">
-                        Registrarse
-                    </button>
+                <div id="password-required" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+                    La contraseña es requerida.
                 </div>
-                <div class="text-right col-sm-6">
-                    <a href="/login/">ya tengo una cuenta</a> |
-                    <a href="/resend/">mi correo no llegó</a>
+                <div id="email-email" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+                    La dirección de correo no es válida.
+                </div>
+                <div id="password-min" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+                    La contraseña debe tener 4 caracteres mínimo.
+                </div>
+                <div id="clone" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+                    El nombre de usuario y/o la dirección de correo ya están en uso.
+                </div>
+                <div id="sent" class="alert alert-success d-none animated fadeIn faster" role="alert">
+                    Se envío el correo de confirmación.
+                </div>
+                <form id="signup-form">
+                    <input type="hidden" name="_csrf">
+                    Dirección de Correo
+                    <input type="text" name="email" class="form-control" placeholder="ejemplo@ejemplo.com">
+                    Nombre de Usuario
+                    <input type="text" name="username" class="form-control" placeholder="usuario">
+                    Contraseña
+                    <input type="password" name="password" class="form-control" placeholder="4 caracteres mínimo">
+                </form>
+                <button id="signup-btn" class="btn btn-outline-dark btn-block" onclick="actions.signup()">
+                    Registrarse
+                </button>
+                <div class="text-right">
+                    <a href="/login/">Ya tengo una cuenta</a> |
+                    <a href="/resend/">Mi correo no llegó</a>
                 </div>
             </div>
         </div>
