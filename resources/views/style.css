@@ -27,6 +27,9 @@ a, a:hover {
 .bg-entiras-focus-2 {
   background-image: url('https://res.cloudinary.com/entiras/image/upload/v1587763727/carton_glsjt5.jpg');
 }
+.bg-entiras-focus-3 {
+  background-image: url('https://res.cloudinary.com/entiras/image/upload/v1589929842/IMG_0641_k5qpbr.jpg');
+}
 @font-face {
   font-family: 'desyrelregular';
   src: url('https://res.cloudinary.com/entiras/raw/upload/v1588187690/desyrel_iwosvz.woff2') format('woff2'),
