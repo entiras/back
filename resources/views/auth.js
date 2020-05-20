@@ -102,7 +102,7 @@ actions.confirm = function () {
 }
 $(document).ready(function () {
     login.check();
-    if ($('input[name=token]').val()) {
+    if ($('input[name=confirm]').val()) {
         signup.confirm()
     }
 });
