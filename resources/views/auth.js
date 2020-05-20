@@ -102,6 +102,9 @@ actions.confirm = function () {
 }
 $(document).ready(function () {
     login.check();
+    if ($('input[name=token]').val()) {
+        signup.confirm()
+    }
 });
 $.ajaxSetup({
     beforeSend: loader.show,
