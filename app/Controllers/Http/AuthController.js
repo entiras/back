@@ -49,7 +49,7 @@ class AuthController {
       password: request.input('password'),
       verified: false
     });
-    const token = jwt.sign({ email: user.email }, Env.get('SECRET'), {
+    const token = jwt.sign(user.email, Env.get('SECRET'), {
       expiresIn: 60 * 60 * 24 * 3
     });
     const data = {
@@ -65,6 +65,37 @@ class AuthController {
     return response.json({
       type: 'success',
       message: 'sent'
+    });
+  }
+  async confirm({ response, request, session }) {
+    const token = request.input('token');
+    const payload
+    try {
+      payload = await jwt.verify(token, Env.get('SECRET'));
+    } catch (err) {
+      return response.json({
+        type: 'danger',
+        message: 'invalid'
+      });
+    }
+    const user = await User.findBy('email', payload);
+    if (!user) {
+      return response.json({
+        type: 'danger',
+        message: 'user'
+      });
+    }
+    if (user.verified) {
+      return response.json({
+        type: 'danger',
+        message: 'verified'
+      });
+    }
+    user.verified = true;
+    await user.save();
+    return response.json({
+      type: 'success',
+      message: 'verified'
     });
   }
   /*async reset({response, request, session}) {
@@ -83,7 +114,7 @@ class AuthController {
       })
       return response.redirect('back')
     }
-    var payload
+    const payload
     try {
       payload = await jwt.verify(request.input('token'), Env.get('SECRET'))
     } catch(err) {
@@ -282,43 +313,6 @@ class AuthController {
       }
     })
     return response.redirect('back')
-  }
-  async confirm({response, params, session}) {
-    const { token } = params
-    var payload
-    try {
-      payload = await jwt.verify(token, Env.get('SECRET'))
-    } catch(err) {
-      session.flash({
-        notification: {
-          type: 'danger',
-          message: 'Invalid or expired link'
-        }
-      })
-      return response.redirect('/login')
-    }
-    const user = await User.findBy('email', payload.email)
-    if (!user) {
-      session.flash({
-        notification: {
-          type: 'danger',
-          message: 'User not found'
-        }
-      })
-      return response.redirect('/login')
-    }
-    if (user.verified) {
-      return response.redirect('/login')
-    }
-    user.verified = true
-    await user.save()
-    session.flash({
-      notification: {
-        type: 'success',
-        message: 'Email confirmed'
-      }
-    })
-    return response.redirect('/login')
   }*/
 }
 

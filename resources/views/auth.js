@@ -98,7 +98,7 @@ actions.signup = function (data) {
     }
 };
 actions.confirm = function () {
-    $('input[name=token]').val(window.location.search);
+    $('input[name=token]').val(window.location.search.replace('?', ''));
 }
 $(document).ready(function () {
     login.check();

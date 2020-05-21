@@ -33,10 +33,10 @@ class PageController {
     const iterator = await col.find({
       type: 'base'
     });
-    var file = null;
+    const file = null;
     while (file = await iterator.next()) {
       // delete old files
-      var del = await octokit.repos.deleteFile({
+      const del = await octokit.repos.deleteFile({
         owner: 'entiras',
         repo: 'front',
         path: file.path,
@@ -51,14 +51,14 @@ class PageController {
       }
     }
     // create new files
-    var names = [
+    const names = [
       'auth.js',
       '_redirects',
       'style.css'
     ];
-    for (var i = 0; i < names.length; i++) {
-      var buff = new Buffer(await fs.readFile('./resources/views/' + names[i]));
-      var save = await octokit.repos.createOrUpdateFile({
+    for (const i = 0; i < names.length; i++) {
+      const buff = new Buffer(await fs.readFile('./resources/views/' + names[i]));
+      const save = await octokit.repos.createOrUpdateFile({
         owner: 'entiras',
         repo: 'front',
         path: names[i],
@@ -75,16 +75,16 @@ class PageController {
     view.share({
       date: new Date().toISOString()
     });
-    var info = [
+    const info = [
       ['index.html', 'content.home'],
       ['signup/index.html', 'content.signup'],
       ['login/index.html', 'content.login'],
       ['obscure.html', 'content.obscure'],
       ['confirm/index.html', 'content.confirm']
     ];
-    for (var i = 0; i < info.length; i++) {
-      var buff = new Buffer(view.render(info[i][1]));
-      var save = await octokit.repos.createOrUpdateFile({
+    for (const i = 0; i < info.length; i++) {
+      const buff = new Buffer(view.render(info[i][1]));
+      const save = await octokit.repos.createOrUpdateFile({
         owner: 'entiras',
         repo: 'front',
         path: info[i][0],
