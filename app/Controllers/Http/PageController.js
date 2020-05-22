@@ -33,7 +33,7 @@ class PageController {
     const iterator = await col.find({
       type: 'base'
     });
-    const file = null;
+    var file;
     while (file = await iterator.next()) {
       // delete old files
       const del = await octokit.repos.deleteFile({
