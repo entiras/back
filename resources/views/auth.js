@@ -62,49 +62,45 @@ actions.form = function (id) {
     }
     return data;
 };
-actions.signup = function (data) {
-    $('#signup-btn').prop('disabled', true);
+actions.signup = function (event) {
+    event.preventDefault();
+    $('#signup').prop('disabled', true);
     $('.alert').addClass('d-none');
     $('input').removeClass('is-invalid');
-    if (typeof data !== 'object') {
-        actions.csrf(actions.signup);
-    } else if (typeof data.token === 'string') {
+    actions.csrf((data) => {
         $('input[name=_csrf]').val(data.token);
-        var data = actions.form('#signup-form');
+        var input = actions.form('#signup-form');
         $.ajax({
             type: 'POST',
             url: '/api/signup',
-            data: data,
-            success: actions.signup,
+            data: input,
+            success: (res) => {
+                $('#signup').prop('disabled', false);
+                if (res.message === 'validation') {
+                    var field = res.error.field;
+                    var val = res.error.validation;
+                    $('#' + field + '-' + val).removeClass('d-none');
+                    $('input[name=' + field + ']').addClass('is-invalid');
+                } else if (res.message === 'url') {
+                    $('#username-url').removeClass('d-none');
+                    $('input[name=username]').addClass('is-invalid');
+                } else if (res.message === 'clone') {
+                    $('#clone').removeClass('d-none');
+                    $('input[name=username]').addClass('is-invalid');
+                    $('input[name=email]').addClass('is-invalid');
+                } else if (res.message === 'sent') {
+                    $('#sent').removeClass('d-none');
+                }
+            },
             error: actions.failed
         });
-    } else {
-        $('#signup-btn').prop('disabled', false);
-        if (data.message === 'validation') {
-            var field = data.error.field;
-            var val = data.error.validation;
-            $('#' + field + '-' + val).removeClass('d-none');
-            $('input[name=' + field + ']').addClass('is-invalid');
-        } else if (data.message === 'url') {
-            $('#username-url').removeClass('d-none');
-            $('input[name=username]').addClass('is-invalid');
-        } else if (data.message === 'clone') {
-            $('#clone').removeClass('d-none');
-            $('input[name=username]').addClass('is-invalid');
-            $('input[name=email]').addClass('is-invalid');
-        } else if (data.message === 'sent') {
-            $('#sent').removeClass('d-none');
-        }
-    }
+    });
 };
 actions.confirm = function () {
     $('input[name=token]').val(window.location.search.replace('?', ''));
 }
 $(document).ready(function () {
     login.check();
-    if ($('input[name=confirm]').val()) {
-        actions.confirm();
-    }
 });
 $.ajaxSetup({
     beforeSend: loader.show,

@@ -44,7 +44,7 @@
                 <div id="sent" class="alert alert-success d-none animated fadeIn faster" role="alert">
                     Se envío el correo de confirmación.
                 </div>
-                <form id="signup-form">
+                <form onsubmit="actions.signup(event)">
                     <input type="hidden" name="_csrf">
                     Dirección de Correo
                     <input type="text" name="email" class="form-control mb-2" placeholder="ejemplo@ejemplo.com">
@@ -52,10 +52,10 @@
                     <input type="text" name="username" class="form-control mb-2" placeholder="usuario">
                     Contraseña
                     <input type="password" name="password" class="form-control mb-2" placeholder="4 caracteres mínimo">
+                    <button id="signup" class="btn btn-outline-dark btn-block mb-2">
+                        Registrarse
+                    </button>
                 </form>
-                <button id="signup-btn" class="btn btn-outline-dark btn-block mb-2" onclick="actions.signup()">
-                    Registrarse
-                </button>
                 <div class="text-right">
                     <a href="/login/">Ya tengo una cuenta</a> |
                     <a href="/resend/">Mi correo no llegó</a>
