@@ -74,6 +74,7 @@ actions.signup = function (event) {
             type: 'POST',
             url: '/api/signup',
             data: input,
+            error: actions.failed,
             success: (res) => {
                 $('#signup').prop('disabled', false);
                 if (res.message === 'validation') {
@@ -91,8 +92,7 @@ actions.signup = function (event) {
                 } else if (res.message === 'sent') {
                     $('#sent').removeClass('d-none');
                 }
-            },
-            error: actions.failed
+            }
         });
     });
 };
