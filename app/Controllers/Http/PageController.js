@@ -56,7 +56,7 @@ class PageController {
       '_redirects',
       'style.css'
     ];
-    for (const i = 0; i < names.length; i++) {
+    for (var i = 0; i < names.length; i++) {
       const buff = new Buffer(await fs.readFile('./resources/views/' + names[i]));
       const save = await octokit.repos.createOrUpdateFile({
         owner: 'entiras',
