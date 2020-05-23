@@ -82,7 +82,7 @@ class PageController {
       ['obscure.html', 'content.obscure'],
       ['confirm/index.html', 'content.confirm']
     ];
-    for (const i = 0; i < info.length; i++) {
+    for (var i = 0; i < info.length; i++) {
       const buff = new Buffer(view.render(info[i][1]));
       const save = await octokit.repos.createOrUpdateFile({
         owner: 'entiras',
