@@ -49,7 +49,7 @@ class AuthController {
       password: request.input('password'),
       verified: false
     });
-    const token = jwt.sign(user.email, Env.get('SECRET'), {
+    const token = jwt.sign({ e: user.email }, Env.get('SECRET'), {
       expiresIn: '3d'
     });
     const data = {
@@ -78,7 +78,7 @@ class AuthController {
         message: 'invalid'
       });
     }
-    const user = await User.findBy('email', payload);
+    const user = await User.findBy('email', payload.e);
     if (!user) {
       return response.json({
         type: 'danger',
