@@ -54,8 +54,8 @@ actions.csrf = function (callback) {
         error: actions.failed
     });
 };
-actions.form = function (form) {
-    var arr = $(form).serializeArray();
+actions.form = function (id) {
+    var arr = $(id).serializeArray();
     var data = {};
     for (var i = 0; i < arr.length; i++) {
         data[arr[i].name] = arr[i].value;
@@ -64,13 +64,12 @@ actions.form = function (form) {
 };
 actions.signup = function (event) {
     event.preventDefault();
-    const form = this;
     $('#signup :submit').prop('disabled', true);
     $('.alert').addClass('d-none');
     $('input').removeClass('is-invalid');
     actions.csrf((data) => {
         $('input[name=_csrf]').val(data.token);
-        var input = actions.form(form);
+        var input = actions.form('#signup');
         $.ajax({
             type: 'POST',
             url: '/api/signup',
