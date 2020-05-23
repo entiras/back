@@ -50,7 +50,7 @@ class AuthController {
       verified: false
     });
     const token = jwt.sign(user.email, Env.get('SECRET'), {
-      expiresIn: 60 * 60 * 24 * 3
+      expiresIn: '3d'
     });
     const data = {
       username: user.username,
