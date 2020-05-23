@@ -69,7 +69,7 @@ class AuthController {
   }
   async confirm({ response, request, session }) {
     const token = request.input('token');
-    const payload;
+    var payload;
     try {
       payload = await jwt.verify(token, Env.get('SECRET'));
     } catch (err) {
