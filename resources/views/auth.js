@@ -54,8 +54,8 @@ actions.csrf = function (callback) {
         error: actions.failed
     });
 };
-actions.form = function (id) {
-    var arr = $(id).serializeArray();
+actions.form = function (form) {
+    var arr = $(form).serializeArray();
     var data = {};
     for (var i = 0; i < arr.length; i++) {
         data[arr[i].name] = arr[i].value;
@@ -64,19 +64,20 @@ actions.form = function (id) {
 };
 actions.signup = function (event) {
     event.preventDefault();
-    $('#signup').prop('disabled', true);
+    const form = this;
+    $('#signup :submit').prop('disabled', true);
     $('.alert').addClass('d-none');
     $('input').removeClass('is-invalid');
     actions.csrf((data) => {
         $('input[name=_csrf]').val(data.token);
-        var input = actions.form('#signup-form');
+        var input = actions.form(form);
         $.ajax({
             type: 'POST',
             url: '/api/signup',
             data: input,
             error: actions.failed,
             success: (res) => {
-                $('#signup').prop('disabled', false);
+                $('#signup :submit').prop('disabled', false);
                 if (res.message === 'validation') {
                     var field = res.error.field;
                     var val = res.error.validation;
