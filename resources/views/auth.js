@@ -136,7 +136,7 @@ actions.resend = function (event) {
             success: (res) => {
                 $('#resend :submit').prop('disabled', false);
                 if (res.message === 'required' || res.message === 'email') {
-                    $('input[name=token]').addClass('is-invalid');
+                    $('input[name=email]').addClass('is-invalid');
                 }
                 $('#' + res.message).removeClass('d-none');
             }
