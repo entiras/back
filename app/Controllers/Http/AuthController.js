@@ -105,7 +105,7 @@ class AuthController {
     if (validation.fails()) {
       return response.json({
         type: 'danger',
-        message: validation._errorMessages[0]
+        message: validation._errorMessages[0].validation
       });
     }
     const user = await User.findBy('email', request.input('email'));
