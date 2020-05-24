@@ -54,8 +54,7 @@ class AuthController {
     });
     const data = {
       username: user.username,
-      token: token,
-      appUrl: Env.get('APP_URL')
+      token: token
     };
     await Mail.raw(view.render('emails.confirm.text', data), (message) => {
       message.to(user.email);
@@ -67,7 +66,7 @@ class AuthController {
       message: 'sent'
     });
   }
-  async confirm({ response, request, session }) {
+  async confirm({ response, request }) {
     const token = request.input('token');
     var payload;
     try {
@@ -88,14 +87,14 @@ class AuthController {
     if (user.verified) {
       return response.json({
         type: 'danger',
-        message: 'verified'
+        message: 'late'
       });
     }
     user.verified = true;
     await user.save();
     return response.json({
       type: 'success',
-      message: 'verified'
+      message: 'confirmed'
     });
   }
   /*async reset({response, request, session}) {

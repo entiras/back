@@ -91,13 +91,34 @@ actions.signup = function (event) {
                     $('input[name=email]').addClass('is-invalid');
                 } else if (res.message === 'sent') {
                     $('#sent').removeClass('d-none');
+                    window.location.href = "/confirm/";
                 }
             }
         });
     });
 };
 actions.confirm = function () {
-    $('input[name=token]').val(window.location.search.replace('?', ''));
+    event.preventDefault();
+    $('#confirm :submit').prop('disabled', true);
+    $('.alert').addClass('d-none');
+    $('input').removeClass('is-invalid');
+    actions.csrf((data) => {
+        $('input[name=_csrf]').val(data.token);
+        var input = actions.form('#confirm');
+        $.ajax({
+            type: 'POST',
+            url: '/api/confirm',
+            data: input,
+            error: actions.failed,
+            success: (res) => {
+                $('#confirm :submit').prop('disabled', false);
+                if (res.type === 'danger') {
+                    $('input[name=token]').addClass('is-invalid');
+                }
+                $('#' + res.message).removeClass('d-none');
+            }
+        });
+    });
 }
 $(document).ready(function () {
     login.check();

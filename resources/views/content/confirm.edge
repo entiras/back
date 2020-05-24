@@ -5,6 +5,33 @@
 </title>
 @endsection
 @section('content')
-<input readonly name="confirm" value="true">
-<input name="token">
+<p class="h1 h-entiras text-center">
+  Activar Cuenta
+</p>
+<div id="invalid" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+  El texto secreto no es válido o ya ha caducado.
+</div>
+<div id="user" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+  El usuario no existe.
+</div>
+<div id="late" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+  Esa cuenta ya está activada.
+</div>
+<div id="confirmed" class="alert alert-success d-none animated fadeIn faster" role="alert">
+  La cuenta fue activada correctamente.
+</div>
+<form id="confirm" onsubmit="actions.confirm(event)">
+  <input type="hidden" name="_csrf">
+  Copia y pega el texto secreto que recibiste por correo
+  <input type="text" name="token" class="form-control mb-2" placeholder="Texto secreto...">
+  <small>
+    El texto secreto solamente será válido por 3 días, si es necesario puedes pedir otro correo.
+  </small>
+  <button class="btn btn-outline-dark btn-block mb-2">
+    Activar
+  </button>
+</form>
+<div class="text-right">
+  <a href="/resend/">Mi correo no llegó</a>
+</div>
 @endsection
