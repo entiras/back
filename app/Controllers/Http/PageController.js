@@ -80,7 +80,8 @@ class PageController {
       ['signup/index.html', 'content.signup'],
       ['login/index.html', 'content.login'],
       ['obscure.html', 'content.obscure'],
-      ['confirm/index.html', 'content.confirm']
+      ['confirm/index.html', 'content.confirm'],
+      ['resend/index.html', 'content.resend']
     ];
     for (var i = 0; i < info.length; i++) {
       const buff = new Buffer(view.render(info[i][1]));
