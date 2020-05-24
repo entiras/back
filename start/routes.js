@@ -20,6 +20,7 @@ Route.get('/csrf', 'PageController.csrf');
 Route.get('/base', 'PageController.base');
 Route.get('/', 'PageController.home');
 Route.post('/signup', 'AuthController.signup');
+Route.post('confirm', 'AuthController.confirm');
 Route.route('*', 'PageController.obscure');
 
 /*Route.group(() => {
@@ -39,5 +40,4 @@ Route.group(() => {
   Route.post('logout', 'AuthController.logout')
   Route.post('forgot', 'AuthController.forgot')
   Route.post('reset', 'AuthController.reset')
-  Route.get('confirm/:token', 'AuthController.confirm')
 }).prefix('/api/')*/
