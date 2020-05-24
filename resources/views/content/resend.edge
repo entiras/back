@@ -1,27 +1,47 @@
 @layout('layout.app')
+@section('headers')
+<title>
+  EnTiras - Reenviar Correo de Activación
+</title>
+@endsection
 @section('content')
-<div class="jumbotron bg-entiras-focus-1">
-  <div class="row">
-    <div class="col-md">
-    </div>
-    <div class="col-md">
-      <div class="card bg-entiras-dark text-light">
+<div class="row d-none animated fadeIn faster guest">
+  <div class="col-lg-6">
+    <div class="jumbotron d-flex bg-entiras-focus-2 d-none animated fadeIn faster guest">
+      <div class="card mt-auto bg-entiras-dark text-light">
         <div class="card-body">
-          @include('layout.notification')
-          <form action="/api/resend" method="POST">
-            {{ csrfField() }}
-            <div class="form-group">
-              <label>
-                Direcci&oacute;n de Correo
-              </label>
-              <input type="text" name="email" value="{{ old('email') }}"
-                class="form-control {{ hasErrorFor('email') ? 'is-invalid' : '' }}"
-                placeholder="ejemplo@ejemplo.com">
-            </div>
-            <button class="btn btn-outline-secondary btn-block" type="submit">
-                Reenviar
-            </button>
-          </form>
+          <p class="h1 h-entiras text-center">
+            Reenviar Correo de Activación
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <div id="required" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+          La dirección de correo es requerida.
+        </div>
+        <div id="email" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+          La dirección de correo no es válida.
+        </div>
+        <div id="late" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+          Esa cuenta ya está activada.
+        </div>
+        <div id="sent" class="alert alert-success d-none animated fadeIn faster" role="alert">
+          Se envío el correo de confirmación.
+        </div>
+        <form id="resend" onsubmit="actions.resend(event)">
+          <input type="hidden" name="_csrf">
+          Dirección de Correo
+          <input type="text" name="email" class="form-control mb-2" placeholder="ejemplo@ejemplo.com">
+          <button class="btn btn-outline-dark btn-block mb-2">
+            Reenviar
+          </button>
+        </form>
+        <div class="text-right">
+          <a href="/confirm/">Ya tengo mi texto secreto</a>
         </div>
       </div>
     </div>

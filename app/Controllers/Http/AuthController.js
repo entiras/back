@@ -97,6 +97,47 @@ class AuthController {
       message: 'confirmed'
     });
   }
+  async resend({ request, response, view }) {
+    const validation = await validate(
+      request.all(), {
+      email: 'required|email'
+    });
+    if (validation.fails()) {
+      return response.json({
+        type: 'danger',
+        message: validation._errorMessages[0]
+      });
+    }
+    const user = await User.findBy('email', request.input('email'));
+    if (!user) {
+      return response.json({
+        type: 'success',
+        message: 'sent'
+      });
+    }
+    if (user.verified) {
+      return response.json({
+        type: 'danger',
+        message: 'late'
+      });
+    }
+    const token = jwt.sign({ e: user.email }, Env.get('SECRET'), {
+      expiresIn: '3d'
+    });
+    const data = {
+      username: user.username,
+      token: token
+    };
+    await Mail.raw(view.render('emails.confirm.text', data), (message) => {
+      message.to(user.email);
+      message.from(Env.get('FROM_EMAIL'));
+      message.subject(view.render('emails.confirm.subject'));
+    });
+    return response.json({
+      type: 'success',
+      message: 'sent'
+    });
+  }
   /*async reset({response, request, session}) {
     const validation = await validate(
       request.all(), {
@@ -259,59 +300,6 @@ class AuthController {
     }
     await auth.login(user)
     return response.redirect('/dash')
-  }
-  async resend({request, response, session}) {
-    const validation = await validate(
-      request.all(), {
-      email: 'required|email'
-    })
-    if (validation.fails()) {
-      session.withErrors(validation.messages()).flashExcept('password')
-      session.flash({
-        notification: {
-          type: 'danger',
-          message: 'Corrija los campos indicados'
-        }
-      })
-      return response.redirect('back')
-    }
-    const user = await User.findBy('email', request.input('email'))
-    if (!user){
-      session.flash({
-        notification: {
-          type: 'success',
-          message: 'Esperando confirmaci\u00f3n por correo'
-        }
-      })
-      return response.redirect('back')
-    }
-    if(user.verified) {
-      session.flash({
-        notification: {
-          type: 'danger',
-          message: 'Correo verificado'
-        }
-      })
-      return response.redirect('back')
-    }
-    const token = jwt.sign({email: user.email}, Env.get('SECRET'), {
-      expiresIn: 60 * 60 * 24 * 3
-    })
-    await Mail.send('emails.confirm', {
-      username: user.username,
-      token: token,
-      appUrl: Env.get('APP_URL')
-    }, (message) => {
-      message.to(user.email).from(Env.get('FROM_EMAIL'))
-      .subject('Por favor confirma tu direcci\u00f3n de correo electr\u00f3nico')
-    })
-    session.flash({
-      notification: {
-        type: 'success',
-        message: 'Esperando confirmaci\u00f3n por correo'
-      }
-    })
-    return response.redirect('back')
   }*/
 }
 

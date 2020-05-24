@@ -97,7 +97,7 @@ actions.signup = function (event) {
         });
     });
 };
-actions.confirm = function () {
+actions.confirm = function (event) {
     event.preventDefault();
     $('#confirm :submit').prop('disabled', true);
     $('.alert').addClass('d-none');
@@ -113,6 +113,29 @@ actions.confirm = function () {
             success: (res) => {
                 $('#confirm :submit').prop('disabled', false);
                 if (res.type === 'danger') {
+                    $('input[name=token]').addClass('is-invalid');
+                }
+                $('#' + res.message).removeClass('d-none');
+            }
+        });
+    });
+}
+actions.resend = function (event) {
+    event.preventDefault();
+    $('#resend :submit').prop('disabled', true);
+    $('.alert').addClass('d-none');
+    $('input').removeClass('is-invalid');
+    actions.csrf((data) => {
+        $('input[name=_csrf]').val(data.token);
+        var input = actions.form('#resend');
+        $.ajax({
+            type: 'POST',
+            url: '/api/resend',
+            data: input,
+            error: actions.failed,
+            success: (res) => {
+                $('#resend :submit').prop('disabled', false);
+                if (res.message === 'required' || res.message === 'email') {
                     $('input[name=token]').addClass('is-invalid');
                 }
                 $('#' + res.message).removeClass('d-none');

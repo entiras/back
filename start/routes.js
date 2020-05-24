@@ -20,7 +20,8 @@ Route.get('/csrf', 'PageController.csrf');
 Route.get('/base', 'PageController.base');
 Route.get('/', 'PageController.home');
 Route.post('/signup', 'AuthController.signup');
-Route.post('confirm', 'AuthController.confirm');
+Route.post('/confirm', 'AuthController.confirm');
+Route.post('/resend', 'AuthController.resend');
 Route.route('*', 'PageController.obscure');
 
 /*Route.group(() => {
@@ -34,8 +35,6 @@ Route.get('/', 'PageController.home')
 Route.get('*', 'PageController.obscure')
 
 Route.group(() => {
-  Route.post('signup', 'AuthController.signup')
-  Route.post('resend', 'AuthController.resend')
   Route.post('login', 'AuthController.login')
   Route.post('logout', 'AuthController.logout')
   Route.post('forgot', 'AuthController.forgot')
