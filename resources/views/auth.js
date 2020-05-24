@@ -127,7 +127,7 @@ actions.resend = function (event) {
     $('input').removeClass('is-invalid');
     actions.csrf((data) => {
         $('input[name=_csrf]').val(data.token);
-        var input = actions.form('#resend');
+        /*var input = actions.form('#resend');
         $.ajax({
             type: 'POST',
             url: '/api/resend',
@@ -140,7 +140,7 @@ actions.resend = function (event) {
                 }
                 $('#' + res.message).removeClass('d-none');
             }
-        });
+        });*/
     });
 }
 $(document).ready(function () {
