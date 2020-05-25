@@ -11,7 +11,7 @@
             <div class="card mt-auto bg-entiras-dark text-light">
                 <div class="card-body">
                     <p class="h1 h-entiras text-center">
-                        Registro :V
+                        Registro
                     </p>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                     El nombre de usuario y/o la dirección de correo ya están en uso.
                 </div>
                 <div id="sent" class="alert alert-success d-none animated fadeIn faster" role="alert">
-                    Se envío el correo de confirmación.
+                    Se envío el texto secreto por correo.
                 </div>
                 <form id="signup" onsubmit="actions.signup(event)">
                     <input type="hidden" name="_csrf">
@@ -56,11 +56,15 @@
                         Registrarse
                     </button>
                 </form>
-                <div class="text-right">
-                    <a href="/confirm/">Ya tengo mi texto secreto</a> |
-                    <a href="/resend/">Mi correo no llegó</a>
-                </div>
             </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <a href="/signup/confirm/">Ya tengo mi texto secreto</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="/signup/resend/">Mi texto secreto no llegó</a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

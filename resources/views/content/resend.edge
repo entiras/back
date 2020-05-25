@@ -1,7 +1,7 @@
 @layout('layout.app')
 @section('headers')
 <title>
-  EnTiras - Reenviar Correo de Activación
+  EnTiras - Registro | Reenviar
 </title>
 @endsection
 @section('content')
@@ -11,7 +11,7 @@
       <div class="card mt-auto bg-entiras-dark text-light">
         <div class="card-body">
           <p class="h1 h-entiras text-center">
-            Reenviar Correo de Activación
+            Registro | Reenviar
           </p>
         </div>
       </div>
@@ -30,7 +30,7 @@
           Esa cuenta ya está activada.
         </div>
         <div id="sent" class="alert alert-success d-none animated fadeIn faster" role="alert">
-          Se envío el correo de confirmación.
+          Se envío el texto secreto por correo.
         </div>
         <form id="resend" onsubmit="actions.resend(event)">
           <input type="hidden" name="_csrf">
@@ -41,7 +41,9 @@
           </button>
         </form>
         <div class="text-right">
-          <a href="/confirm/">Ya tengo mi texto secreto</a>
+          <small>
+            <p><a href="/signup/confirm/">Ya tengo mi texto secreto</a></p>
+          </small>
         </div>
       </div>
     </div>

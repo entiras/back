@@ -107,7 +107,7 @@ actions.confirm = function (event) {
         var input = actions.form('#confirm');
         $.ajax({
             type: 'POST',
-            url: '/api/confirm',
+            url: '/api/signup/confirm',
             data: input,
             error: actions.failed,
             success: (res) => {
@@ -130,7 +130,7 @@ actions.resend = function (event) {
         var input = actions.form('#resend');
         $.ajax({
             type: 'POST',
-            url: '/api/resend',
+            url: '/api/signup/resend',
             data: input,
             error: actions.failed,
             success: (res) => {
