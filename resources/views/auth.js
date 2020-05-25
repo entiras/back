@@ -62,6 +62,11 @@ actions.form = function (id) {
     }
     return data;
 };
+actions.redirect = function (route) {
+    setTimeout((destiny) => {
+        window.location.href = destiny;
+    }, 500, route);
+}
 actions.signup = function (event) {
     event.preventDefault();
     $('#signup :submit').prop('disabled', true);
@@ -91,7 +96,7 @@ actions.signup = function (event) {
                     $('input[name=email]').addClass('is-invalid');
                 } else if (res.message === 'sent') {
                     $('#sent').removeClass('d-none');
-                    window.location.href = "/confirm/";
+                    actions.redirect('/signup/confirm/');
                 }
             }
         });
@@ -139,6 +144,9 @@ actions.resend = function (event) {
                     $('input[name=email]').addClass('is-invalid');
                 }
                 $('#' + res.message).removeClass('d-none');
+                if (res.message === 'sent') {
+                    actions.redirect('/signup/confirm/');
+                }
             }
         });
     });
