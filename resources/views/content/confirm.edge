@@ -32,10 +32,10 @@
         <div id="confirmed" class="alert alert-success d-none animated fadeIn faster" role="alert">
           La cuenta fue activada correctamente.
         </div>
+        Copia y pega el texto secreto que recibiste por correo. El texto secreto solamente será válido por 3 días, si
+        es necesario puedes solicitar que te enviemos otro.
         <form id="confirm" onsubmit="actions.confirm(event)">
           <input type="hidden" name="_csrf">
-          Copia y pega el texto secreto que recibiste por correo. El texto secreto solamente será válido por 3 días, si
-          es necesario puedes solicitar que te enviemos otro.
           <textarea name="token" class="form-control mb-2" placeholder="Texto secreto..." rows="3"></textarea>
           <button class="btn btn-outline-dark btn-block mb-2">
             Confirmar
