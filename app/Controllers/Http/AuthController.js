@@ -133,6 +133,8 @@ class AuthController {
       message.from(Env.get('FROM_EMAIL'));
       message.subject(view.render('emails.confirm.subject'));
     });
+    user.sent++;
+    await user.save();
     return response.json({
       type: 'success',
       message: 'sent'

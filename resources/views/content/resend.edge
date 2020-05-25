@@ -33,6 +33,8 @@
           Se envío el texto secreto por correo.
         </div>
         <form id="resend" onsubmit="actions.resend(event)">
+          Por favor revisa tu bandeja de correo no deseado antes de pedir que te enviemos otro correo. Hay un límite
+          para el número de veces que puedes hacer esto.
           <input type="hidden" name="_csrf">
           Dirección de Correo
           <input type="text" name="email" class="form-control mb-2" placeholder="ejemplo@ejemplo.com">
@@ -40,12 +42,15 @@
             Reenviar
           </button>
         </form>
-        <div class="text-right">
-          <small>
-            <p><a href="/signup/confirm/">Ya tengo mi texto secreto</a></p>
-          </small>
-        </div>
       </div>
+      <ul class="list-group list-group-flush border-top">
+        <li class="list-group-item text-center">
+          <a href="/signup/">Aún no me he registrado</a>
+        </li>
+        <li class="list-group-item text-center">
+          <a href="/signup/confirm/">Ya tengo mi texto secreto</a>
+        </li>
+      </ul>
     </div>
   </div>
 </div>
