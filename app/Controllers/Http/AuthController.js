@@ -128,13 +128,15 @@ class AuthController {
       username: user.username,
       token: token
     };
-    await Mail.raw(view.render('emails.confirm.text', data), (message) => {
-      message.to(user.email);
-      message.from(Env.get('FROM_EMAIL'));
-      message.subject(view.render('emails.confirm.subject'));
-    });
-    user.sent++;
-    await user.save();
+    if (user.sent < 3) {
+      await Mail.raw(view.render('emails.confirm.text', data), (message) => {
+        message.to(user.email);
+        message.from(Env.get('FROM_EMAIL'));
+        message.subject(view.render('emails.confirm.subject'));
+      });
+      user.sent++;
+      await user.save();
+    }
     return response.json({
       type: 'success',
       message: 'sent'
