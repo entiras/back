@@ -26,7 +26,7 @@ class AuthController {
         error: validation._errorMessages[0]
       });
     }
-    const url = new URL('https://domain.top:8080/path?query#hash');
+    const url = new URL('https://domain.top');
     url.username = request.input('username');
     if (url.username !== request.input('username')) {
       // url unsafe

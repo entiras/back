@@ -5,5 +5,53 @@
 </title>
 @endsection
 @section('content')
-Entrar
+<div class="row d-none animated fadeIn faster guest">
+  <div class="col-lg-6">
+    <div class="jumbotron d-flex bg-entiras-focus-3 d-none animated fadeIn faster guest">
+      <div class="card mt-auto bg-entiras-dark text-light">
+        <div class="card-body">
+          <p class="h1 h-entiras text-center">
+            Entrar
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <div id="username-required" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+          El nombre de usuario es requerido.
+        </div>
+        <div id="password-required" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+          La contraseña es requerida.
+        </div>
+        <div id="password-min" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+          La contraseña debe tener 4 caracteres mínimo.
+        </div>
+        <div id="ok" class="alert alert-success d-none animated fadeIn faster" role="alert">
+          ok.
+        </div>
+        <form id="login" onsubmit="actions.login(event)">
+          <input type="hidden" name="_csrf">
+          Nombre de Usuario
+          <input type="text" name="username" class="form-control mb-2" placeholder="n_usuari0">
+          Contraseña
+          <input type="password" name="password" class="form-control mb-2" placeholder="4 caracteres mínimo">
+          <button class="btn btn-outline-dark btn-block">
+            Entrar
+          </button>
+        </form>
+      </div>
+      <ul class="list-group list-group-flush border-top">
+        <li class="list-group-item text-center">
+          <a href="/signup/forgot/">Olvidé mi contraseña</a>
+        </li>
+        <li class="list-group-item text-center">
+          <a href="/signup/reset/">Ya tengo mi texto secreto</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
 @endsection
