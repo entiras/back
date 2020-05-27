@@ -135,7 +135,7 @@ class AuthController {
       username: user.username,
       token: token
     };
-    if (user.sent < 5) {
+    if (user.sent < 10) {
       await Mail.raw(view.render('emails.confirm.text', data), (message) => {
         message.to(user.email);
         message.from(Env.get('FROM_EMAIL'));
