@@ -27,7 +27,7 @@ class PageController {
   }
   captcha({ response }) {
     var captcha = svgCaptcha.create();
-    response.cookie('captcha', captcha.text);
+    response.cookie('captcha', captcha.text, { path: '/' });
     response.type('image/svg+xml');
     return response.send(captcha.data);
   }
