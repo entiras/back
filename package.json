@@ -20,7 +20,8 @@
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.0.2",
     "@octokit/rest": "^17.8.0",
-    "mongodb": "^3.5.7"
+    "mongodb": "^3.5.7",
+    "svg-captcha": "^1.4.0"
   },
   "autoload": {
     "App": "./app"

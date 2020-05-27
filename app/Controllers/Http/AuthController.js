@@ -8,7 +8,6 @@ const Mail = use('Mail')
 const Hash = use('Hash')
 const jwt = require('jsonwebtoken')
 
-//response.plainCookie('test', '1', { path: '/' });
 //response.clearCookie('test');
 
 class AuthController {
@@ -176,6 +175,7 @@ class AuthController {
       });
     }
     await auth.login(user);
+    response.plainCookie('user', user.username, { path: '/' });
     return response.json({
       type: 'success',
       message: 'logged'

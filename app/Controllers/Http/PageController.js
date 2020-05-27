@@ -7,6 +7,7 @@ const octokit = new Octokit({
 });
 const MongoClient = require('mongodb').MongoClient;
 const fs = require('fs').promises;
+var svgCaptcha = require('svg-captcha');
 
 class PageController {
   async home({ response }) {
@@ -23,6 +24,12 @@ class PageController {
     return response.json({
       token: view.render('content/token').replace('\n', '')
     });
+  }
+  captcha({ response }) {
+    var captcha = svgCaptcha.create();
+    response.cookie('captcha', captcha.text);
+    response.type('image/svg+xml');
+    return response.send(captcha.data);
   }
   async base({ response, view }) {
     const mongo = new MongoClient(Env.get('MONGO_URI', ''), {
