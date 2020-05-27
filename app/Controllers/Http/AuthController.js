@@ -97,7 +97,9 @@ class AuthController {
     });
   }
   async resend({ request, response, view }) {
-    if (request.cookie('captcha') !== request.input('captcha')) {
+    const captcha = request.cookie('captcha', '');
+    response.cookie('captcha', '', { path: '/' });
+    if (captcha !== request.input('captcha') || captcha === '') {
       return response.json({
         type: 'danger',
         message: 'captcha'
