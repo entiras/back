@@ -149,7 +149,7 @@ actions.resend = function (event) {
                 if (res.message === 'sent') {
                     actions.redirect('/signup/confirm/');
                 }
-                $('#captcha').attr("src", "/api/captcha?" + Math.random());
+                $('#_captcha').attr("src", "/api/captcha?" + Math.random());
             }
         });
     });
