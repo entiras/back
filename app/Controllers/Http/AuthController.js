@@ -142,6 +142,45 @@ class AuthController {
       message: 'sent'
     });
   }
+  async login({ session, request, response, auth }) {
+    const validation = await validate(
+      request.all(), {
+      username: 'required',
+      password: 'required|min:4'
+    });
+    if (validation.fails()) {
+      return response.json({
+        type: 'danger',
+        message: 'validation',
+        error: validation._errorMessages[0]
+      });
+    }
+    const user = await User.findBy('username', request.input('username'));
+    if (!user) {
+      return response.json({
+        type: 'danger',
+        message: 'credentials'
+      });
+    }
+    if (!user.verified) {
+      return response.json({
+        type: 'danger',
+        message: 'unconfirmed'
+      });
+    }
+    const correct = await Hash.verify(request.input('password'), user.password);
+    if (!correct) {
+      return response.json({
+        type: 'danger',
+        message: 'credentials'
+      });
+    }
+    await auth.login(user);
+    return response.json({
+      type: 'success',
+      message: 'logged'
+    });
+  }
   /*async reset({response, request, session}) {
     const validation = await validate(
       request.all(), {
@@ -256,54 +295,6 @@ class AuthController {
   async logout({auth, response}) {
     await auth.logout()
     return response.redirect('/')
-  }
-  async login({session, request, response, auth}) {
-    const validation = await validate(
-      request.all(), {
-      username: 'required',
-      password: 'required|min:4'
-    })
-    if (validation.fails()) {
-      session.withErrors(validation.messages()).flashExcept('password')
-      session.flash({
-        notification: {
-          type: 'danger',
-          message: 'Corrija los campos indicados'
-        }
-      })
-      return response.redirect('back')
-    }
-    const user = await User.findBy('username', request.input('username'))
-    if (!user){
-      session.flash({
-        notification: {
-          type: 'danger',
-          message: 'Credenciales incorrectas'
-        }
-      })
-      return response.redirect('back')
-    }
-    if (!user.verified) {
-      session.flash({
-        notification: {
-          type: 'danger',
-          message: 'Correo no verificado'
-        }
-      })
-      return response.redirect('back')
-    }
-    const correct = await Hash.verify(request.input('password'), user.password)
-    if (!correct) {
-      session.flash({
-        notification: {
-          type: 'danger',
-          message: 'Credenciales incorrectas'
-        }
-      })
-      return response.redirect('back')
-    }
-    await auth.login(user)
-    return response.redirect('/dash')
   }*/
 }
 
