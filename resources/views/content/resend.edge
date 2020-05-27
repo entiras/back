@@ -20,6 +20,9 @@
   <div class="col-lg-6">
     <div class="card">
       <div class="card-body">
+        <div id="captcha" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+          Captcha incorrecto.
+        </div>
         <div id="required" class="alert alert-danger d-none animated fadeIn faster" role="alert">
           La dirección de correo es requerida.
         </div>
@@ -32,12 +35,14 @@
         <div id="sent" class="alert alert-success d-none animated fadeIn faster" role="alert">
           Se envío el texto secreto por correo.
         </div>
-        <p>Por favor revisa tu bandeja de correo no deseado antes de pedir que te enviemos otro correo. Hay un límite
-          para el número de veces que puedes hacer esto.</p>
+        <p>Por favor revisa tu bandeja de correo no deseado antes de pedir que te enviemos otro correo.</p>
         <form id="resend" onsubmit="actions.resend(event)">
           <input type="hidden" name="_csrf">
           Dirección de Correo
           <input type="text" name="email" class="form-control mb-2" placeholder="ejemplo@ejemplo.com">
+          Captcha
+          <input type="text" name="captcha" class="form-control mb-2">
+          <img src="/api/captcha">
           <button class="btn btn-outline-dark btn-block">
             Reenviar
           </button>

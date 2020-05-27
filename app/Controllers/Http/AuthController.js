@@ -97,6 +97,12 @@ class AuthController {
     });
   }
   async resend({ request, response, view }) {
+    if (request.cookie('captcha') !== request.input('captcha')) {
+      return response.json({
+        type: 'danger',
+        message: 'captcha'
+      });
+    }
     const validation = await validate(
       request.all(), {
       email: 'required|email'
@@ -127,7 +133,7 @@ class AuthController {
       username: user.username,
       token: token
     };
-    if (user.sent < 3) {
+    if (user.sent < 5) {
       await Mail.raw(view.render('emails.confirm.text', data), (message) => {
         message.to(user.email);
         message.from(Env.get('FROM_EMAIL'));

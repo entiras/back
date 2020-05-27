@@ -33,7 +33,7 @@ login.checked = function () {
         content.guest();
     }
 };
-// show content depending on log
+// show content
 var content = {};
 content.logged = function () {
     $('.logged').removeClass('d-none');
@@ -142,6 +142,8 @@ actions.resend = function (event) {
                 $('#resend :submit').prop('disabled', false);
                 if (res.message === 'required' || res.message === 'email') {
                     $('input[name=email]').addClass('is-invalid');
+                } else if (res.message === 'captcha') {
+                    $('input[name=captcha]').addClass('is-invalid');
                 }
                 $('#' + res.message).removeClass('d-none');
                 if (res.message === 'sent') {
