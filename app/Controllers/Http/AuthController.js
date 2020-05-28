@@ -150,6 +150,19 @@ class AuthController {
     });
   }
   async login({ request, response, auth }) {
+    var logged;
+    try {
+      logged = await auth.getUser();
+    } catch (error) {
+      logged = null;
+    }
+    if (logged) {
+      response.assertStatus(403);
+      return response.json({
+        type: 'danger',
+        message: 'late'
+      });
+    }
     const validation = await validate(
       request.all(), {
       username: 'required',

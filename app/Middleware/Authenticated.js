@@ -12,7 +12,7 @@ class Authenticated {
   async handle ({ response, auth }, next) {
     try {
       await auth.check()
-      response.route('/dash')
+      response.route('/')
     } catch(err) {
       await next()
     }

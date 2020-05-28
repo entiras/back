@@ -24,6 +24,7 @@ Route.post('/signup', 'AuthController.signup');
 Route.post('/signup/confirm', 'AuthController.confirm');
 Route.post('/signup/resend', 'AuthController.resend');
 Route.post('/login', 'AuthController.login');
+Route.post('/logout', 'AuthController.logout');
 Route.route('*', 'PageController.obscure');
 
 /*Route.group(() => {
