@@ -23,6 +23,7 @@ Route.get('/', 'PageController.home');
 Route.post('/signup', 'AuthController.signup');
 Route.post('/signup/confirm', 'AuthController.confirm');
 Route.post('/signup/resend', 'AuthController.resend');
+Route.post('/login', 'AuthController.login');
 Route.route('*', 'PageController.obscure');
 
 /*Route.group(() => {

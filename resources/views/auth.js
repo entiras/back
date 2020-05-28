@@ -67,6 +67,40 @@ actions.redirect = function (route) {
         window.location.href = destiny;
     }, 500, route);
 }
+actions.login = function (event) {
+    event.preventDefault();
+    $('#login :submit').prop('disabled', true);
+    $('.alert').addClass('d-none');
+    $('input').removeClass('is-invalid');
+    actions.csrf((data) => {
+        $('input[name=_csrf]').val(data.token);
+        var input = actions.form('#login');
+        $.ajax({
+            type: 'POST',
+            url: '/api/login',
+            data: input,
+            error: actions.failed,
+            success: (res) => {
+                $('#login :submit').prop('disabled', false);
+                if (res.message === 'validation') {
+                    var field = res.error.field;
+                    var val = res.error.validation;
+                    $('#' + field + '-' + val).removeClass('d-none');
+                    $('input[name=' + field + ']').addClass('is-invalid');
+                } else if (res.message === 'credentials') {
+                    $('#credentials').removeClass('d-none');
+                    $('input[name=username]').addClass('is-invalid');
+                    $('input[name=password]').addClass('is-invalid');
+                } else if (res.message === 'unconfirmed') {
+                    $('#unconfirmed').removeClass('d-none');
+                } else if (res.message === 'logged') {
+                    $('#logged').removeClass('d-none');
+                    actions.redirect('/');
+                }
+            }
+        });
+    });
+};
 actions.signup = function (event) {
     event.preventDefault();
     $('#signup :submit').prop('disabled', true);

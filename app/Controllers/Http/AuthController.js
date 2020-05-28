@@ -149,7 +149,7 @@ class AuthController {
       message: 'sent'
     });
   }
-  async login({ session, request, response, auth }) {
+  async login({ request, response, auth }) {
     const validation = await validate(
       request.all(), {
       username: 'required',
@@ -169,17 +169,17 @@ class AuthController {
         message: 'credentials'
       });
     }
-    if (!user.verified) {
-      return response.json({
-        type: 'danger',
-        message: 'unconfirmed'
-      });
-    }
     const correct = await Hash.verify(request.input('password'), user.password);
     if (!correct) {
       return response.json({
         type: 'danger',
         message: 'credentials'
+      });
+    }
+    if (!user.verified) {
+      return response.json({
+        type: 'danger',
+        message: 'unconfirmed'
       });
     }
     await auth.login(user);

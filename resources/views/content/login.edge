@@ -29,8 +29,14 @@
         <div id="password-min" class="alert alert-danger d-none animated fadeIn faster" role="alert">
           La contraseña debe tener 4 caracteres mínimo.
         </div>
-        <div id="ok" class="alert alert-success d-none animated fadeIn faster" role="alert">
-          ok.
+        <div id="credentials" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+          El nombre de usuario y/o contraseña son incorrectos.
+        </div>
+        <div id="unconfirmed" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+          La cuenta aún no ha sido activada.
+        </div>
+        <div id="logged" class="alert alert-success d-none animated fadeIn faster" role="alert">
+          Inicio de sesión correcto.
         </div>
         <form id="login" onsubmit="actions.login(event)">
           <input type="hidden" name="_csrf">
@@ -45,7 +51,7 @@
       </div>
       <ul class="list-group list-group-flush border-top">
         <li class="list-group-item text-center">
-          <a href="/signup/forgot/">Olvidé mi contraseña</a>
+          <a href="/login/forgot/">Olvidé mi contraseña</a>
         </li>
       </ul>
     </div>
