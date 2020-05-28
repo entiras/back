@@ -21,9 +21,9 @@ login.check = function () {
     var cookie = Cookies.get('user');
     if (cookie === undefined) {
         login.logged = false;
-        $('#username').text(cookie);
     } else {
         login.logged = true;
+        $('#username').text(cookie);
     }
     login.checked();
 };
