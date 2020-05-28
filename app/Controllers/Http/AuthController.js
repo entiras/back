@@ -8,8 +8,6 @@ const Mail = use('Mail')
 const Hash = use('Hash')
 const jwt = require('jsonwebtoken')
 
-//response.clearCookie('test');
-
 class AuthController {
   async signup({ request, response, view }) {
     const validation = await validate(
@@ -202,6 +200,10 @@ class AuthController {
       message: 'logged'
     });
   }
+  async logout({ auth, response }) {
+    await auth.logout();
+    return response.clearCookie('user');
+  }
   /*async reset({response, request, session}) {
     const validation = await validate(
       request.all(), {
@@ -312,10 +314,6 @@ class AuthController {
       }
     })
     return response.redirect('back')
-  }
-  async logout({auth, response}) {
-    await auth.logout()
-    return response.redirect('/')
   }*/
 }
 

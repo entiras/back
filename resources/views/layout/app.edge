@@ -32,9 +32,22 @@
               Entrar
             </a>
           </li>
+          <li class="nav-item d-none animated fadeIn faster logged">
+            <a class="nav-link" href="/dash/" id="username">
+            </a>
+          </li>
+          <li class="nav-item d-none animated fadeIn faster logged">
+            <a class="nav-link" href="#logout" onclick="actions.logout()">
+              <span class="icon-lock"></span>
+              Salir
+            </a>
+          </li>
         </ul>
       </div>
     </div>
+    <form id="logout">
+      <input type="hidden" name="_csrf">
+    </form>
   </nav>
   <div class="container mt-4">
     <div id="loader" class="alert alert-info d-none animated fadeIn faster" role="alert">

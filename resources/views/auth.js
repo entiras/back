@@ -21,6 +21,7 @@ login.check = function () {
     var cookie = Cookies.get('user');
     if (cookie === undefined) {
         login.logged = false;
+        $('#username').text(cookie);
     } else {
         login.logged = true;
     }
@@ -67,6 +68,21 @@ actions.redirect = function (route) {
         window.location.href = destiny;
     }, 500, route);
 }
+actions.logout = function () {
+    actions.csrf((data) => {
+        $('input[name=_csrf]').val(data.token);
+        var input = actions.form('#logout');
+        $.ajax({
+            type: 'POST',
+            url: '/api/logout',
+            data: input,
+            error: actions.failed,
+            success: (res) => {
+                actions.redirect('/');
+            }
+        });
+    });
+};
 actions.login = function (event) {
     event.preventDefault();
     $('#login :submit').prop('disabled', true);
