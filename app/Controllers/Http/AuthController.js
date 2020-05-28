@@ -157,7 +157,7 @@ class AuthController {
       logged = null;
     }
     if (logged) {
-      response.assertStatus(403);
+      response.status(403);
       return response.json({
         type: 'danger',
         message: 'late'
