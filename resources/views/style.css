@@ -54,10 +54,10 @@ a, a:hover {
 }
 @font-face {
   font-family: 'icomoon';
-  src:  url('https://res.cloudinary.com/entiras/raw/upload/v1589343212/icomoon_hxfe2u.eot?mh8zzq');
-  src:  url('https://res.cloudinary.com/entiras/raw/upload/v1589343212/icomoon_hxfe2u.eot?mh8zzq#iefix') format('embedded-opentype'),
-    url('https://res.cloudinary.com/entiras/raw/upload/v1589343212/icomoon_mp54xs.ttf?mh8zzq') format('truetype'),
-    url('https://res.cloudinary.com/entiras/raw/upload/v1589343212/icomoon_aarv0l.woff?mh8zzq') format('woff');
+  src:  url('https://res.cloudinary.com/entiras/raw/upload/v1590703693/icomoon_qkwxkc.eot?qtimxy');
+  src:  url('https://res.cloudinary.com/entiras/raw/upload/v1590703693/icomoon_qkwxkc.eot?qtimxy#iefix') format('embedded-opentype'),
+    url('https://res.cloudinary.com/entiras/raw/upload/v1590703693/icomoon_onvrhh.ttf?qtimxy') format('truetype'),
+    url('https://res.cloudinary.com/entiras/raw/upload/v1590703693/icomoon_kp19jv.woff?qtimxy') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -76,10 +76,7 @@ a, a:hover {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.icon-paper-plane:before {
-  content: "\e903";
-}
-.icon-hourglass:before {
+.icon-clipboard:before {
   content: "\e902";
 }
 .icon-bars:before {
