@@ -29,9 +29,6 @@
         <div id="email" class="alert alert-danger d-none animated fadeIn faster" role="alert">
           La dirección de correo no es válida.
         </div>
-        <div id="late" class="alert alert-danger d-none animated fadeIn faster" role="alert">
-          Esa cuenta ya está activada.
-        </div>
         <div id="sent" class="alert alert-success d-none animated fadeIn faster" role="alert">
           Se envío el texto secreto por correo.
         </div>
@@ -41,7 +38,7 @@
           Dirección de Correo
           <input type="text" name="email" class="form-control mb-2" placeholder="ejemplo@ejemplo.com">
           Captcha
-          <input type="text" name="captcha" class="form-control mb-2">
+          <input type="text" name="captcha" class="form-control mb-2" autocomplete="off">
           <img id="_captcha" src="/api/captcha" class="mb-2">
           <button class="btn btn-outline-dark btn-block">
             Reenviar

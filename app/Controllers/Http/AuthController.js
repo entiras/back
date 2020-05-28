@@ -124,8 +124,8 @@ class AuthController {
     }
     if (user.verified) {
       return response.json({
-        type: 'danger',
-        message: 'late'
+        type: 'success',
+        message: 'sent'
       });
     }
     const token = jwt.sign({ e: user.email }, Env.get('SECRET'), {
