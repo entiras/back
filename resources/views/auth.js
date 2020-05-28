@@ -119,6 +119,8 @@ actions.confirm = function (event) {
                 $('#confirm :submit').prop('disabled', false);
                 if (res.type === 'danger') {
                     $('input[name=token]').addClass('is-invalid');
+                } else {
+                    actions.redirect('/login/');
                 }
                 $('#' + res.message).removeClass('d-none');
             }
