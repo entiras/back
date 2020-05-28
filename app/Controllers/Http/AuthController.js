@@ -64,7 +64,7 @@ class AuthController {
     });
   }
   async confirm({ response, request }) {
-    const token = request.input('token').replace(/\s+/g, "");;
+    const token = (request.input('token') || '').replace(/\s+/g, "");;
     var payload;
     try {
       payload = await jwt.verify(token, Env.get('SECRET'));
