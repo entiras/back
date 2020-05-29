@@ -1,16 +1,16 @@
 'use strict'
 
 const Env = use('Env');
-const { Octokit } = require("@octokit/rest");
+const { Octokit } = use("@octokit/rest");
 const octokit = new Octokit({
   auth: Env.get('GITHUB_TOKEN', '')
 });
-const MongoClient = require('mongodb').MongoClient;
-const fs = require('fs').promises;
-var svgCaptcha = require('svg-captcha');
+const MongoClient = use('mongodb').MongoClient;
+const fs = use('fs').promises;
+const svgCaptcha = use('svg-captcha');
 
 class PageController {
-  async home({ response }) {
+  home({ response }) {
     return response.json({
       status: '✔️'
     });

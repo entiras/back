@@ -1,12 +1,12 @@
 'use strict'
 
-const { validate } = use('Validator')
-const User = use('App/Models/User')
-const PasswordReset = use('App/Models/PasswordReset')
-const Env = use('Env')
-const Mail = use('Mail')
-const Hash = use('Hash')
-const jwt = require('jsonwebtoken')
+const { validate } = use('Validator');
+const User = use('App/Models/User');
+const PasswordReset = use('App/Models/PasswordReset');
+const Env = use('Env');
+const Mail = use('Mail');
+const Hash = use('Hash');
+const jwt = use('jsonwebtoken');
 
 class AuthController {
   async signup({ request, response, view }) {
