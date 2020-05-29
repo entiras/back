@@ -201,10 +201,18 @@ actions.resend = function (event) {
                 if (res.message === 'sent') {
                     actions.redirect('/signup/confirm/');
                 }
-                $('#_captcha').attr("src", "/api/captcha?" + Math.random());
+                if (res.message !== 'sent') {
+                    $('#_captcha').attr("src", "/api/captcha?" + Math.random());
+                }
             }
         });
     });
+}
+actions.forgot = function (event) {
+    event.preventDefault();
+}
+actions.reset = function (event) {
+    event.preventDefault();
 }
 $(document).ready(function () {
     login.check();
