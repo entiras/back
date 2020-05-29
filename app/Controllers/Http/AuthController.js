@@ -216,7 +216,7 @@ class AuthController {
     const validation = await validate(
       request.all(), {
       email: 'required|email'
-    })
+    });
     if (validation.fails()) {
       return response.json({
         type: 'danger',
@@ -268,7 +268,7 @@ class AuthController {
       })
       return response.redirect('back')
     }
-    const payload
+    var payload;
     try {
       payload = await jwt.verify(request.input('token'), Env.get('SECRET'))
     } catch (err) {
