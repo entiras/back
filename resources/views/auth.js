@@ -241,6 +241,31 @@ actions.forgot = function (event) {
 }
 actions.reset = function (event) {
     event.preventDefault();
+    $('#reset :submit').prop('disabled', true);
+    $('.alert').addClass('d-none');
+    $('input').removeClass('is-invalid');
+    actions.csrf((data) => {
+        $('input[name=_csrf]').val(data.token);
+        var input = actions.form('#reset');
+        $.ajax({
+            type: 'POST',
+            url: '/api/login/reset',
+            data: input,
+            error: actions.failed,
+            success: (res) => {
+                $('#reset :submit').prop('disabled', false);
+                if (res.type !== 'danger') {
+                    actions.redirect('/login/');
+                }
+                if (res.message === 'required' || res.message === 'min') {
+                    $('input[name=password]').addClass('is-invalid');
+                } else if (res.message === 'invalid') {
+                    $('input[name=token]').addClass('is-invalid');
+                }
+                $('#' + res.message).removeClass('d-none');
+            }
+        });
+    });
 }
 $(document).ready(function () {
     login.check();

@@ -23,18 +23,18 @@
         <div id="invalid" class="alert alert-danger d-none animated fadeIn faster" role="alert">
           El texto secreto no es válido o ya ha caducado.
         </div>
-        <div id="user" class="alert alert-danger d-none animated fadeIn faster" role="alert">
-          El usuario no existe.
+        <div id="required" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+          La contraseña es requerida.
         </div>
-        <div id="soon" class="alert alert-danger d-none animated fadeIn faster" role="alert">
-          No se ha solicitado cambiar la contraseña.
+        <div id="min" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+          La contraseña debe tener 4 caracteres mínimo.
         </div>
         <div id="reset" class="alert alert-success d-none animated fadeIn faster" role="alert">
           Contraseña actualizada.
         </div>
         <p>Copia y pega el texto secreto que recibiste por correo. El texto secreto solamente será válido por 2 horas,
           si es necesario puedes solicitar que te enviemos otro.</p>
-        <form id="confirm" onsubmit="actions.reset(event)">
+        <form id="reset" onsubmit="actions.reset(event)">
           <input type="hidden" name="_csrf">
           <textarea name="token" class="form-control mb-2" placeholder="Texto secreto..." rows="3"></textarea>
           Nueva Contraseña

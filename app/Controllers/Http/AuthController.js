@@ -64,7 +64,7 @@ class AuthController {
     });
   }
   async confirm({ response, request }) {
-    const token = (request.input('token') || '').replace(/\s+/g, "");;
+    const token = (request.input('token') || '').replace(/\s+/g, "");
     var payload;
     try {
       payload = await jwt.verify(token, Env.get('SECRET'));
@@ -231,7 +231,7 @@ class AuthController {
       });
     }
     await PasswordReset.query().where('email', user.email).delete();
-    const token = jwt.sign({ email: user.email }, Env.get('SECRET'), {
+    const token = jwt.sign({ e: user.email }, Env.get('SECRET'), {
       expiresIn: '2h'
     });
     await PasswordReset.create({
@@ -252,67 +252,51 @@ class AuthController {
       message: 'sent'
     });
   }
-  async reset({ response, request, session }) {
-    const validation = await validate(
-      request.all(), {
-      token: 'required',
-      password: 'required|min:4'
-    })
-    if (validation.fails()) {
-      session.withErrors(validation.messages()).flashExcept('password')
-      session.flash({
-        notification: {
-          type: 'danger',
-          message: 'Corrija los campos indicados'
-        }
-      })
-      return response.redirect('back')
-    }
+  async reset({ response, request }) {
+    const token = (request.input('token') || '').replace(/\s+/g, '');
     var payload;
     try {
-      payload = await jwt.verify(request.input('token'), Env.get('SECRET'))
+      payload = await jwt.verify(token, Env.get('SECRET'));
     } catch (err) {
-      session.flash({
-        notification: {
-          type: 'danger',
-          message: 'El enlace es inv\u00e1lido o ha caducado'
-        }
-      })
-      return response.redirect('back')
+      return response.json({
+        type: 'danger',
+        message: 'invalid'
+      });
     }
-    const user = await User.findBy('email', payload.email);
+    const validation = await validate(
+      request.all(), {
+      password: 'required|min:4'
+    });
+    if (validation.fails()) {
+      return response.json({
+        type: 'danger',
+        message: validation._errorMessages[0].validation
+      });
+    }
+    const user = await User.findBy('email', payload.e);
     if (!user) {
-      session.flash({
-        notification: {
-          type: 'danger',
-          message: 'El usuario no existe'
-        }
-      })
-      return response.redirect('back')
+      return response.json({
+        type: 'success',
+        message: 'reset'
+      });
     }
     const passwordReset = await PasswordReset.query()
-      .where('email', payload.email)
-      .where('token', request.input('token'))
-      .first()
+      .where('email', payload.e)
+      .where('token', token)
+      .first();
     if (!passwordReset) {
-      session.flash({
-        notification: {
-          type: 'danger',
-          message: 'No se ha solicitado cambiar la contrase\u00f1a'
-        }
-      })
-      return response.redirect('back')
+      return response.json({
+        type: 'success',
+        message: 'reset'
+      });
     }
     user.password = request.input('password');
-    await user.save()
-    await passwordReset.delete()
-    session.flash({
-      notification: {
-        type: 'success',
-        message: 'Contrase\u00f1a actualizada'
-      }
-    })
-    return response.redirect('back')
+    await user.save();
+    await passwordReset.delete();
+    return response.json({
+      type: 'success',
+      message: 'reset'
+    });
   }
 }
 
