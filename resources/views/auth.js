@@ -210,6 +210,34 @@ actions.resend = function (event) {
 }
 actions.forgot = function (event) {
     event.preventDefault();
+    $('#forgot :submit').prop('disabled', true);
+    $('.alert').addClass('d-none');
+    $('input').removeClass('is-invalid');
+    actions.csrf((data) => {
+        $('input[name=_csrf]').val(data.token);
+        var input = actions.form('#forgot');
+        $.ajax({
+            type: 'POST',
+            url: '/api/login/forgot',
+            data: input,
+            error: actions.failed,
+            success: (res) => {
+                $('#forgot :submit').prop('disabled', false);
+                if (res.message === 'required' || res.message === 'email') {
+                    $('input[name=email]').addClass('is-invalid');
+                } else if (res.message === 'captcha') {
+                    $('input[name=captcha]').addClass('is-invalid');
+                }
+                $('#' + res.message).removeClass('d-none');
+                if (res.message === 'sent') {
+                    actions.redirect('/login/reset/');
+                }
+                if (res.message !== 'sent') {
+                    $('#_captcha').attr("src", "/api/captcha?" + Math.random());
+                }
+            }
+        });
+    });
 }
 actions.reset = function (event) {
     event.preventDefault();

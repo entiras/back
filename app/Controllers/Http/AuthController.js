@@ -96,7 +96,7 @@ class AuthController {
   }
   async resend({ request, response, view }) {
     const captcha = request.cookie('captcha', '');
-    response.cookie('captcha', '', { path: '/' });
+    response.clearCookie('captcha');
     if (captcha !== request.input('captcha') || captcha === '') {
       return response.json({
         type: 'danger',
@@ -204,11 +204,59 @@ class AuthController {
     await auth.logout();
     return response.clearCookie('user');
   }
-  /*async reset({response, request, session}) {
+  async forgot({ request, response, session }) {
+    const captcha = request.cookie('captcha', '');
+    response.clearCookie('captcha');
+    if (captcha !== request.input('captcha') || captcha === '') {
+      return response.json({
+        type: 'danger',
+        message: 'captcha'
+      });
+    }
     const validation = await validate(
       request.all(), {
-        token: 'required',
-        password: 'required|min:4'
+      email: 'required|email'
+    })
+    if (validation.fails()) {
+      return response.json({
+        type: 'danger',
+        message: validation._errorMessages[0].validation
+      });
+    }
+    const user = await User.findBy('email', request.input('email'));
+    if (!user) {
+      return response.json({
+        type: 'success',
+        message: 'sent'
+      });
+    }
+    await PasswordReset.query().where('email', user.email).delete();
+    const token = jwt.sign({ email: user.email }, Env.get('SECRET'), {
+      expiresIn: '2h'
+    });
+    await PasswordReset.create({
+      email: user.email,
+      token: token
+    });
+    const data = {
+      username: user.username,
+      token: token
+    };
+    await Mail.raw(view.render('emails.reset.text', data), (message) => {
+      message.to(user.email);
+      message.from(Env.get('FROM_EMAIL'));
+      message.subject(view.render('emails.reset.subject'));
+    });
+    return response.json({
+      type: 'success',
+      message: 'sent'
+    });
+  }
+  async reset({ response, request, session }) {
+    const validation = await validate(
+      request.all(), {
+      token: 'required',
+      password: 'required|min:4'
     })
     if (validation.fails()) {
       session.withErrors(validation.messages()).flashExcept('password')
@@ -223,7 +271,7 @@ class AuthController {
     const payload
     try {
       payload = await jwt.verify(request.input('token'), Env.get('SECRET'))
-    } catch(err) {
+    } catch (err) {
       session.flash({
         notification: {
           type: 'danger',
@@ -233,7 +281,7 @@ class AuthController {
       return response.redirect('back')
     }
     const user = await User.findBy('email', payload.email);
-    if (!user){
+    if (!user) {
       session.flash({
         notification: {
           type: 'danger',
@@ -246,7 +294,7 @@ class AuthController {
       .where('email', payload.email)
       .where('token', request.input('token'))
       .first()
-    if (!passwordReset){
+    if (!passwordReset) {
       session.flash({
         notification: {
           type: 'danger',
@@ -266,55 +314,6 @@ class AuthController {
     })
     return response.redirect('back')
   }
-  async forgot({request, response, session}) {
-    const validation = await validate(
-      request.all(), {
-      email: 'required|email'
-    })
-    if (validation.fails()) {
-      session.withErrors(validation.messages()).flashExcept('password')
-      session.flash({
-        notification: {
-          type: 'danger',
-          message: 'Corrija los campos indicados'
-        }
-      })
-      return response.redirect('back')
-    }
-    const user = await User.findBy('email', request.input('email'))
-    if (!user){
-      session.flash({
-        notification: {
-          type: 'success',
-          message: 'Correo enviado'
-        }
-      })
-      return response.redirect('back')
-    }
-    await PasswordReset.query().where('email', user.email).delete()
-    const token = jwt.sign({email: user.email}, Env.get('SECRET'), {
-      expiresIn: 60 * 60 * 24 * 3
-    })
-    await PasswordReset.create({
-      email: user.email,
-      token: token
-    })
-    await Mail.send('emails.reset', {
-      username: user.username,
-      token: token,
-      appUrl: Env.get('APP_URL')
-    }, (message) => {
-      message.to(user.email).from(Env.get('FROM_EMAIL'))
-      .subject('Puedes cambiar tu contrase\u00f1a')
-    })
-    session.flash({
-      notification: {
-        type: 'success',
-        message: 'Correo enviado'
-      }
-    })
-    return response.redirect('back')
-  }*/
 }
 
 module.exports = AuthController;
