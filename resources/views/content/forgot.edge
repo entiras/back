@@ -1,27 +1,49 @@
 @layout('layout.app')
+@section('headers')
+<title>
+  EnTiras - Entrar | Recuperación
+</title>
+@endsection
 @section('content')
-<div class="jumbotron bg-entiras-focus-1">
-  <div class="row">
-    <div class="col-md">
-    </div>
-    <div class="col-md">
-      <div class="card bg-entiras-dark text-light">
+<div class="row d-none animated fadeIn faster guest">
+  <div class="col-lg-6">
+    <div class="jumbotron d-flex bg-entiras-focus-2 d-none animated fadeIn faster guest">
+      <div class="card mt-auto bg-entiras-dark text-light">
         <div class="card-body">
-          @include('layout.notification')
-          <form action="/api/forgot" method="POST">
-            {{ csrfField() }}
-            <div class="form-group">
-              <label>
-                Direcci&oacute;n de Correo
-              </label>
-              <input type="text" name="email" value="{{ old('email') }}"
-                class="form-control {{ hasErrorFor('email') ? 'is-invalid' : '' }}" placeholder="ejemplo@ejemplo.com">
-            </div>
-            <button class="btn btn-outline-secondary btn-block" type="submit">
-              Confirmar
-            </button>
-          </form>
+          <p class="h1 h-entiras text-center">
+            Entrar | Recuperación
+          </p>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <div id="captcha" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+          Captcha incorrecto.
+        </div>
+        <div id="required" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+          La dirección de correo es requerida.
+        </div>
+        <div id="email" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+          La dirección de correo no es válida.
+        </div>
+        <div id="sent" class="alert alert-success d-none animated fadeIn faster" role="alert">
+          Se envío el texto secreto por correo.
+        </div>
+        <p>Por favor revisa tu bandeja de correo no deseado antes de pedir que te enviemos otro correo.</p>
+        <form id="forgot" onsubmit="actions.forgot(event)">
+          <input type="hidden" name="_csrf">
+          Dirección de Correo
+          <input type="text" name="email" class="form-control mb-2" placeholder="ejemplo@ejemplo.com">
+          Captcha
+          <input type="text" name="captcha" class="form-control mb-2" autocomplete="off">
+          <img id="_captcha" src="/api/captcha" class="mb-2">
+          <button class="btn btn-outline-dark btn-block">
+            Recuperar
+          </button>
+        </form>
       </div>
     </div>
   </div>
