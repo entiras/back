@@ -204,7 +204,7 @@ class AuthController {
     await auth.logout();
     return response.clearCookie('user');
   }
-  async forgot({ request, response, session }) {
+  async forgot({ request, response, view }) {
     const captcha = request.cookie('captcha', '');
     response.clearCookie('captcha');
     if (captcha !== request.input('captcha') || captcha === '') {
