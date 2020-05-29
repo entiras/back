@@ -247,6 +247,7 @@ actions.reset = function (event) {
     actions.csrf((data) => {
         $('input[name=_csrf]').val(data.token);
         var input = actions.form('#reset');
+        console.log(input);
         $.ajax({
             type: 'POST',
             url: '/api/login/reset',
