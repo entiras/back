@@ -1,30 +1,54 @@
 @layout('layout.app')
+@section('headers')
+<title>
+  EnTiras - Entrar | Restablecer
+</title>
+@endsection
 @section('content')
-<div class="jumbotron bg-entiras-focus-1">
-  <div class="row">
-    <div class="col-md">
-    </div>
-    <div class="col-md">
-      <div class="card bg-entiras-dark text-light">
+<div class="row d-none animated fadeIn faster guest">
+  <div class="col-lg-6">
+    <div class="jumbotron d-flex bg-entiras-focus-2 d-none animated fadeIn faster guest">
+      <div class="card mt-auto bg-entiras-dark text-light">
         <div class="card-body">
-          @include('layout.notification')
-          <form action="/api/reset" method="POST">
-            {{ csrfField() }}
-            <input type="hidden" value="{{ token }}" name="token">
-            <div class="form-group">
-              <label>
-                Contrase&ntilde;a
-              </label>
-              <input type="password" name="password"
-                class="form-control {{ hasErrorFor('password') ? 'is-invalid' : '' }}"
-                placeholder="4 caracteres m&iacute;nimo">
-            </div>
-            <button class="btn btn-outline-secondary btn-block" type="submit">
-                Cambiar
-            </button>
-          </form>
+          <p class="h1 h-entiras text-center">
+            Entrar | Restablecer
+          </p>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <div id="invalid" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+          El texto secreto no es válido o ya ha caducado.
+        </div>
+        <div id="user" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+          El usuario no existe.
+        </div>
+        <div id="soon" class="alert alert-danger d-none animated fadeIn faster" role="alert">
+          No se ha solicitado cambiar la contraseña.
+        </div>
+        <div id="reset" class="alert alert-success d-none animated fadeIn faster" role="alert">
+          Contraseña actualizada.
+        </div>
+        <p>Copia y pega el texto secreto que recibiste por correo. El texto secreto solamente será válido por 3 días, si
+          es necesario puedes solicitar que te enviemos otro.</p>
+        <form id="confirm" onsubmit="actions.reset(event)">
+          <input type="hidden" name="_csrf">
+          <textarea name="token" class="form-control mb-2" placeholder="Texto secreto..." rows="3"></textarea>
+          Nueva Contraseña
+          <input type="password" name="password" class="form-control mb-2" placeholder="4 caracteres mínimo">
+          <button class="btn btn-outline-dark btn-block">
+            Restablecer
+          </button>
+        </form>
+      </div>
+      <ul class="list-group list-group-flush border-top">
+        <li class="list-group-item text-center">
+          <a href="/login/forgot/">Mi texto secreto no llegó</a>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

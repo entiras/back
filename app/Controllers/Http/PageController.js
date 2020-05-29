@@ -89,7 +89,8 @@ class PageController {
       ['obscure.html', 'content.obscure'],
       ['signup/confirm/index.html', 'content.confirm'],
       ['signup/resend/index.html', 'content.resend'],
-      ['login/forgot/index.html', 'content.forgot']
+      ['login/forgot/index.html', 'content.forgot'],
+      ['login/reset/index.html', 'content.reset']
     ];
     for (var i = 0; i < info.length; i++) {
       const buff = new Buffer(view.render(info[i][1]));
