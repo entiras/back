@@ -277,7 +277,7 @@ class AuthController {
     if (!user) {
       return response.json({
         type: 'success',
-        message: 'reset'
+        message: 'changed'
       });
     }
     const passwordReset = await PasswordReset.query()
@@ -287,7 +287,7 @@ class AuthController {
     if (!passwordReset) {
       return response.json({
         type: 'success',
-        message: 'reset'
+        message: 'changed'
       });
     }
     user.password = request.input('password');
@@ -295,7 +295,7 @@ class AuthController {
     await passwordReset.delete();
     return response.json({
       type: 'success',
-      message: 'reset'
+      message: 'changed'
     });
   }
 }
