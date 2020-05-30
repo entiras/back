@@ -9,7 +9,7 @@ const MongoClient = use('mongodb').MongoClient;
 const fs = use('fs').promises;
 const svgCaptcha = use('svg-captcha');
 const minify = use('@node-minify/core');
-const babelMinify = use('@node-minify/babel-minify');
+const uglifyJS = use('@node-minify/uglify-js');
 
 class PageController {
   home({ response }) {
@@ -69,12 +69,9 @@ class PageController {
       var buff;
       if (i === 0) {
         const min = await minify({
-          compressor: babelMinify,
+          compressor: uglifyJS,
           input: './resources/views/' + names[i],
-          output: '_temp',
-          options: {
-            comments: false
-          }
+          output: '_temp'
         });
         buff = new Buffer(min);
       } else {
