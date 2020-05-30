@@ -67,7 +67,7 @@ class PageController {
     for (var i = 0; i < names.length; i++) {
       var buff;
       if (i === 0) {
-        buff = new Buffer(UglifyJS.minify(await fs.readFile('./resources/views/' + names[i])));
+        buff = new Buffer((UglifyJS.minify(await fs.readFile('./resources/views/' + names[i]))).code);
       } else {
         buff = new Buffer(await fs.readFile('./resources/views/' + names[i]));
       }
