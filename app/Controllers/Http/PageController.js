@@ -9,7 +9,7 @@ const MongoClient = use('mongodb').MongoClient;
 const fs = use('fs').promises;
 const svgCaptcha = use('svg-captcha');
 const minify = use('@node-minify/core');
-const uglifyJS = use('@node-minify/uglify-js');
+const gcc = require('@node-minify/google-closure-compiler');
 
 class PageController {
   home({ response }) {
@@ -69,7 +69,7 @@ class PageController {
       var buff;
       if (i === 0) {
         const min = await minify({
-          compressor: uglifyJS,
+          compressor: gcc,
           input: './resources/views/' + names[i],
           output: '_temp'
         });

@@ -23,7 +23,7 @@
     "mongodb": "^3.5.7",
     "svg-captcha": "^1.4.0",
     "@node-minify/core": "*",
-    "@node-minify/uglify-js": "*"
+    "@node-minify/google-closure-compiler": "*"
   },
   "autoload": {
     "App": "./app"
