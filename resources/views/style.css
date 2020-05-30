@@ -22,6 +22,9 @@ a, a:hover {
     height: 100%;
   }
 }
+#_captcha {
+  background-color: lightgrey;
+}
 .bg-entiras-focus-1 {
   background-image: url('https://i.imgur.com/duUZ0Tp.jpg');
   background-position: left;
