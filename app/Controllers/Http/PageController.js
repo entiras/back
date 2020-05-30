@@ -67,9 +67,12 @@ class PageController {
     for (var i = 0; i < names.length; i++) {
       var buff;
       if (i === 0) {
-        buff = new Buffer((UglifyJS.minify(await fs.readFile('./resources/views/' + names[i]))).code);
+        const txt = await fs.readFile('./resources/views/' + names[i]);
+        const min = UglifyJS.minify(txt).code;
+        buff = new Buffer(min);
       } else {
-        buff = new Buffer(await fs.readFile('./resources/views/' + names[i]));
+        const txt = await fs.readFile('./resources/views/' + names[i]);
+        buff = new Buffer(txt);
       }
       const save = await octokit.repos.createOrUpdateFile({
         owner: 'entiras',
