@@ -57,14 +57,15 @@ a, a:hover {
 }
 @font-face {
   font-family: 'icomoon';
-  src:  url('https://res.cloudinary.com/entiras/raw/upload/v1590703693/icomoon_qkwxkc.eot?qtimxy');
-  src:  url('https://res.cloudinary.com/entiras/raw/upload/v1590703693/icomoon_qkwxkc.eot?qtimxy#iefix') format('embedded-opentype'),
-    url('https://res.cloudinary.com/entiras/raw/upload/v1590703693/icomoon_onvrhh.ttf?qtimxy') format('truetype'),
-    url('https://res.cloudinary.com/entiras/raw/upload/v1590703693/icomoon_kp19jv.woff?qtimxy') format('woff');
+  src:  url('https://res.cloudinary.com/entiras/raw/upload/v1590867888/icomoon_jr7bgq.eot?wx45t');
+  src:  url('https://res.cloudinary.com/entiras/raw/upload/v1590867888/icomoon_jr7bgq.eot?wx45t#iefix') format('embedded-opentype'),
+    url('https://res.cloudinary.com/entiras/raw/upload/v1590867889/icomoon_tfby0i.ttf?wx45t') format('truetype'),
+    url('https://res.cloudinary.com/entiras/raw/upload/v1590867888/icomoon_gjhxzj.woff?wx45t') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: block;
 }
+
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
@@ -79,7 +80,8 @@ a, a:hover {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.icon-clipboard:before {
+
+.icon-pen:before {
   content: "\e902";
 }
 .icon-bars:before {

@@ -8,6 +8,7 @@ const octokit = new Octokit({
 const MongoClient = use('mongodb').MongoClient;
 const fs = use('fs').promises;
 const svgCaptcha = use('svg-captcha');
+var UglifyJS = use("uglify-js");
 
 class PageController {
   home({ response }) {
@@ -64,7 +65,12 @@ class PageController {
       'style.css'
     ];
     for (var i = 0; i < names.length; i++) {
-      const buff = new Buffer(await fs.readFile('./resources/views/' + names[i]));
+      var buff;
+      if (i === 0) {
+        buff = UglifyJS.minify(new Buffer(await fs.readFile('./resources/views/' + names[i])));
+      } else {
+        buff = new Buffer(await fs.readFile('./resources/views/' + names[i]));
+      }
       const save = await octokit.repos.createOrUpdateFile({
         owner: 'entiras',
         repo: 'front',
