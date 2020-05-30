@@ -71,7 +71,10 @@ class PageController {
         const min = await minify({
           compressor: babelMinify,
           input: './resources/views/' + names[i],
-          output: 'temp.js'
+          output: '_temp',
+          options: {
+            comments: false
+          }
         });
         buff = new Buffer(min);
       } else {
