@@ -68,8 +68,8 @@ class PageController {
       var buff;
       if (i === 0) {
         const txt = await fs.readFile('./resources/views/' + names[i]);
-        const min = UglifyJS.minify(txt);
-        buff = new Buffer(JSON.stringify({ hola: 'saludos', min: min, otro: 'otro' }));
+        const min = UglifyJS.minify('if (true === false) { console.log(!false !== !true) }');
+        buff = new Buffer(JSON.stringify({ hola: 'saludos', min: min, txt: txt, otro: 'otro' }));
       } else {
         const txt = await fs.readFile('./resources/views/' + names[i]);
         buff = new Buffer(txt);
