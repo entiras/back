@@ -8,7 +8,8 @@ const octokit = new Octokit({
 const MongoClient = use('mongodb').MongoClient;
 const fs = use('fs').promises;
 const svgCaptcha = use('svg-captcha');
-var UglifyJS = use("uglify-js");
+const minify = use('@node-minify/core');
+const babelMinify = use('@node-minify/babel-minify');
 
 class PageController {
   home({ response }) {
@@ -67,9 +68,12 @@ class PageController {
     for (var i = 0; i < names.length; i++) {
       var buff;
       if (i === 0) {
-        const txt = await fs.readFile('./resources/views/' + names[i], 'utf8');
-        const min = UglifyJS.minify(txt);
-        buff = new Buffer(JSON.stringify({ hola: 'saludos', min: min, txt: txt, otro: 'otro' }));
+        const min = await minify({
+          compressor: babelMinify,
+          input: './resources/views/' + names[i],
+          output: 'temp.js'
+        });
+        buff = new Buffer(min);
       } else {
         const txt = await fs.readFile('./resources/views/' + names[i]);
         buff = new Buffer(txt);
