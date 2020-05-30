@@ -22,7 +22,8 @@
     "@octokit/rest": "^17.8.0",
     "mongodb": "^3.5.7",
     "svg-captcha": "^1.4.0",
-    "uglify-js": "^3.9.4"
+    "@node-minify/core": "*",
+    "@node-minify/babel-minify": "*"
   },
   "autoload": {
     "App": "./app"
