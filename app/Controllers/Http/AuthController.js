@@ -196,7 +196,7 @@ class AuthController {
     await auth.remember(true).login(user);
     response.plainCookie('user', user.username, {
       path: '/',
-      maxAge: 60 * 60 * 24 * 365 * 5
+      maxAge: 60 * 60 * 24 * 365 * 5 + 108000
     });
     return response.json({
       type: 'success',
