@@ -23,7 +23,9 @@
     "mongodb": "^3.5.7",
     "svg-captcha": "^1.4.0",
     "@node-minify/core": "*",
-    "@node-minify/google-closure-compiler": "*"
+    "@node-minify/google-closure-compiler": "*",
+    "@node-minify/clean-css": "*",
+    "@node-minify/html-minifier": "*"
   },
   "autoload": {
     "App": "./app"

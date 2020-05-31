@@ -9,7 +9,9 @@ const MongoClient = use('mongodb').MongoClient;
 const fs = use('fs').promises;
 const svgCaptcha = use('svg-captcha');
 const minify = use('@node-minify/core');
-const gcc = require('@node-minify/google-closure-compiler');
+const gcc = use('@node-minify/google-closure-compiler');
+const cleanCSS = use('@node-minify/clean-css');
+const htmlMinifier = use('@node-minify/html-minifier');
 
 class PageController {
   home({ response }) {
@@ -74,6 +76,13 @@ class PageController {
           output: '_temp'
         });
         buff = new Buffer(min);
+      } else if (i === 2) {
+        const min = await minify({
+          compressor: cleanCSS,
+          input: './resources/views/' + names[i],
+          output: '_temp'
+        });
+        buff = new Buffer(min);
       } else {
         const txt = await fs.readFile('./resources/views/' + names[i]);
         buff = new Buffer(txt);
@@ -106,7 +115,14 @@ class PageController {
       ['login/reset/index.html', 'content.reset']
     ];
     for (var i = 0; i < info.length; i++) {
-      const buff = new Buffer(view.render(info[i][1]));
+      const txt = view.render(info[i][1]);
+      fs.writeFile('_temp', txt, 'utf8');
+      const min = await minify({
+        compressor: gcc,
+        input: '_temp',
+        output: '__temp'
+      });
+      const buff = new Buffer(min);
       const save = await octokit.repos.createOrUpdateFile({
         owner: 'entiras',
         repo: 'front',
