@@ -116,7 +116,7 @@ class PageController {
     ];
     for (var i = 0; i < info.length; i++) {
       const txt = view.render(info[i][1]);
-      fs.writeFile('_temp', txt, 'utf8');
+      await fs.writeFile('_temp', txt, 'utf8');
       const min = await minify({
         compressor: gcc,
         input: '_temp',
