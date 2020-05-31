@@ -193,7 +193,7 @@ class AuthController {
         message: 'unconfirmed'
       });
     }
-    await auth.login(user);
+    await auth.remember(true).login(user);
     response.plainCookie('user', user.username, { path: '/' });
     return response.json({
       type: 'success',
