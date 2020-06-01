@@ -16,10 +16,11 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route');
 
+Route.get('/', 'PageController.home');
+Route.get('/test', 'TestController.test');
 Route.get('/csrf', 'PageController.csrf');
 Route.get('/captcha', 'PageController.captcha');
 Route.get('/base', 'PageController.base');
-Route.get('/', 'PageController.home');
 Route.post('/signup', 'AuthController.signup');
 Route.post('/signup/confirm', 'AuthController.confirm');
 Route.post('/signup/resend', 'AuthController.resend');
@@ -28,20 +29,3 @@ Route.post('/login/forgot', 'AuthController.forgot');
 Route.post('/login/reset', 'AuthController.reset');
 Route.post('/logout', 'AuthController.logout');
 Route.route('*', 'PageController.obscure');
-
-/*Route.group(() => {
-  Route.get('/resend', 'PageController.resend')
-  Route.get('/forgot', 'PageController.forgot')
-  Route.get('/reset/:token', 'PageController.reset')
-  Route.get('/login', 'PageController.login')
-}).middleware(['authenticated'])
-Route.get('/dash', 'PageController.dash').middleware(['auth']).as('dash')
-Route.get('/', 'PageController.home')
-Route.get('*', 'PageController.obscure')
-
-Route.group(() => {
-  Route.post('login', 'AuthController.login')
-  Route.post('logout', 'AuthController.logout')
-  Route.post('forgot', 'AuthController.forgot')
-  Route.post('reset', 'AuthController.reset')
-}).prefix('/api/')*/
