@@ -15,9 +15,9 @@ a, a:hover {
   color: #fd772d;
 }
 #_captcha {
-  background-color: lightgrey;
+  background-color: beige;
 }
-.bg-entiras-focus-1 {
+/*.bg-entiras-focus-1 {
   background-image: url('https://i.imgur.com/duUZ0Tp.jpg');
   background-position: left;
   background-size: 105%;
@@ -31,7 +31,7 @@ a, a:hover {
   background-image: url('https://i.imgur.com/c49Z7nk.jpg');
   background-position: center;
   background-size: 150%;
-}
+}*/
 @font-face {
   font-family: 'desyrelregular';
   src: url('https://res.cloudinary.com/entiras/raw/upload/v1588187690/desyrel_iwosvz.woff2') format('woff2'),
