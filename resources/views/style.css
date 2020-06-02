@@ -1,8 +1,5 @@
-.navbar-dark {
+.navbar-dark.bg-dark {
   background-color: #074c97;
-}
-.bg-entiras-secondary {
-  background-color: #fd772d;
 }
 .bg-dark.bg-transparent {
   background-color: rgba(0, 0, 0, 0.6);
@@ -13,9 +10,6 @@ a, a:hover {
 }
 .entiras-brand {
   height: 2em;
-}
-.jumbotron {
-  background-color: black;
 }
 @media (min-width: 992px) {
   .jumbotron {
@@ -51,10 +45,6 @@ a, a:hover {
 .h-entiras {
   font-family: 'desyrelregular' !important;
   font-weight: bold;
-}
-.big {
-  font-size: 10rem;
-  color: #074c97;
 }
 .icon-logo:before {
   content: "\e903";
