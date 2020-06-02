@@ -64,6 +64,12 @@ a, a:hover {
   content: "\e904";
   color: #fd772d;
 }
+.icon-logo:before:hover {
+  color: transparent;
+}
+.icon-logo:after:hover {
+  color: white;
+}
 
 @font-face {
   font-family: 'icomoon';
