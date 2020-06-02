@@ -64,10 +64,10 @@ a, a:hover {
   content: "\e904";
   color: #fd772d;
 }
-.icon-logo:before:hover {
+.icon-logo:hover:before {
   color: transparent;
 }
-.icon-logo:after:hover {
+.icon-logo:hover:after {
   color: white;
 }
 
