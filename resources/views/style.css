@@ -4,6 +4,13 @@
 .jumbotron .bg-dark {
   background-color: rgba(0, 0, 0, 0.6) !important;
 }
+.jumbotron img {
+  position: absolute;
+  width: 100%;
+}
+.jumbotron {
+  overflow: hidden;
+}
 a, a:hover {
   color: #fd772d;
 }
