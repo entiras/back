@@ -1,20 +1,11 @@
 .navbar-dark.bg-dark {
-  background-color: #074c97;
+  background-color: #074c97 !important;
 }
-.bg-dark.bg-transparent {
-  background-color: rgba(0, 0, 0, 0.6);
-  width: 100%;
+.jumbotron .bg-dark {
+  background-color: rgba(0, 0, 0, 0.6) !important;
 }
 a, a:hover {
   color: #fd772d;
-}
-.entiras-brand {
-  height: 2em;
-}
-@media (min-width: 992px) {
-  .jumbotron {
-    height: 100%;
-  }
 }
 #_captcha {
   background-color: lightgrey;
