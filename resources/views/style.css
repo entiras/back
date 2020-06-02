@@ -1,10 +1,10 @@
-.bg-entiras-primary {
+.navbar-dark {
   background-color: #074c97;
 }
 .bg-entiras-secondary {
   background-color: #fd772d;
 }
-.bg-entiras-dark {
+.bg-dark.bg-transparent {
   background-color: rgba(0, 0, 0, 0.6);
   width: 100%;
 }
@@ -46,6 +46,7 @@ a, a:hover {
     url('https://res.cloudinary.com/entiras/raw/upload/v1588187690/desyrel_aju6af.woff') format('woff');
   font-weight: normal;
   font-style: normal;
+  font-display: block;
 }
 .h-entiras {
   font-family: 'desyrelregular' !important;
@@ -59,10 +60,12 @@ a, a:hover {
   content: "\e903";
   letter-spacing: -10em;
   color: white;
+  transition: color 1s;
 }
 .icon-logo:after {
   content: "\e904";
   color: #fd772d;
+  transition: color 1s;
 }
 .icon-logo:hover:before {
   color: transparent;
