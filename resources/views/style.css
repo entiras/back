@@ -58,12 +58,11 @@ a, a:hover {
 .icon-logo:before {
   content: "\e903";
   letter-spacing: -10em;
-  margin-right: -0.5em;
-  color: #fd772d;
+  color: white;
 }
 .icon-logo:after {
   content: "\e904";
-  color: white;
+  color: #fd772d;
 }
 
 @font-face {
