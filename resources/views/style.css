@@ -55,6 +55,16 @@ a, a:hover {
   font-size: 10rem;
   color: #074c97;
 }
+.icon-logo:before {
+  content: "\e903";
+  letter-spacing: -10em;
+  margin-right: -0.5em;
+  color: #fd772d;
+}
+.icon-logo:after {
+  content: "\e904";
+  color: white;
+}
 
 @font-face {
   font-family: 'icomoon';
