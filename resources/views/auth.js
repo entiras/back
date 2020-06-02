@@ -44,6 +44,9 @@ content.guest = function () {
 };
 // actions
 var actions = {};
+actions.show = (e) => {
+    $(e.target).removeClass('d-none');
+}
 actions.failed = function () {
     $('#network-err').removeClass('d-none');
 };
