@@ -43,6 +43,11 @@ const page = {
         const bg = 'https://i.imgur.com/duUZ0Tp.jpg';
         await util.img.load(bg);
         $('.jumbotron').css('background-image', 'url(' + bg + ')');
+    },
+    login: async () => {
+        const bg = 'https://i.imgur.com/ZiLd6zZ.jpg';
+        await util.img.load(bg);
+        $('.jumbotron').css('background-image', 'url(' + bg + ')');
     }
 };
 
