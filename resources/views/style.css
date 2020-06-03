@@ -1,21 +1,46 @@
+@font-face {
+  font-family: 'desyrelregular';
+  src: url('https://res.cloudinary.com/entiras/raw/upload/v1588187690/desyrel_iwosvz.woff2') format('woff2'),
+    url('https://res.cloudinary.com/entiras/raw/upload/v1588187690/desyrel_aju6af.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
 .navbar-dark.bg-dark {
   background-color: #074c97 !important;
 }
 .jumbotron .bg-dark {
   background-color: rgba(0, 0, 0, 0.6) !important;
 }
-.jumbotron img {
-  position: absolute;
-  width: 100%;
-}
 .jumbotron {
-  overflow: hidden;
+  transition: background-image 1s;
 }
 a, a:hover {
   color: #fd772d;
 }
 #_captcha {
   background-color: beige;
+}
+.h-entiras {
+  font-family: 'desyrelregular' !important;
+  font-weight: bold;
+}
+.icon-logo:before {
+  content: "\e903";
+  letter-spacing: -10em;
+  color: white;
+  transition: color 0.5s;
+}
+.icon-logo:after {
+  content: "\e904";
+  color: #fd772d;
+  transition: color 0.5s;
+}
+.icon-logo:hover:before {
+  color: transparent;
+}
+.icon-logo:hover:after {
+  color: white;
 }
 /*.bg-entiras-focus-1 {
   background-image: url('https://i.imgur.com/duUZ0Tp.jpg');
@@ -32,35 +57,6 @@ a, a:hover {
   background-position: center;
   background-size: 150%;
 }*/
-@font-face {
-  font-family: 'desyrelregular';
-  src: url('https://res.cloudinary.com/entiras/raw/upload/v1588187690/desyrel_iwosvz.woff2') format('woff2'),
-    url('https://res.cloudinary.com/entiras/raw/upload/v1588187690/desyrel_aju6af.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: block;
-}
-.h-entiras {
-  font-family: 'desyrelregular' !important;
-  font-weight: bold;
-}
-.icon-logo:before {
-  content: "\e903";
-  letter-spacing: -10em;
-  color: white;
-  transition: color 1s;
-}
-.icon-logo:after {
-  content: "\e904";
-  color: #fd772d;
-  transition: color 1s;
-}
-.icon-logo:hover:before {
-  color: transparent;
-}
-.icon-logo:hover:after {
-  color: white;
-}
 
 @font-face {
   font-family: 'icomoon';

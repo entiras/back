@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(() => {
     session.init();
     page.init();
 });
@@ -18,14 +18,31 @@ const session = {
         }
     }
 };
+const util = {
+    img: {
+        load: (src) => {
+            return new Promise((resolve, reject) => {
+                const i = new Image();
+                img.onload = resolve;
+                img.onerror = reject;
+                img.src = src;
+            });
+        }
+    }
+};
 const page = {
     label: undefined,
     init: () => {
         page.label = $("meta[name=label]").attr("content");
-        page[page.label]();
+        if (page.label) {
+            console.log(page.label);
+            page[page.label]();
+        }
     },
-    home: () => {
-        console.log('home');
+    home: async () => {
+        const bg = 'https://i.imgur.com/duUZ0Tp.jpg';
+        await util.img.load(bg);
+        $('.jumbotron').css('background-image', bg);
     }
 };
 
