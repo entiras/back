@@ -25,64 +25,13 @@
         <label class="form-label">Contraseña</label>
         <input type="password" name="password" class="form-control" placeholder="4 caracteres mínimo">
       </div>
-      <div class="form-group">
-        <button class="btn btn-outline-dark btn-block">
-          Entrar
-        </button>
-      </div>
-      <label class="form-label">
+      <button class="btn btn-outline-dark btn-block">
+        Entrar
+      </button>
+      <p class="card-text">
         <a href="/login/forgot/" class="card-link">Olvidé mi contraseña</a>
-      </label>
+      </p>
     </form>
   </div>
 </div>
-
-<!--<div class="row d-none animated fadeIn faster guest">
-  <div class="col-lg-6">
-    <div class="jumbotron d-flex bg-entiras-focus-3 d-none animated fadeIn faster guest">
-      <div class="card mt-auto bg-entiras-dark text-light">
-        <div class="card-body">
-          <p class="h1 h-entiras text-center">
-            Entrar
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-6">
-    <div class="card">
-      <div class="card-body">
-        <div id="username-required" class="alert alert-danger d-none animated fadeIn faster" role="alert">
-          El nombre de usuario es requerido.
-        </div>
-        <div id="password-required" class="alert alert-danger d-none animated fadeIn faster" role="alert">
-          La contraseña es requerida.
-        </div>
-        <div id="password-min" class="alert alert-danger d-none animated fadeIn faster" role="alert">
-          La contraseña debe tener 4 caracteres mínimo.
-        </div>
-        <div id="credentials" class="alert alert-danger d-none animated fadeIn faster" role="alert">
-          El nombre de usuario y/o contraseña son incorrectos.
-        </div>
-        <div id="unconfirmed" class="alert alert-danger d-none animated fadeIn faster" role="alert">
-          La cuenta aún no ha sido activada.
-        </div>
-        <div id="logged" class="alert alert-success d-none animated fadeIn faster" role="alert">
-          Inicio de sesión correcto.
-        </div>
-        <form id="login" onsubmit="actions.login(event)">
-          <input type="hidden" name="_csrf">
-          Nombre de Usuario
-          <input type="text" name="username" class="form-control mb-2" placeholder="n_usuari0">
-          Contraseña
-          <input type="password" name="password" class="form-control mb-2" placeholder="4 caracteres mínimo">
-          <button class="btn btn-outline-dark btn-block mb-2">
-            Entrar
-          </button>
-        </form>
-        <a href="/login/forgot/" class="card-link">Olvidé mi contraseña</a>
-      </div>
-    </div>
-  </div>
-</div>-->
 @endsection
