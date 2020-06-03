@@ -1,11 +1,41 @@
 @layout('layout.app')
 @section('headers')
+<meta name="label" content="login">
 <title>
   EnTiras - Entrar
 </title>
 @endsection
 @section('content')
-<div class="row d-none animated fadeIn faster guest">
+<div class="jumbotron bg-dark animated fadeIn faster">
+  <div class="card bg-dark bg-transparent text-light">
+    <div class="card-body">
+      <p class="h1 h-entiras text-center">Entrar</p>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <form id="login" class="row" onsubmit="actions.login(event)">
+      <input type="hidden" name="_csrf">
+      <div class="form-group row">
+        <label class="col">Nombre de Usuario</label>
+        <input type="text" name="username" class="form-control col mb-2" placeholder="n_usuari0">
+      </div>
+      <div class="form-group row">
+        <label class="col">Contraseña</label>
+        <input type="password" name="password" class="form-control col mb-2" placeholder="4 caracteres mínimo">
+      </div>
+      <div class="row">
+        <button class="btn btn-outline-dark btn-block mb-2 col">
+          Entrar
+        </button>
+        <a href="/login/forgot/" class="card-link col">Olvidé mi contraseña</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--<div class="row d-none animated fadeIn faster guest">
   <div class="col-lg-6">
     <div class="jumbotron d-flex bg-entiras-focus-3 d-none animated fadeIn faster guest">
       <div class="card mt-auto bg-entiras-dark text-light">
@@ -52,5 +82,5 @@
       </div>
     </div>
   </div>
-</div>
+</div>-->
 @endsection
