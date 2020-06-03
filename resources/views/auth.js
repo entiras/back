@@ -23,9 +23,9 @@ const util = {
         load: (src) => {
             return new Promise((resolve, reject) => {
                 const i = new Image();
-                img.onload = resolve;
-                img.onerror = reject;
-                img.src = src;
+                i.onload = resolve;
+                i.onerror = reject;
+                i.src = src;
             });
         }
     }
