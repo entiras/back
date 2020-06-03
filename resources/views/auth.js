@@ -42,7 +42,7 @@ const page = {
     home: async () => {
         const bg = 'https://i.imgur.com/duUZ0Tp.jpg';
         await util.img.load(bg);
-        $('.jumbotron').css('background-image', bg);
+        $('.jumbotron').css('background-image', 'url(' + bg + ')');
     }
 };
 
