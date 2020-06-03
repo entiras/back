@@ -17,30 +17,20 @@
   <div class="card-body">
     <form id="login">
       <input type="hidden" name="_csrf">
-      <div class="form-group row">
-        <label class="col-lg-2 col-form-label">Nombre de Usuario</label>
-        <div class="col-lg-10">
-          <input type="text" name="username" class="form-control" placeholder="n_usuari0">
-        </div>
+      <div class="form-group">
+        <label class="form-label">Nombre de Usuario</label>
+        <input type="text" name="username" class="form-control" placeholder="n_usuari0">
       </div>
-
-      <div class="form-group row">
-        <label class="col-lg-2 col-form-label">Contraseña</label>
-        <div class="col-lg-10">
-          <input type="password" name="password" class="form-control" placeholder="4 caracteres mínimo">
-        </div>
+      <div class="form-group">
+        <label class="form-label">Contraseña</label>
+        <input type="password" name="password" class="form-control" placeholder="4 caracteres mínimo">
       </div>
-
-      <div class="row">
-        <div class="col-lg-10">
-          <button class="btn btn-outline-dark btn-block">
-            Entrar
-          </button>
-        </div>
-        <div class="col-lg-2">
-          <a href="/login/forgot/" class="card-link">Olvidé mi contraseña</a>
-        </div>
-      </div>
+      <button class="btn btn-outline-dark btn-block">
+        Entrar
+      </button>
+      <label class="form-label">
+        <a href="/login/forgot/" class="card-link">Olvidé mi contraseña</a>
+      </label>
     </form>
   </div>
 </div>
