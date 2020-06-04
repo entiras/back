@@ -20,13 +20,29 @@ const session = {
 };
 const util = {
     img: {
-        load: (src) => {
-            return new Promise((resolve, reject) => {
+        load: async (src) => {
+            await new Promise((s, e) => {
                 const i = new Image();
-                i.onload = resolve;
-                i.onerror = reject;
+                i.onload = s;
+                i.onerror = e;
                 i.src = src;
             });
+            $('.jumbotron').css('background-image', 'url(' + src + ')');
+        }
+    }
+};
+const api = {
+    login: {
+        main: () => {
+            return 'ok';
+        }
+    }
+};
+const act = {
+    login: {
+        main: (e) => {
+            e.preventDefault();
+            console.log(api.login.main());
         }
     }
 };
@@ -40,14 +56,11 @@ const page = {
         }
     },
     home: async () => {
-        const bg = 'https://i.imgur.com/duUZ0Tp.jpg';
-        await util.img.load(bg);
-        $('.jumbotron').css('background-image', 'url(' + bg + ')');
+        await util.img.load('https://i.imgur.com/duUZ0Tp.jpg');
     },
     login: async () => {
-        const bg = 'https://i.imgur.com/ZiLd6zZ.jpg';
-        await util.img.load(bg);
-        $('.jumbotron').css('background-image', 'url(' + bg + ')');
+        $('#login').on('submit', act.login.main);
+        await util.img.load('https://i.imgur.com/ZiLd6zZ.jpg');
     }
 };
 
