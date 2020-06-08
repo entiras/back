@@ -11,16 +11,19 @@ const session = {
     }
 };
 const util = {
-    img: {
-        load: async (src) => {
-            await new Promise((s, e) => {
-                const i = new Image();
-                i.onload = s;
-                i.onerror = e;
-                i.src = src;
-            });
-            $('.jumbotron').css('background-image', 'url(' + src + ')');
-        }
+    jumbo: async (src) => {
+        await new Promise((s, e) => {
+            const i = new Image();
+            i.onload = s;
+            i.onerror = e;
+            i.src = src;
+        });
+        $('.jumbotron').css('background-image', 'url(' + src + ')');
+    },
+    redirect = (route) => {
+        setTimeout((destiny) => {
+            window.location.href = destiny;
+        }, 500, route);
     },
     form: async (id) => {
         await act.csrf();
@@ -76,7 +79,19 @@ const act = {
                 data: form
             });
             util.alert(login);
-            console.log(login);
+            if (login.type = 'success') {
+                util.redirect('/')
+            }
+        },
+        logout: async (e) => {
+            e.preventDefault();
+            const form = await util.form('#logout');
+            await $.ajax({
+                type: 'POST',
+                url: '/api/logout',
+                data: form
+            });
+            util.redirect('/')
         }
     }
 };
@@ -84,6 +99,7 @@ const page = {
     label: undefined,
     init: () => {
         $(':submit').prop('disabled', false);
+        $('#logout-btn').click(act.login.logout);
         page.label = $("meta[name=label]").attr("content");
         if (page.label) {
             console.log(page.label);
@@ -91,11 +107,11 @@ const page = {
         }
     },
     home: async () => {
-        await util.img.load('https://i.imgur.com/duUZ0Tp.jpg');
+        await util.jumbo('https://i.imgur.com/duUZ0Tp.jpg');
     },
     login: async () => {
         $('#login').on('submit', act.login.main);
-        await util.img.load('https://i.imgur.com/ZiLd6zZ.jpg');
+        await util.jumbo('https://i.imgur.com/ZiLd6zZ.jpg');
     }
 };
 $(document).ready(() => {
