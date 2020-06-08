@@ -30,17 +30,33 @@ const util = {
             data[arr[i].name] = arr[i].value;
         }
         return data;
+    },
+    alert: (data) => {
+        $('#form-alert').addClass('alert-' + data.type);
+        $('#form-alert').removeClass('d-none');
+        $('#form-alert span').addClass('d-none');
+        $('#' + data.message + '-' + data.field).addClass('d-none');
+        $('input[name=' + data.field + ']').addClass('is-invalid');
+    },
+    unalert: () => {
+        $('#form-alert').removeClass('alert-danger');
+        $('#form-alert').removeClass('alert-success');
+        $('#form-alert').addClass('d-none');
+        $('input').removeClass('is-invalid');
     }
 };
 const act = {
     fail: () => {
         $('#network-err').removeClass('d-none');
+        $(':submit').prop('disabled', false);
     },
     wait: () => {
         $('#loader').removeClass('d-none');
+        $(':submit').prop('disabled', true);
     },
     end: () => {
         $('#loader').addClass('d-none');
+        $(':submit').prop('disabled', false);
     },
     csrf: async () => {
         const csrf = await $.ajax({
@@ -52,12 +68,14 @@ const act = {
     login: {
         main: async (e) => {
             e.preventDefault();
+            util.unalert();
             const form = await util.form('#login');
             const login = await $.ajax({
                 type: 'POST',
                 url: '/api/login',
                 data: form
             });
+            util.alert(login);
             console.log(login);
         }
     }
@@ -65,6 +83,7 @@ const act = {
 const page = {
     label: undefined,
     init: () => {
+        $(':submit').prop('disabled', false);
         page.label = $("meta[name=label]").attr("content");
         if (page.label) {
             console.log(page.label);

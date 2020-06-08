@@ -158,9 +158,11 @@ class AuthController {
       response.status(403);
       return response.json({
         type: 'danger',
-        message: 'late'
+        message: 'late',
+        field: 'form'
       });
     }
+
     const validation = await validate(
       request.all(), {
       username: 'required',
@@ -169,30 +171,37 @@ class AuthController {
     if (validation.fails()) {
       return response.json({
         type: 'danger',
-        message: 'validation',
-        error: validation._errorMessages[0]
+        message: validation._errorMessages[0].validation,
+        field: validation._errorMessages[0].field
       });
     }
+
     const user = await User.findBy('username', request.input('username'));
     if (!user) {
       return response.json({
         type: 'danger',
-        message: 'credentials'
+        message: 'credentials',
+        field: 'form'
       });
     }
+
     const correct = await Hash.verify(request.input('password'), user.password);
     if (!correct) {
       return response.json({
         type: 'danger',
-        message: 'credentials'
+        message: 'credentials',
+        field: 'form'
       });
     }
+
     if (!user.verified) {
       return response.json({
         type: 'danger',
-        message: 'unconfirmed'
+        message: 'unconfirmed',
+        field: 'form'
       });
     }
+
     await auth.remember(true).login(user);
     response.plainCookie('user', user.username, {
       path: '/',
@@ -200,7 +209,8 @@ class AuthController {
     });
     return response.json({
       type: 'success',
-      message: 'logged'
+      message: 'logged',
+      field: 'form'
     });
   }
   async logout({ auth, response }) {

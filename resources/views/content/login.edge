@@ -15,6 +15,15 @@
 </div>
 <div class="card">
   <div class="card-body">
+    <div id="form-alert" class="alert d-none animated fadeIn faster" role="alert">
+      <span id="late-form">late-form</span>
+      <span id="required-username">required-username</span>
+      <span id="required-password">required-password</span>
+      <span id="min-password">min-password</span>
+      <span id="credentials-form">credentials-form</span>
+      <span id="unconfirmed-form">unconfirmed-form</span>
+      <span id="logged-form">logged-form</span>
+    </div>
     <form id="login">
       <input type="hidden" name="_csrf">
       <div class="form-group">
@@ -25,7 +34,7 @@
         <label class="form-label">Contraseña</label>
         <input type="password" name="password" class="form-control" placeholder="4 caracteres mínimo">
       </div>
-      <button class="btn btn-outline-dark btn-block">
+      <button class="btn btn-outline-dark btn-block" disabled>
         Entrar
       </button>
     </form>
