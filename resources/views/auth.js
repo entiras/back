@@ -79,7 +79,7 @@ const act = {
                 data: form
             });
             util.alert(login);
-            if (login.type = 'success') {
+            if (login.type === 'success') {
                 util.redirect('/')
             }
         },
