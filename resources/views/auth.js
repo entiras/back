@@ -3,8 +3,9 @@ $(document).ready(() => {
     page.init();
 });
 $.ajaxSetup({
-    beforeSend: loader.show,
-    complete: loader.hide
+    beforeSend: act.wait,
+    complete: act.end,
+    error: act.fail
 });
 const session = {
     user: undefined,
@@ -29,20 +30,39 @@ const util = {
             });
             $('.jumbotron').css('background-image', 'url(' + src + ')');
         }
-    }
-};
-const api = {
-    login: {
-        main: () => {
-            return 'ok';
+    },
+    form: async (id) => {
+        await act.csrf();
+        var arr = $(id).serializeArray();
+        var data = {};
+        for (var i = 0; i < arr.length; i++) {
+            data[arr[i].name] = arr[i].value;
         }
+        return data;
     }
 };
 const act = {
+    fail: () => {
+        $('#network-err').removeClass('d-none');
+    },
+    wait: () => {
+        $('#loader').removeClass('d-none');
+    },
+    end: () => {
+        $('#loader').addClass('d-none');
+    },
+    csrf: async () => {
+        const csrf = await $.ajax({
+            type: 'GET',
+            url: '/api/csrf'
+        });
+        $('input[name=_csrf]').val(csrf.token);
+    },
     login: {
         main: (e) => {
             e.preventDefault();
-            console.log(api.login.main());
+            const form = await util.form('#login');
+            console.log(form);
         }
     }
 };
