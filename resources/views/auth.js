@@ -35,7 +35,7 @@ const util = {
         $('#form-alert').addClass('alert-' + data.type);
         $('#form-alert').removeClass('d-none');
         $('#form-alert span').addClass('d-none');
-        $('#' + data.message + '-' + data.field).addClass('d-none');
+        $('#' + data.message + '-' + data.field).removeClass('d-none');
         $('input[name=' + data.field + ']').addClass('is-invalid');
     },
     unalert: () => {
