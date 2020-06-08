@@ -1,4 +1,5 @@
-$(document).ready(() => {
+console.log('ok');
+/*$(document).ready(() => {
     session.init();
     page.init();
 });
