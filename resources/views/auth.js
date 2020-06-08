@@ -59,7 +59,7 @@ const act = {
         $('input[name=_csrf]').val(csrf.token);
     },
     login: {
-        main: (e) => {
+        main: async (e) => {
             e.preventDefault();
             const form = await util.form('#login');
             console.log(form);
