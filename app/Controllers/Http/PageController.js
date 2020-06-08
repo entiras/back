@@ -106,13 +106,13 @@ class PageController {
     });
     const info = [
       ['index.html', 'content.home'],
-      // ['signup/index.html', 'content.signup'],
+      ['signup/index.html', 'content.signup'],
       ['login/index.html', 'content.login'],
-      //['obscure.html', 'content.obscure'],
-      //['signup/confirm/index.html', 'content.confirm'],
-      //['signup/resend/index.html', 'content.resend'],
-      //['login/forgot/index.html', 'content.forgot'],
-      //['login/reset/index.html', 'content.reset']
+      ['obscure.html', 'content.obscure'],
+      ['signup/confirm/index.html', 'content.confirm'],
+      ['signup/resend/index.html', 'content.resend'],
+      ['login/forgot/index.html', 'content.forgot'],
+      ['login/reset/index.html', 'content.reset']
     ];
     for (var i = 0; i < info.length; i++) {
       const txt = view.render(info[i][1]);
