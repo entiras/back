@@ -20,7 +20,7 @@ const util = {
         });
         $('.jumbotron').css('background-image', 'url(' + src + ')');
     },
-    redirect = (route) => {
+    redirect: (route) => {
         setTimeout((destiny) => {
             window.location.href = destiny;
         }, 500, route);
