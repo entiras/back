@@ -53,7 +53,12 @@ const act = {
         main: async (e) => {
             e.preventDefault();
             const form = await util.form('#login');
-            console.log(form);
+            const login = await $.ajax({
+                type: 'POST',
+                url: '/api/login',
+                data: form
+            });
+            console.log(login);
         }
     }
 };
