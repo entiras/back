@@ -1,12 +1,3 @@
-$(document).ready(() => {
-    session.init();
-    page.init();
-});
-$.ajaxSetup({
-    beforeSend: act.wait,
-    complete: act.end,
-    error: act.fail
-});
 const session = {
     user: undefined,
     init: () => {
@@ -83,6 +74,15 @@ const page = {
         await util.img.load('https://i.imgur.com/ZiLd6zZ.jpg');
     }
 };
+$(document).ready(() => {
+    session.init();
+    page.init();
+});
+$.ajaxSetup({
+    beforeSend: act.wait,
+    complete: act.end,
+    error: act.fail
+});
 
 // var loader = {};
 // loader.active = false;
