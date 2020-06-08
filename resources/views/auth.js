@@ -1,5 +1,4 @@
-console.log('ok');
-/*$(document).ready(() => {
+$(document).ready(() => {
     session.init();
     page.init();
 });
@@ -83,7 +82,7 @@ const page = {
         $('#login').on('submit', act.login.main);
         await util.img.load('https://i.imgur.com/ZiLd6zZ.jpg');
     }
-};*/
+};
 
 // var loader = {};
 // loader.active = false;
