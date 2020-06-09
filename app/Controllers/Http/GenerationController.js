@@ -17,7 +17,7 @@ const mongo = new MongoClient(Env.get('MONGO_URI', ''), {
 
 class GenerationController {
     async delete(path) {
-        await mongo.open();
+        await mongo.connect(();
         const col = await mongo.db('entiras').collection('files');
         const iterator = await col.find({
             type: 'base',
@@ -39,10 +39,9 @@ class GenerationController {
                 });
             }
         }
-        await mongo.close();
     }
     async create(path, content) {
-        await mongo.open();
+        await mongo.connect();
         const col = await mongo.db('entiras').collection('files');
         const save = await octokit.repos.createOrUpdateFile({
             owner: 'entiras',
@@ -56,7 +55,6 @@ class GenerationController {
             path: save.data.content.path,
             sha: save.data.content.sha
         });
-        await mongo.close();
     }
     async script({ response, view }) {
         const file = 'script.js';
