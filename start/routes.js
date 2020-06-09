@@ -19,8 +19,11 @@ const Route = use('Route');
 Route.get('/', 'MainController.home');
 Route.get('/csrf', 'MainController.csrf');
 Route.get('/captcha', 'MainController.captcha');
+
 Route.get('/gen/script', 'GenerationController.script');
 Route.get('/gen/style', 'GenerationController.style');
+Route.get('/gen/home', 'GenerationController.home');
+Route.get('/gen/login', 'GenerationController.login');
 
 /*Route.post('/signup', 'AuthController.signup');
 Route.post('/signup/confirm', 'AuthController.confirm');

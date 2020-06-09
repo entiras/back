@@ -11,9 +11,6 @@ const minify = use('@node-minify/core');
 const babelMinify = require('@node-minify/babel-minify');
 const cleanCSS = use('@node-minify/clean-css');
 const htmlMinifier = use('@node-minify/html-minifier');
-const mongo = new MongoClient(Env.get('MONGO_URI', ''), {
-    useNewUrlParser: true
-});
 const drop = async (name) => {
     const mongo = new MongoClient(Env.get('MONGO_URI', ''), {
         useNewUrlParser: true
@@ -63,7 +60,7 @@ const raise = async (name, buff) => {
     await mongo.close();
 }
 class GenerationController {
-    async script({ response, view }) {
+    async script({ response }) {
         const name = 'script.js';
         await drop(name);
         const min = await minify({
@@ -77,13 +74,57 @@ class GenerationController {
             status: '✔️'
         });
     }
-    async style({ response, view }) {
+    async style({ response }) {
         const name = 'style.css';
         await drop(name);
         const min = await minify({
             compressor: cleanCSS,
             input: './resources/static/' + name,
             output: '_temp'
+        });
+        const buff = new Buffer(min);
+        await raise(name, buff)
+        return response.json({
+            status: '✔️'
+        });
+    }
+    async redirects({ response }) {
+        const name = '_redirects';
+        await drop(name);
+        const txt = await fs.readFile('./resources/views/' + name);
+        const buff = new Buffer(TextMetrics);
+        await raise(name, buff)
+        return response.json({
+            status: '✔️'
+        });
+    }
+    async home({ response, view }) {
+        const name = 'index.html'
+        const edge = 'content.home';
+        await drop(name);
+        const txt = view.render(edge);
+        await fs.writeFile('_temp', txt, 'utf8');
+        const min = await minify({
+            compressor: htmlMinifier,
+            input: '_temp',
+            output: '__temp'
+        });
+        const buff = new Buffer(min);
+        await raise(name, buff)
+        return response.json({
+            status: '✔️'
+        });
+    }
+    async login({ response, view }) {
+        const name = 'login/index.html'
+        const edge = 'content.login';
+        await drop(name);
+        const txt = view.render(edge);
+        await fs.writeFile('_temp', txt, 'utf8');
+        const min = await minify({
+            compressor: htmlMinifier,
+            input: '_temp',
+            output: '__temp'
         });
         const buff = new Buffer(min);
         await raise(name, buff)
