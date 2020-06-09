@@ -24,18 +24,20 @@ class GenerationController {
             path: path
         });
         const file = await iterator.next();
-        const del = await octokit.repos.deleteFile({
-            owner: 'entiras',
-            repo: 'front',
-            path: file.path,
-            message: 'auto',
-            sha: file.sha
-        });
-        if (del) {
-            col.deleteMany({
-                type: 'base',
-                path: file.path
+        if (file) {
+            const del = await octokit.repos.deleteFile({
+                owner: 'entiras',
+                repo: 'front',
+                path: file.path,
+                message: 'auto',
+                sha: file.sha
             });
+            if (del) {
+                col.deleteMany({
+                    type: 'base',
+                    path: file.path
+                });
+            }
         }
         await mongo.close();
     }
