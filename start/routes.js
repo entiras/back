@@ -16,16 +16,18 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route');
 
-Route.get('/', 'PageController.home');
-Route.get('/test', 'TestController.test');
-Route.get('/csrf', 'PageController.csrf');
-Route.get('/captcha', 'PageController.captcha');
-Route.get('/base', 'PageController.base');
+Route.get('/', 'MainController.home');
+Route.get('/csrf', 'MainController.csrf');
+Route.get('/captcha', 'MainController.captcha');
+Route.get('/gen/script', 'GenerationController.script');
+
+/*Route.get('/base', 'PageController.base');
 Route.post('/signup', 'AuthController.signup');
 Route.post('/signup/confirm', 'AuthController.confirm');
 Route.post('/signup/resend', 'AuthController.resend');
 Route.post('/login', 'AuthController.login');
 Route.post('/login/forgot', 'AuthController.forgot');
 Route.post('/login/reset', 'AuthController.reset');
-Route.post('/logout', 'AuthController.logout');
-Route.route('*', 'PageController.obscure');
+Route.post('/logout', 'AuthController.logout');*/
+
+Route.route('*', 'MainController.obscure');

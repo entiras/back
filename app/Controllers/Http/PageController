@@ -1,67 +1,8 @@
 'use strict'
 
-const Env = use('Env');
-const { Octokit } = use("@octokit/rest");
-const octokit = new Octokit({
-  auth: Env.get('GITHUB_TOKEN', '')
-});
-const MongoClient = use('mongodb').MongoClient;
-const fs = use('fs').promises;
-const svgCaptcha = use('svg-captcha');
-const minify = use('@node-minify/core');
-const gcc = use('@node-minify/google-closure-compiler');
-const cleanCSS = use('@node-minify/clean-css');
-const htmlMinifier = use('@node-minify/html-minifier');
-
 class PageController {
-  home({ response }) {
-    return response.json({
-      status: '✔️'
-    });
-  }
-  obscure({ response }) {
-    return response.json({
-      route: '❌'
-    });
-  }
-  csrf({ response, view }) {
-    return response.json({
-      token: view.render('content/token').replace('\n', '')
-    });
-  }
-  captcha({ response }) {
-    var captcha = svgCaptcha.create();
-    response.cookie('captcha', captcha.text, { path: '/' });
-    response.type('image/svg+xml');
-    return response.send(captcha.data);
-  }
   async base({ response, view }) {
     try {
-      const mongo = new MongoClient(Env.get('MONGO_URI', ''), {
-        useNewUrlParser: true
-      });
-      await mongo.connect();
-      const col = await mongo.db('entiras').collection('files');
-      const iterator = await col.find({
-        type: 'base'
-      });
-      var file;
-      while (file = await iterator.next()) {
-        // delete old files
-        const del = await octokit.repos.deleteFile({
-          owner: 'entiras',
-          repo: 'front',
-          path: file.path,
-          message: 'auto',
-          sha: file.sha
-        });
-        if (del) {
-          col.deleteMany({
-            type: 'base',
-            path: file.path
-          });
-        }
-      }
       // create new files
       const names = [
         'auth.js',
