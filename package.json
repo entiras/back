@@ -25,7 +25,8 @@
     "@node-minify/core": "*",
     "@node-minify/google-closure-compiler": "*",
     "@node-minify/clean-css": "*",
-    "@node-minify/html-minifier": "*"
+    "@node-minify/html-minifier": "*",
+    "@node-minify/babel-minify": "*"
   },
   "autoload": {
     "App": "./app"

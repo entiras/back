@@ -9,6 +9,7 @@ const MongoClient = use('mongodb').MongoClient;
 const fs = use('fs').promises;
 const minify = use('@node-minify/core');
 const gcc = use('@node-minify/google-closure-compiler');
+const babelMinify = require('@node-minify/babel-minify');
 const cleanCSS = use('@node-minify/clean-css');
 const htmlMinifier = use('@node-minify/html-minifier');
 const mongo = new MongoClient(Env.get('MONGO_URI', ''), {
@@ -44,7 +45,7 @@ class GenerationController {
             }
         }
         const min = await minify({
-            compressor: gcc,
+            compressor: babelMinify,
             input: './resources/static/' + name,
             output: '_temp'
         });
