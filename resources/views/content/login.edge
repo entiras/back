@@ -6,44 +6,40 @@
 </title>
 @endsection
 @section('content')
-<div class="row justify-content-md-center">
-  <div class="col col-lg-6">
-    <div class="jumbotron bg-dark animated fadeIn faster">
-      <div class="card bg-dark bg-transparent text-light">
-        <div class="card-body">
-          <p class="h1 h-entiras text-center">Entrar</p>
-        </div>
-      </div>
+<div class="jumbotron bg-dark animated fadeIn faster">
+  <div class="card bg-dark bg-transparent text-light">
+    <div class="card-body">
+      <p class="h1 h-entiras text-center">Entrar</p>
     </div>
-    <div class="card">
-      <div class="card-body">
-        <div id="form-alert" class="alert d-none animated fadeIn faster" role="alert">
-          <span id="required-username">El nombre de usuario es requerido.</span>
-          <span id="required-password">La contraseña es requerida.</span>
-          <span id="min-password">La contraseña debe tener 4 caracteres mínimo.</span>
-          <span id="credentials-form">El nombre de usuario y/o contraseña son incorrectos.</span>
-          <span id="unconfirmed-form">La cuenta aún no ha sido activada.</span>
-          <span id="logged-form">Inicio de sesión correcto.</span>
-        </div>
-        <form id="login">
-          <input type="hidden" name="_csrf">
-          <div class="form-group">
-            <label class="form-label">Nombre de Usuario</label>
-            <input type="text" name="username" class="form-control" placeholder="n_usuari0">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Contraseña</label>
-            <input type="password" name="password" class="form-control" placeholder="4 caracteres mínimo">
-          </div>
-          <button class="btn btn-outline-dark btn-block" disabled>
-            Entrar
-          </button>
-        </form>
-      </div>
-      <div class="card-footer text-center bg-transparent">
-        <a href="/login/forgot/" class="card-link">Olvidé mi contraseña</a>
-      </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <div id="form-alert" class="alert d-none animated fadeIn faster" role="alert">
+      <span id="required-username">El nombre de usuario es requerido.</span>
+      <span id="required-password">La contraseña es requerida.</span>
+      <span id="min-password">La contraseña debe tener 4 caracteres mínimo.</span>
+      <span id="credentials-form">El nombre de usuario y/o contraseña son incorrectos.</span>
+      <span id="unconfirmed-form">La cuenta aún no ha sido activada.</span>
+      <span id="logged-form">Inicio de sesión correcto.</span>
     </div>
+    <form id="login" class="row">
+      <input type="hidden" name="_csrf">
+      <div class="form-group col-lg">
+        <label class="form-label">Nombre de Usuario</label>
+        <input type="text" name="username" class="form-control" placeholder="n_usuari0">
+      </div>
+      <div class="form-group  col-lg">
+        <label class="form-label">Contraseña</label>
+        <input type="password" name="password" class="form-control" placeholder="4 caracteres mínimo">
+      </div>
+      <button class="btn btn-outline-dark btn-block" disabled>
+        Entrar
+      </button>
+    </form>
+  </div>
+  <div class="card-footer text-center bg-transparent">
+    <a href="/login/forgot/">Olvidé mi contraseña</a>
   </div>
 </div>
 @endsection
