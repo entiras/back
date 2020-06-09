@@ -14,7 +14,7 @@ const htmlMinifier = use('@node-minify/html-minifier');
 const mongo = new MongoClient(Env.get('MONGO_URI', ''), {
     useNewUrlParser: true
 });
-const drop = (name) => {
+const drop = async (name) => {
     const mongo = new MongoClient(Env.get('MONGO_URI', ''), {
         useNewUrlParser: true
     });
@@ -42,7 +42,7 @@ const drop = (name) => {
     }
     await mongo.close();
 };
-const raise = (name, buff) => {
+const raise = async (name, buff) => {
     const mongo = new MongoClient(Env.get('MONGO_URI', ''), {
         useNewUrlParser: true
     });
@@ -65,28 +65,28 @@ const raise = (name, buff) => {
 class GenerationController {
     async script({ response, view }) {
         const name = 'script.js';
-        drop(name);
+        await drop(name);
         const min = await minify({
             compressor: babelMinify,
             input: './resources/static/' + name,
             output: '_temp'
         });
         const buff = new Buffer(min);
-        raise(name, buff)
+        await raise(name, buff)
         return response.json({
             status: '✔️'
         });
     }
     async style({ response, view }) {
         const name = 'style.css';
-        drop(name);
+        await drop(name);
         const min = await minify({
             compressor: cleanCSS,
             input: './resources/static/' + name,
             output: '_temp'
         });
         const buff = new Buffer(min);
-        raise(name, buff)
+        await raise(name, buff)
         return response.json({
             status: '✔️'
         });
