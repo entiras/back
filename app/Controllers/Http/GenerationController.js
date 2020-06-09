@@ -8,61 +8,85 @@ const octokit = new Octokit({
 const MongoClient = use('mongodb').MongoClient;
 const fs = use('fs').promises;
 const minify = use('@node-minify/core');
-const gcc = use('@node-minify/google-closure-compiler');
 const babelMinify = require('@node-minify/babel-minify');
 const cleanCSS = use('@node-minify/clean-css');
 const htmlMinifier = use('@node-minify/html-minifier');
 const mongo = new MongoClient(Env.get('MONGO_URI', ''), {
     useNewUrlParser: true
 });
-
+const drop = (name) => {
+    const mongo = new MongoClient(Env.get('MONGO_URI', ''), {
+        useNewUrlParser: true
+    });
+    await mongo.connect();
+    const col = await mongo.db('entiras').collection('files');
+    const iterator = await col.find({
+        type: 'base',
+        path: name
+    });
+    var file;
+    while (file = await iterator.next()) {
+        const del = await octokit.repos.deleteFile({
+            owner: 'entiras',
+            repo: 'front',
+            path: file.path,
+            message: 'auto',
+            sha: file.sha
+        });
+        if (del) {
+            col.deleteMany({
+                type: 'base',
+                path: file.path
+            });
+        }
+    }
+    await mongo.close();
+};
+const raise = (name, buff) => {
+    const mongo = new MongoClient(Env.get('MONGO_URI', ''), {
+        useNewUrlParser: true
+    });
+    await mongo.connect();
+    const col = await mongo.db('entiras').collection('files');
+    const save = await octokit.repos.createOrUpdateFile({
+        owner: 'entiras',
+        repo: 'front',
+        path: name,
+        message: 'auto',
+        content: buff.toString('base64')
+    });
+    await col.insertOne({
+        type: 'base',
+        path: save.data.content.path,
+        sha: save.data.content.sha
+    });
+    await mongo.close();
+}
 class GenerationController {
     async script({ response, view }) {
         const name = 'script.js';
-        const mongo = new MongoClient(Env.get('MONGO_URI', ''), {
-            useNewUrlParser: true
-        });
-        await mongo.connect();
-        const col = await mongo.db('entiras').collection('files');
-        const iterator = await col.find({
-            type: 'base',
-            path: name
-        });
-        var file;
-        while (file = await iterator.next()) {
-            const del = await octokit.repos.deleteFile({
-                owner: 'entiras',
-                repo: 'front',
-                path: file.path,
-                message: 'auto',
-                sha: file.sha
-            });
-            if (del) {
-                col.deleteMany({
-                    type: 'base',
-                    path: file.path
-                });
-            }
-        }
+        drop(name);
         const min = await minify({
             compressor: babelMinify,
             input: './resources/static/' + name,
             output: '_temp'
         });
         const buff = new Buffer(min);
-        const save = await octokit.repos.createOrUpdateFile({
-            owner: 'entiras',
-            repo: 'front',
-            path: name,
-            message: 'auto',
-            content: buff.toString('base64')
+        raise(name, buff)
+        return response.json({
+            status: '✔️'
         });
-        await col.insertOne({
-            type: 'base',
-            path: save.data.content.path,
-            sha: save.data.content.sha
+    }
+    async style({ response, view }) {
+        const name = 'style.css';
+        drop(name);
+        const min = await minify({
+            compressor: cleanCSS,
+            input: './resources/static/' + name,
+            output: '_temp'
         });
-        await mongo.close();
+        const buff = new Buffer(min);
+        raise(name, buff)
         return response.json({
             status: '✔️'
         });

@@ -20,6 +20,7 @@ Route.get('/', 'MainController.home');
 Route.get('/csrf', 'MainController.csrf');
 Route.get('/captcha', 'MainController.captcha');
 Route.get('/gen/script', 'GenerationController.script');
+Route.get('/gen/style', 'GenerationController.style');
 
 /*Route.post('/signup', 'AuthController.signup');
 Route.post('/signup/confirm', 'AuthController.confirm');
