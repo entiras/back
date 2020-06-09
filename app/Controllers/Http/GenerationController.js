@@ -74,7 +74,8 @@ class GenerationController {
             await this.create(file, buff.toString('base64'));
         } catch (e) {
             return response.json({
-                status: '❌'
+                status: '❌',
+                error: e
             });
         }
         return response.json({
