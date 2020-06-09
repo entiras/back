@@ -17,7 +17,7 @@ const mongo = new MongoClient(Env.get('MONGO_URI', ''), {
 
 class GenerationController {
     async delete(path) {
-        await mongo.connect(();
+        await mongo.connect();
         const col = await mongo.db('entiras').collection('files');
         const iterator = await col.find({
             type: 'base',
