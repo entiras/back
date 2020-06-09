@@ -39,9 +39,45 @@ class GenerationController {
         }
         await mongo.close();
     }
+    async create(path, content) {
+        const mongo = new MongoClient(Env.get('MONGO_URI', ''), {
+            useNewUrlParser: true
+        });
+        await mongo.connect();
+        const col = await mongo.db('entiras').collection('files');
+        const save = await octokit.repos.createOrUpdateFile({
+            owner: 'entiras',
+            repo: 'front',
+            path: path,
+            message: 'auto',
+            content: content
+        });
+        await col.insertOne({
+            type: 'base',
+            path: save.data.content.path,
+            sha: save.data.content.sha
+        });
+        await mongo.close();
+    }
     async script({ response, view }) {
-        const file = 'auth.js';
-        await this.delete(file);
+        const file = 'script.js';
+        try {
+            await this.delete(file);
+            const min = await minify({
+                compressor: gcc,
+                input: './resources/static/' + file,
+                output: '_temp'
+            });
+            buff = new Buffer(min);
+            await this.create(file, buff.toString('base64'));
+        } catch (e) {
+            return response.json({
+                status: '❌'
+            });
+        }
+        return response.json({
+            status: '✔️'
+        });
     }
 }
 

@@ -21,8 +21,7 @@ Route.get('/csrf', 'MainController.csrf');
 Route.get('/captcha', 'MainController.captcha');
 Route.get('/gen/script', 'GenerationController.script');
 
-/*Route.get('/base', 'PageController.base');
-Route.post('/signup', 'AuthController.signup');
+/*Route.post('/signup', 'AuthController.signup');
 Route.post('/signup/confirm', 'AuthController.confirm');
 Route.post('/signup/resend', 'AuthController.resend');
 Route.post('/login', 'AuthController.login');
