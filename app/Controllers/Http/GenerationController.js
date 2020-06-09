@@ -48,7 +48,7 @@ class GenerationController {
             input: './resources/static/' + name,
             output: '_temp'
         });
-        buff = new Buffer(min);
+        const buff = new Buffer(min);
         const save = await octokit.repos.createOrUpdateFile({
             owner: 'entiras',
             repo: 'front',
@@ -61,6 +61,7 @@ class GenerationController {
             path: save.data.content.path,
             sha: save.data.content.sha
         });
+        await mongo.close();
         return response.json({
             status: '✔️'
         });
