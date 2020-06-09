@@ -3,6 +3,7 @@
 class PageController {
   async base({ response, view }) {
     try {
+      
       // create new files
       const names = [
         'auth.js',
@@ -12,7 +13,12 @@ class PageController {
       for (var i = 0; i < names.length; i++) {
         var buff;
         if (i === 0) {
-          
+          const min = await minify({
+            compressor: gcc,
+            input: './resources/views/' + names[i],
+            output: '_temp'
+          });
+          buff = new Buffer(min);
         } else if (i === 2) {
           const min = await minify({
             compressor: cleanCSS,
@@ -24,6 +30,18 @@ class PageController {
           const txt = await fs.readFile('./resources/views/' + names[i]);
           buff = new Buffer(txt);
         }
+        const save = await octokit.repos.createOrUpdateFile({
+          owner: 'entiras',
+          repo: 'front',
+          path: names[i],
+          message: 'auto',
+          content: buff.toString('base64')
+        });
+        await col.insertOne({
+          type: 'base',
+          path: save.data.content.path,
+          sha: save.data.content.sha
+        });
       }
       // render views
       view.share({

@@ -16,15 +16,19 @@ const mongo = new MongoClient(Env.get('MONGO_URI', ''), {
 });
 
 class GenerationController {
-    async delete(path) {
+    async script({ response, view }) {
+        const name = 'script.js';
+        const mongo = new MongoClient(Env.get('MONGO_URI', ''), {
+            useNewUrlParser: true
+        });
         await mongo.connect();
         const col = await mongo.db('entiras').collection('files');
         const iterator = await col.find({
             type: 'base',
-            path: path
+            path: name
         });
-        const file = await iterator.next();
-        if (file) {
+        var file;
+        while (file = await iterator.next()) {
             const del = await octokit.repos.deleteFile({
                 owner: 'entiras',
                 repo: 'front',
@@ -39,40 +43,24 @@ class GenerationController {
                 });
             }
         }
-    }
-    async create(path, content) {
-        await mongo.connect();
-        const col = await mongo.db('entiras').collection('files');
+        const min = await minify({
+            compressor: gcc,
+            input: './resources/static/' + name,
+            output: '_temp'
+        });
+        buff = new Buffer(min);
         const save = await octokit.repos.createOrUpdateFile({
             owner: 'entiras',
             repo: 'front',
-            path: path,
+            path: name,
             message: 'auto',
-            content: content
+            content: buff.toString('base64')
         });
         await col.insertOne({
             type: 'base',
             path: save.data.content.path,
             sha: save.data.content.sha
         });
-    }
-    async script({ response, view }) {
-        const file = 'script.js';
-        try {
-            await this.delete(file);
-            const min = await minify({
-                compressor: gcc,
-                input: './resources/static/' + file,
-                output: '_temp'
-            });
-            buff = new Buffer(min);
-            await this.create(file, buff.toString('base64'));
-        } catch (e) {
-            return response.json({
-                status: '❌',
-                error: e
-            });
-        }
         return response.json({
             status: '✔️'
         });
