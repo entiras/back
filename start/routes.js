@@ -25,4 +25,7 @@ Route.get('/gen/style', 'GenerationController.style');
 Route.get('/gen/home', 'GenerationController.home');
 Route.get('/gen/login', 'GenerationController.login');
 
+Route.post('/login', 'LoginController.login');
+Route.post('/logout', 'LoginController.logout');
+
 Route.route('*', 'MainController.obscure');
