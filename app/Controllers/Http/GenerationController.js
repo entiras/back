@@ -11,13 +11,13 @@ const minify = use('@node-minify/core');
 const gcc = use('@node-minify/google-closure-compiler');
 const cleanCSS = use('@node-minify/clean-css');
 const htmlMinifier = use('@node-minify/html-minifier');
+const mongo = new MongoClient(Env.get('MONGO_URI', ''), {
+    useNewUrlParser: true
+});
 
 class GenerationController {
     async delete(path) {
-        const mongo = new MongoClient(Env.get('MONGO_URI', ''), {
-            useNewUrlParser: true
-        });
-        await mongo.connect();
+        await mongo.open();
         const col = await mongo.db('entiras').collection('files');
         const iterator = await col.find({
             type: 'base',
@@ -42,10 +42,7 @@ class GenerationController {
         await mongo.close();
     }
     async create(path, content) {
-        const mongo = new MongoClient(Env.get('MONGO_URI', ''), {
-            useNewUrlParser: true
-        });
-        await mongo.connect();
+        await mongo.open();
         const col = await mongo.db('entiras').collection('files');
         const save = await octokit.repos.createOrUpdateFile({
             owner: 'entiras',
