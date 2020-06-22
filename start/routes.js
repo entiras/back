@@ -28,5 +28,6 @@ Route.get('/gen/signup', 'GenerationController.signup');
 
 Route.post('/login', 'LoginController.login');
 Route.post('/logout', 'LoginController.logout');
+Route.post('/signup', 'SignupController.signup');
 
 Route.route('*', 'MainController.obscure');

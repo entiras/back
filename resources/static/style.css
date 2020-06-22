@@ -45,21 +45,6 @@ a, a:hover {
 .icon-logo:hover:after {
   color: white;
 }
-/*.bg-entiras-focus-1 {
-  background-image: url('https://i.imgur.com/duUZ0Tp.jpg');
-  background-position: left;
-  background-size: 105%;
-}
-.bg-entiras-focus-2 {
-  background-image: url('https://i.imgur.com/ZiLd6zZ.jpg');
-  background-position: left;
-  background-size: 155%;
-}
-.bg-entiras-focus-3 {
-  background-image: url('https://i.imgur.com/c49Z7nk.jpg');
-  background-position: center;
-  background-size: 150%;
-}*/
 
 @font-face {
   font-family: 'icomoon';
