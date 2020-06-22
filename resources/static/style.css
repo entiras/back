@@ -16,7 +16,7 @@
   background-image: url('https://i.imgur.com/YzM5zFL.png');
   background-size: cover;
   background-position: center;
-  transition: background-image 1s;
+  transition: background-image 1.5s;
 }
 a, a:hover {
   color: #fd772d;

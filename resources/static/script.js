@@ -11,14 +11,13 @@ const session = {
     }
 };
 const util = {
-    jumbo: async (src) => {
-        await new Promise((s, e) => {
-            const i = new Image();
-            i.onload = s;
-            i.onerror = e;
-            i.src = src;
-        });
-        $('.jumbotron').css('background-image', 'url(' + src + ')');
+    jumbo: (src) => {
+        const i = new Image();
+        i.onload = () => {
+            var src = $(this).attr('src');
+            $('.jumbotron').css('background-image', 'url(' + src + ')');
+        };
+        i.src = src;
     },
     redirect: (route) => {
         setTimeout((destiny) => {
@@ -122,16 +121,16 @@ const page = {
             page[page.label]();
         }
     },
-    home: async () => {
-        await util.jumbo('https://i.imgur.com/duUZ0Tp.jpg');
+    home: () => {
+        util.jumbo('https://i.imgur.com/duUZ0Tp.jpg');
     },
-    login: async () => {
+    login: () => {
         $('#login').on('submit', act.login.main);
-        await util.jumbo('https://i.imgur.com/ZiLd6zZ.jpg');
+        util.jumbo('https://i.imgur.com/ZiLd6zZ.jpg');
     },
-    signup: async () => {
+    signup: () => {
         $('#signup').on('submit', act.signup.main);
-        await util.jumbo('https://i.imgur.com/c49Z7nk.jpg');
+        util.jumbo('https://i.imgur.com/c49Z7nk.jpg');
     }
 };
 $(document).ready(() => {
