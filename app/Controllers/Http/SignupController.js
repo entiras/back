@@ -2,6 +2,9 @@
 
 const { validate } = use('Validator');
 const User = use('App/Models/User');
+const Env = use('Env');
+const Mail = use('Mail');
+const jwt = use('jsonwebtoken');
 
 class SignupController {
     async signup({ request, response, view }) {
