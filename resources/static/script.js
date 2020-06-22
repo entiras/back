@@ -13,8 +13,8 @@ const session = {
 const util = {
     jumbo: (src) => {
         const i = new Image();
-        i.onload = () => {
-            var src = $(this).attr('src');
+        i.onload = (e) => {
+            var src = e.path[0].src;
             $('.jumbotron').css('background-image', 'url(' + src + ')');
         };
         i.src = src;
