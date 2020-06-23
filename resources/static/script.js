@@ -143,41 +143,6 @@ $.ajaxSetup({
     error: act.fail
 });
 
-// actions.signup = function (event) {
-//     event.preventDefault();
-//     $('#signup :submit').prop('disabled', true);
-//     $('.alert').addClass('d-none');
-//     $('input').removeClass('is-invalid');
-//     actions.csrf((data) => {
-//         $('input[name=_csrf]').val(data.token);
-//         var input = actions.form('#signup');
-//         $.ajax({
-//             type: 'POST',
-//             url: '/api/signup',
-//             data: input,
-//             error: actions.failed,
-//             success: (res) => {
-//                 $('#signup :submit').prop('disabled', false);
-//                 if (res.message === 'validation') {
-//                     var field = res.error.field;
-//                     var val = res.error.validation;
-//                     $('#' + field + '-' + val).removeClass('d-none');
-//                     $('input[name=' + field + ']').addClass('is-invalid');
-//                 } else if (res.message === 'url') {
-//                     $('#username-url').removeClass('d-none');
-//                     $('input[name=username]').addClass('is-invalid');
-//                 } else if (res.message === 'clone') {
-//                     $('#clone').removeClass('d-none');
-//                     $('input[name=username]').addClass('is-invalid');
-//                     $('input[name=email]').addClass('is-invalid');
-//                 } else if (res.message === 'sent') {
-//                     $('#sent').removeClass('d-none');
-//                     actions.redirect('/signup/confirm/');
-//                 }
-//             }
-//         });
-//     });
-// };
 // actions.confirm = function (event) {
 //     event.preventDefault();
 //     $('#confirm :submit').prop('disabled', true);

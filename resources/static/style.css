@@ -1,6 +1,7 @@
 @font-face {
   font-family: 'desyrelregular';
-  src: url('https://res.cloudinary.com/entiras/raw/upload/v1588187690/desyrel_iwosvz.woff2') format('woff2'),
+  src:
+    url('https://res.cloudinary.com/entiras/raw/upload/v1588187690/desyrel_iwosvz.woff2') format('woff2'),
     url('https://res.cloudinary.com/entiras/raw/upload/v1588187690/desyrel_aju6af.woff') format('woff');
   font-weight: normal;
   font-style: normal;
