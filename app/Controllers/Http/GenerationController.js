@@ -149,6 +149,23 @@ class GenerationController {
             status: '✔️'
         });
     }
+    async signup_confirm({ response, view }) {
+        const name = 'signup/confirm/index.html'
+        const edge = 'content.signup.confirm';
+        await drop(name);
+        const txt = view.render(edge);
+        await fs.writeFile('_temp', txt, 'utf8');
+        const min = await minify({
+            compressor: htmlMinifier,
+            input: '_temp',
+            output: '_temp'
+        });
+        const buff = new Buffer(min);
+        await raise(name, buff)
+        return response.json({
+            status: '✔️'
+        });
+    }
 }
 
 module.exports = GenerationController

@@ -131,6 +131,10 @@ const page = {
     signup: () => {
         $('#signup').on('submit', act.signup.main);
         util.jumbo('https://i.imgur.com/ZiLd6zZ.jpg');
+    },
+    signup_confirm: () => {
+        $('#signup_confirm').on('submit', act.signup.confirm);
+        util.jumbo('https://i.imgur.com/ZiLd6zZ.jpg');
     }
 };
 $(document).ready(() => {

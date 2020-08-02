@@ -25,6 +25,7 @@ Route.get('/gen/style', 'GenerationController.style');
 Route.get('/gen/home', 'GenerationController.home');
 Route.get('/gen/login', 'GenerationController.login');
 Route.get('/gen/signup', 'GenerationController.signup');
+Route.get('/gen/signup/confirm', 'GenerationController.signup_confirm');
 
 Route.post('/login', 'LoginController.login');
 Route.post('/logout', 'LoginController.logout');
