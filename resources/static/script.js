@@ -107,6 +107,12 @@ const act = {
             if (signup.type === 'success') {
                 util.redirect('/signup/confirm')
             }
+        },
+        confirm: async (e) => {
+            e.preventDefault();
+            util.unalert();
+            const form = await util.form('#signup-confirm');
+            console.log(form);
         }
     }
 };
@@ -133,7 +139,7 @@ const page = {
         util.jumbo('https://i.imgur.com/ZiLd6zZ.jpg');
     },
     signup_confirm: () => {
-        $('#signup_confirm').on('submit', act.signup.confirm);
+        $('#signup-confirm').on('submit', act.signup.confirm);
         util.jumbo('https://i.imgur.com/ZiLd6zZ.jpg');
     }
 };
