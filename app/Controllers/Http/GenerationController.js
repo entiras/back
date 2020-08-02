@@ -124,7 +124,7 @@ class GenerationController {
         const min = await minify({
             compressor: htmlMinifier,
             input: '_temp',
-            output: '__temp'
+            output: '_temp'
         });
         const buff = new Buffer(min);
         await raise(name, buff)
@@ -141,7 +141,7 @@ class GenerationController {
         const min = await minify({
             compressor: htmlMinifier,
             input: '_temp',
-            output: '__temp'
+            output: '_temp'
         });
         const buff = new Buffer(min);
         await raise(name, buff)

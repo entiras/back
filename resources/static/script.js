@@ -105,7 +105,7 @@ const act = {
             });
             util.alert(signup);
             if (signup.type === 'success') {
-                util.redirect('/')
+                util.redirect('/signup/confirm')
             }
         }
     }
@@ -130,7 +130,7 @@ const page = {
     },
     signup: () => {
         $('#signup').on('submit', act.signup.main);
-        util.jumbo('https://i.imgur.com/c49Z7nk.jpg');
+        util.jumbo('https://i.imgur.com/ZiLd6zZ.jpg');
     }
 };
 $(document).ready(() => {
