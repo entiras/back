@@ -157,6 +157,9 @@ const page = {
             page[page.label]();
         }
     },
+    error: () => {
+        util.redirect('/');
+    },
     home: () => {
         util.jumbo('https://i.imgur.com/duUZ0Tp.jpg');
     },

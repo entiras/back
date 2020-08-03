@@ -115,6 +115,23 @@ class GenerationController {
             status: '✔️'
         });
     }
+    async obscure({ response, view }) {
+        const name = 'obscure.html'
+        const edge = 'content.obscure';
+        await drop(name);
+        const txt = view.render(edge);
+        await fs.writeFile('_temp', txt, 'utf8');
+        const min = await minify({
+            compressor: htmlMinifier,
+            input: '_temp',
+            output: '_temp'
+        });
+        const buff = new Buffer(min);
+        await raise(name, buff)
+        return response.json({
+            status: '✔️'
+        });
+    }
     async login({ response, view }) {
         const name = 'login/index.html'
         const edge = 'content.login';

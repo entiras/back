@@ -19,6 +19,7 @@ const Route = use('Route');
 Route.get('/gen/script', 'GenerationController.script');
 Route.get('/gen/style', 'GenerationController.style');
 Route.get('/gen/home', 'GenerationController.home');
+Route.get('/gen/obscure', 'GenerationController.obscure');
 Route.get('/gen/login', 'GenerationController.login');
 Route.get('/gen/signup', 'GenerationController.signup');
 Route.get('/gen/signup/confirm', 'GenerationController.signup_confirm');
