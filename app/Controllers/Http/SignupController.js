@@ -7,6 +7,41 @@ const Mail = use('Mail');
 const jwt = use('jsonwebtoken');
 
 class SignupController {
+    async signup_confirm({ response, request }) {
+        const token = (request.input('token') || '').replace(/\s+/g, "");
+        var payload;
+        try {
+            payload = await jwt.verify(token, Env.get('SECRET'));
+        } catch (err) {
+            return response.json({
+                type: 'danger',
+                message: 'invalid',
+                field: 'token'
+            });
+        }
+        const user = await User.findBy('email', payload.e);
+        if (!user) {
+            return response.json({
+                type: 'danger',
+                message: 'user',
+                field: 'token'
+            });
+        }
+        if (user.verified) {
+            return response.json({
+                type: 'danger',
+                message: 'late',
+                field: 'token'
+            });
+        }
+        user.verified = true;
+        await user.save();
+        return response.json({
+            type: 'success',
+            message: 'confirmed',
+            field: 'form'
+        });
+    }
     async signup({ request, response, view }) {
         const validation = await validate(
             request.all(), {

@@ -9,37 +9,6 @@ const Hash = use('Hash');
 const jwt = use('jsonwebtoken');
 
 class AuthController {
-  async confirm({ response, request }) {
-    const token = (request.input('token') || '').replace(/\s+/g, "");
-    var payload;
-    try {
-      payload = await jwt.verify(token, Env.get('SECRET'));
-    } catch (err) {
-      return response.json({
-        type: 'danger',
-        message: 'invalid'
-      });
-    }
-    const user = await User.findBy('email', payload.e);
-    if (!user) {
-      return response.json({
-        type: 'danger',
-        message: 'user'
-      });
-    }
-    if (user.verified) {
-      return response.json({
-        type: 'danger',
-        message: 'late'
-      });
-    }
-    user.verified = true;
-    await user.save();
-    return response.json({
-      type: 'success',
-      message: 'confirmed'
-    });
-  }
   async resend({ request, response, view }) {
     const captcha = request.cookie('captcha', '');
     response.clearCookie('captcha');

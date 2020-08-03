@@ -112,7 +112,15 @@ const act = {
             e.preventDefault();
             util.unalert();
             const form = await util.form('#signup-confirm');
-            console.log(form);
+            const confirm = await $.ajax({
+                type: 'POST',
+                url: '/api/signup/confirm',
+                data: form
+            });
+            util.alert(confirm);
+            if (confirm.type === 'success') {
+                util.redirect('/login')
+            }
         }
     }
 };

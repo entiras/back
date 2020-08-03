@@ -30,5 +30,6 @@ Route.get('/gen/signup/confirm', 'GenerationController.signup_confirm');
 Route.post('/login', 'LoginController.login');
 Route.post('/logout', 'LoginController.logout');
 Route.post('/signup', 'SignupController.signup');
+Route.post('/signup/confirm', 'SignupController.signup_confirm');
 
 Route.route('*', 'MainController.obscure');
