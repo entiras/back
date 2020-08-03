@@ -22,11 +22,10 @@ const util = {
     captcha: () => {
         $(':submit').prop('disabled', true);
         const i = $('#_captcha')[0];
-        i.src = 'https://i.imgur.com/YzM5zFL.png';
         i.onload = (e) => {
             $(':submit').prop('disabled', false);
         };
-        i.src = '/api/captcha';
+        i.src = '/api/captcha?' + Math.random();
     },
     redirect: (route) => {
         setTimeout((destiny) => {
