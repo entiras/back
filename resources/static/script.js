@@ -19,6 +19,14 @@ const util = {
         };
         i.src = src;
     },
+    captcha: () => {
+        $(':submit').prop('disabled', false);
+        const i = $('#_captcha')[0];
+        i.onload = (e) => {
+            $(':submit').prop('disabled', true);
+        };
+        i.src = '/api/captcha';
+    },
     redirect: (route) => {
         setTimeout((destiny) => {
             window.location.href = destiny;
@@ -121,6 +129,20 @@ const act = {
             if (confirm.type === 'success') {
                 util.redirect('/login')
             }
+        },
+        resend: async (e) => {
+            e.preventDefault();
+            util.unalert();
+            const form = await util.form('#signup-resend');
+            const resend = await $.ajax({
+                type: 'POST',
+                url: '/api/signup/resend',
+                data: form
+            });
+            util.alert(resend);
+            if (resend.type === 'success') {
+                util.redirect('/signup/confirm')
+            }
         }
     }
 };
@@ -149,6 +171,11 @@ const page = {
     signup_confirm: () => {
         $('#signup-confirm').on('submit', act.signup.confirm);
         util.jumbo('https://i.imgur.com/ZiLd6zZ.jpg');
+    },
+    signup_resend: () => {
+        $('#signup-resend').on('submit', act.signup.resend);
+        util.jumbo('https://i.imgur.com/ZiLd6zZ.jpg');
+        util.captcha();
     }
 };
 $(document).ready(() => {
@@ -160,120 +187,3 @@ $.ajaxSetup({
     complete: act.end,
     error: act.fail
 });
-
-// actions.confirm = function (event) {
-//     event.preventDefault();
-//     $('#confirm :submit').prop('disabled', true);
-//     $('.alert').addClass('d-none');
-//     $('input').removeClass('is-invalid');
-//     actions.csrf((data) => {
-//         $('input[name=_csrf]').val(data.token);
-//         var input = actions.form('#confirm');
-//         $.ajax({
-//             type: 'POST',
-//             url: '/api/signup/confirm',
-//             data: input,
-//             error: actions.failed,
-//             success: (res) => {
-//                 $('#confirm :submit').prop('disabled', false);
-//                 if (res.type === 'danger') {
-//                     $('input[name=token]').addClass('is-invalid');
-//                 } else {
-//                     actions.redirect('/login/');
-//                 }
-//                 $('#' + res.message).removeClass('d-none');
-//             }
-//         });
-//     });
-// }
-// actions.resend = function (event) {
-//     event.preventDefault();
-//     $('#resend :submit').prop('disabled', true);
-//     $('.alert').addClass('d-none');
-//     $('input').removeClass('is-invalid');
-//     actions.csrf((data) => {
-//         $('input[name=_csrf]').val(data.token);
-//         var input = actions.form('#resend');
-//         $.ajax({
-//             type: 'POST',
-//             url: '/api/signup/resend',
-//             data: input,
-//             error: actions.failed,
-//             success: (res) => {
-//                 $('#resend :submit').prop('disabled', false);
-//                 if (res.message === 'required' || res.message === 'email') {
-//                     $('input[name=email]').addClass('is-invalid');
-//                 } else if (res.message === 'captcha') {
-//                     $('input[name=captcha]').addClass('is-invalid');
-//                 }
-//                 $('#' + res.message).removeClass('d-none');
-//                 if (res.message === 'sent') {
-//                     actions.redirect('/signup/confirm/');
-//                 }
-//                 if (res.message !== 'sent') {
-//                     $('#_captcha').attr("src", "/api/captcha?" + Math.random());
-//                 }
-//             }
-//         });
-//     });
-// }
-// actions.forgot = function (event) {
-//     event.preventDefault();
-//     $('#forgot :submit').prop('disabled', true);
-//     $('.alert').addClass('d-none');
-//     $('input').removeClass('is-invalid');
-//     actions.csrf((data) => {
-//         $('input[name=_csrf]').val(data.token);
-//         var input = actions.form('#forgot');
-//         $.ajax({
-//             type: 'POST',
-//             url: '/api/login/forgot',
-//             data: input,
-//             error: actions.failed,
-//             success: (res) => {
-//                 $('#forgot :submit').prop('disabled', false);
-//                 if (res.message === 'required' || res.message === 'email') {
-//                     $('input[name=email]').addClass('is-invalid');
-//                 } else if (res.message === 'captcha') {
-//                     $('input[name=captcha]').addClass('is-invalid');
-//                 }
-//                 $('#' + res.message).removeClass('d-none');
-//                 if (res.message === 'sent') {
-//                     actions.redirect('/login/reset/');
-//                 }
-//                 if (res.message !== 'sent') {
-//                     $('#_captcha').attr("src", "/api/captcha?" + Math.random());
-//                 }
-//             }
-//         });
-//     });
-// }
-// actions.reset = function (event) {
-//     event.preventDefault();
-//     $('#reset :submit').prop('disabled', true);
-//     $('.alert').addClass('d-none');
-//     $('input').removeClass('is-invalid');
-//     actions.csrf((data) => {
-//         $('input[name=_csrf]').val(data.token);
-//         var input = actions.form('#reset');
-//         console.log(input);
-//         $.ajax({
-//             type: 'POST',
-//             url: '/api/login/reset',
-//             data: input,
-//             error: actions.failed,
-//             success: (res) => {
-//                 $('#reset :submit').prop('disabled', false);
-//                 if (res.type !== 'danger') {
-//                     actions.redirect('/login/');
-//                 }
-//                 if (res.message === 'required' || res.message === 'min') {
-//                     $('input[name=password]').addClass('is-invalid');
-//                 } else if (res.message === 'invalid') {
-//                     $('input[name=token]').addClass('is-invalid');
-//                 }
-//                 $('#' + res.message).removeClass('d-none');
-//             }
-//         });
-//     });
-// }
