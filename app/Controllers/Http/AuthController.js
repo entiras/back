@@ -9,59 +9,6 @@ const Hash = use('Hash');
 const jwt = use('jsonwebtoken');
 
 class AuthController {
-  async resend({ request, response, view }) {
-    const captcha = request.cookie('captcha', '');
-    response.clearCookie('captcha');
-    if (captcha !== request.input('captcha') || captcha === '') {
-      return response.json({
-        type: 'danger',
-        message: 'captcha'
-      });
-    }
-    const validation = await validate(
-      request.all(), {
-      email: 'required|email'
-    });
-    if (validation.fails()) {
-      return response.json({
-        type: 'danger',
-        message: validation._errorMessages[0].validation
-      });
-    }
-    const user = await User.findBy('email', request.input('email'));
-    if (!user) {
-      return response.json({
-        type: 'success',
-        message: 'sent'
-      });
-    }
-    if (user.verified) {
-      return response.json({
-        type: 'success',
-        message: 'sent'
-      });
-    }
-    const token = jwt.sign({ e: user.email }, Env.get('SECRET'), {
-      expiresIn: '3d'
-    });
-    const data = {
-      username: user.username,
-      token: token
-    };
-    if (user.sent < 10) {
-      await Mail.raw(view.render('emails.confirm.text', data), (message) => {
-        message.to(user.email);
-        message.from(Env.get('FROM_EMAIL'));
-        message.subject(view.render('emails.confirm.subject'));
-      });
-      user.sent++;
-      await user.save();
-    }
-    return response.json({
-      type: 'success',
-      message: 'sent'
-    });
-  }
   async forgot({ request, response, view }) {
     const captcha = request.cookie('captcha', '');
     response.clearCookie('captcha');
