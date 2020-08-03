@@ -20,10 +20,10 @@ const util = {
         i.src = src;
     },
     captcha: () => {
-        $(':submit').prop('disabled', false);
+        $(':submit').prop('disabled', true);
         const i = $('#_captcha')[0];
         i.onload = (e) => {
-            $(':submit').prop('disabled', true);
+            $(':submit').prop('disabled', false);
         };
         i.src = '/api/captcha';
     },
