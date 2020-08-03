@@ -20,7 +20,7 @@ class MainController {
     }
     captcha({ response }) {
         var captcha = svgCaptcha.create();
-        response.cookie('captcha', captcha.text, { path: '/' });
+        response.cookie('captcha', captcha.text, { path: '/', sameSite: true });
         response.type('image/svg+xml');
         return response.send(captcha.data);
     }
