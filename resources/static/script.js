@@ -142,6 +142,8 @@ const act = {
             util.alert(resend);
             if (resend.type === 'success') {
                 util.redirect('/signup/confirm')
+            } else {
+                util.captcha();
             }
         }
     }
