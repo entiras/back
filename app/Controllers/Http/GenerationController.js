@@ -149,6 +149,23 @@ class GenerationController {
             status: '✔️'
         });
     }
+    async login_forgot({ response, view }) {
+        const name = 'login/forgot/index.html';
+        const edge = 'content.login.forgot';
+        await drop(name);
+        const txt = view.render(edge);
+        await fs.writeFile('_temp', txt, 'utf8');
+        const min = await minify({
+            compressor: htmlMinifier,
+            input: '_temp',
+            output: '_temp'
+        });
+        const buff = new Buffer(min);
+        await raise(name, buff)
+        return response.json({
+            status: '✔️'
+        });
+    }
     async signup({ response, view }) {
         const name = 'signup/index.html'
         const edge = 'content.signup';

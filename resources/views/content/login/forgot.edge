@@ -1,56 +1,49 @@
 @layout('layout.app')
 @section('headers')
+<meta name="label" content="login_forgot">
 <title>
   EnTiras - Entrar | Recuperación
 </title>
 @endsection
 @section('content')
-<div class="row d-none animated fadeIn faster guest">
-  <div class="col-lg-6">
-    <div class="jumbotron d-flex bg-entiras-focus-3 d-none animated fadeIn faster guest">
-      <div class="card mt-auto bg-entiras-dark text-light">
-        <div class="card-body">
-          <p class="h1 h-entiras text-center">
-            Entrar | Recuperación
-          </p>
-        </div>
-      </div>
+<div class="jumbotron bg-dark animated fadeIn faster">
+  <div class="card bg-dark bg-transparent text-light">
+    <div class="card-body">
+      <p class="h1 h-entiras text-center">Entrar | Recuperación</p>
     </div>
   </div>
-  <div class="col-lg-6">
-    <div class="card">
-      <div class="card-body">
-        <div id="captcha" class="alert alert-danger d-none animated fadeIn faster" role="alert">
-          Captcha incorrecto.
-        </div>
-        <div id="required" class="alert alert-danger d-none animated fadeIn faster" role="alert">
-          La dirección de correo es requerida.
-        </div>
-        <div id="email" class="alert alert-danger d-none animated fadeIn faster" role="alert">
-          La dirección de correo no es válida.
-        </div>
-        <div id="sent" class="alert alert-success d-none animated fadeIn faster" role="alert">
-          Se envío el texto secreto por correo.
-        </div>
-        <p>Por favor revisa tu bandeja de correo no deseado antes de pedir que te enviemos otro correo.</p>
-        <form id="forgot" onsubmit="actions.forgot(event)">
-          <input type="hidden" name="_csrf">
-          Dirección de Correo
-          <input type="text" name="email" class="form-control mb-2" placeholder="ejemplo@ejemplo.com">
-          Captcha
-          <input type="text" name="captcha" class="form-control mb-2" autocomplete="off">
-          <img id="_captcha" src="/api/captcha" alt="Generando captcha..." class="mb-2" width="150" height="50">
-          <button class="btn btn-outline-dark btn-block">
-            Recuperar
-          </button>
-        </form>
-      </div>
-      <ul class="list-group list-group-flush border-top">
-        <li class="list-group-item text-center">
-          <a href="/login/reset/">Ya tengo mi texto secreto</a>
-        </li>
-      </ul>
+</div>
+<div class="card">
+  <div class="card-body">
+    <div id="form-alert" class="alert d-none animated fadeIn faster" role="alert">
+      <span id="captcha-captcha">Captcha incorrecto.</span>
+      <span id="required-email">La dirección de correo es requerida.</span>
+      <span id="email-email">La dirección de correo no es válida.</span>
+      <span id="sent-form">Se envío el texto secreto por correo.</span>
     </div>
+    <p>Por favor revisa tu bandeja de correo no deseado antes de pedir que te enviemos otro correo.</p>
+    <form id="login-forgot" class="row">
+      <input type="hidden" name="_csrf">
+      <div class="form-group col-lg-6">
+        <label class="form-label">Dirección de Correo</label>
+        <input type="text" name="email" class="form-control" placeholder="ejemplo@ejemplo.com">
+      </div>
+      <div class="form-group col-lg-6">
+        <label class="form-label">Captcha</label>
+        <input type="text" name="captcha" class="form-control" autocomplete="off">
+        <img id="_captcha" src="/api/captcha" alt="Generando captcha..." class="mb-2" width="150" height="50">
+      </div>
+      <div class="mb-3 mb-lg-0 col-lg-8">
+        <button class="btn btn-outline-dark btn-block" disabled>
+          Recuperar
+        </button>
+      </div>
+      <div class="col-lg-4">
+        <a class="btn btn-light btn-block" href="/login/reset/" role="button">
+          Ya tengo mi texto secreto
+        </a>
+      </div>
+    </form>
   </div>
 </div>
 @endsection

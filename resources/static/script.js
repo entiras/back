@@ -169,6 +169,10 @@ const page = {
         $('#login').on('submit', act.login.main);
         util.jumbo('https://i.imgur.com/ZiLd6zZ.jpg');
     },
+    login_forgot: () => {
+        $('#login-forgot').on('submit', act.login.forgot);
+        util.jumbo('https://i.imgur.com/ZiLd6zZ.jpg');
+    },
     signup: () => {
         $('#signup').on('submit', act.signup.main);
         util.jumbo('https://i.imgur.com/ZiLd6zZ.jpg');
